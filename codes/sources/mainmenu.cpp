@@ -1,4 +1,4 @@
-#include "../codes/headers/mainmenu.h"
+#include "../headers/mainmenu.h"
 #include <iostream>
 MainMenu::MainMenu() {
 	_font.loadFromFile("assets/fonts/monogram-extended.ttf");

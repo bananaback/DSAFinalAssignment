@@ -1,4 +1,4 @@
-#include "../codes/headers/game.h"
+#include "../headers/game.h"
 
 Game::Game() {
 	_running = true;

@@ -1,4 +1,4 @@
-#include "../codes/headers/gamestate.h"
+#include "../headers/gamestate.h"
 
 void GameState::handleEvents(Game& game) {
 
