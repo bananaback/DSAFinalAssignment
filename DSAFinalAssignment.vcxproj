@@ -142,12 +142,14 @@
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gamestate.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
+    <ClCompile Include="codes\sources\resourceallocator.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gamestate.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />
+    <ClInclude Include="codes\headers\resourceallocator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

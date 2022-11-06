@@ -4,6 +4,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "gamestate.h"
+#include "resourceallocator.h"
 #include <memory>
 
 
@@ -18,8 +19,9 @@ public:
 	void changeState(std::string name);
 	void setRunning(bool r);
 
-
+	std::shared_ptr<ResourceAllocator> ra_ptr;
 	sf::RenderWindow _window;
+
 private:
 	void update();
 	void handleEvents();
