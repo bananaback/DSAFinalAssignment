@@ -1,6 +1,6 @@
 #include "codes/headers/game.h"
 #include "codes/headers/mainmenu.h"
-
+ 
 // Driver code
 int main() {
 	// Pointer to main menu game state
