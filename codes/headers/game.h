@@ -3,6 +3,8 @@
 #define GAME_H
 
 #include "SFML/Graphics.hpp"
+#include "SFML/System.hpp"
+
 #include "gamestate.h"
 #include "resourceallocator.h"
 #include <memory>
@@ -30,6 +32,10 @@ public:
 	std::shared_ptr<ResourceAllocator> ra_ptr;
 	// Game window
 	sf::RenderWindow _window;
+	
+	// This is for delta time
+	sf::Clock _clock;
+	float _dt;
 
 private:
 	// Game logic update

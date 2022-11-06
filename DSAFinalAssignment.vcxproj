@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="codes\sources\animation.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gamestate.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="codes\headers\animation.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gamestate.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />

@@ -43,4 +43,7 @@ void MainMenu::render(Game &game) {
 	game._window.draw(rectangle);*/
 	// Draw the text
 	game._window.draw(_text);
+	/*sf::Sprite test;
+	test.setTexture(*game.ra_ptr->_imageResources["player"]["1"]);
+	game._window.draw(test);*/
 };

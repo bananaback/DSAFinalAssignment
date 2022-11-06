@@ -1,11 +1,13 @@
 #include "../headers/game.h"
-
+#include <iostream>
 // Constructor
 Game::Game() {
 	// set running to true
 	_running = true;
 	// create a new game window
 	_window.create(sf::VideoMode(48*2*16, 48*2*9), "Infinity topdown shooter game!");
+	// initialize dt
+	_dt = 0;
 }
 // Destructor
 Game::~Game() {
@@ -14,6 +16,8 @@ Game::~Game() {
 // Function to run our game
 void Game::run() {
 	while (_running) {
+		_dt = _clock.restart().asSeconds();
+		std::cout << _dt << "\n";
 		//do the game 
 		update();
 		handleEvents();
