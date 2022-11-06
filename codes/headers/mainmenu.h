@@ -22,8 +22,6 @@ private:
 	// Testing text on main menu
 	sf::Font _font;
 	sf::Text _text;
-	// State name
-	std::string _name;
 };
 
 #endif 
