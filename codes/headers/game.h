@@ -7,28 +7,44 @@
 #include "resourceallocator.h"
 #include <memory>
 
-
+// Game class
 class Game {
 public:
+	// Constructor
 	Game();
+	// Destructor
 	~Game();
 
+	// Game run
 	void run();
+	// Game init
 	void init(std::shared_ptr<GameState> gamestate);
+	// Function to add new state to game state list
 	void addState(std::shared_ptr<GameState> gamestate);
+	// Function to change game state
 	void changeState(std::string name);
+	// Function to end game
 	void setRunning(bool r);
 
+	// Pointer to resources 
 	std::shared_ptr<ResourceAllocator> ra_ptr;
+	// Game window
 	sf::RenderWindow _window;
 
 private:
+	// Game logic update
 	void update();
+	// Game events handler
 	void handleEvents();
+	// Game render
 	void render();
+	// Check end game
 	void checkQuit();
+	// If it false, end game
 	bool _running = false;
+	// Pointer to current game state
 	std::shared_ptr<GameState> _currentState;
+	// List of game state
 	std::vector<std::shared_ptr<GameState>> _states;
 };
 
