@@ -17,7 +17,7 @@ Game::~Game() {
 void Game::run() {
 	while (_running) {
 		_dt = _clock.restart().asSeconds();
-		std::cout << _dt << "\n";
+		//std::cout << _dt << "\n";
 		//do the game 
 		update();
 		handleEvents();
@@ -28,6 +28,7 @@ void Game::run() {
 // Function to init our game
 void Game::init(std::shared_ptr<GameState> gamestate) {
 	_currentState = gamestate;
+	_states.push_back(gamestate);
 }
 // Update game logic
 void Game::update() {
@@ -53,9 +54,13 @@ void Game::checkQuit() {
 }
 // Add more game state here
 void Game::addState(std::shared_ptr<GameState> gamestate) {
-
+	_states.push_back(gamestate);
 }
 // Function to switch game state with state name
 void Game::changeState(std::string name) {
-
+	for (size_t i = 0; i < _states.size(); i++) {
+		if (_states[i]->_name == name) {
+			_currentState = _states[i];
+		}
+	}
 }
