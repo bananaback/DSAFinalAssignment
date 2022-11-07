@@ -51,4 +51,9 @@ void MainMenu::render(Game &game) {
 	/*sf::Sprite test;
 	test.setTexture(*game.ra_ptr->_imageResources["player"]["1"]);
 	game._window.draw(test);*/
+	sf::Sprite mainMenuBg;
+	mainMenuBg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["bg"]);
+	mainMenuBg.setScale(sf::Vector2f(2.4f, 2.f));
+	game._window.draw(mainMenuBg);
+
 };
