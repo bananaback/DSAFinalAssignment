@@ -4,6 +4,7 @@
 MainMenu::MainMenu() {
 	// load font
 	_font.loadFromFile("assets/fonts/monogram-extended.ttf");
+	_font2.loadFromFile("assets/fonts/ThaleahFat.ttf");
 
 	// init text
 	_text.setFont(_font);
@@ -12,6 +13,12 @@ MainMenu::MainMenu() {
 	_text.setCharacterSize(24);
 	_text.setFillColor(sf::Color::White);
 	_text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	_gameTitle.setFont(_font2);
+	_gameTitle.setPosition(500, 180);
+	_gameTitle.setString("The shooting");
+	_gameTitle.setCharacterSize(120);
+	_gameTitle.setFillColor(sf::Color::Black);
+	_gameTitle.setStyle(sf::Text::Bold);
 	// Set state name to switch soon
 	_name = "mainmenu";
 }
@@ -51,9 +58,9 @@ void MainMenu::render(Game &game) {
 	/*sf::Sprite test;
 	test.setTexture(*game.ra_ptr->_imageResources["player"]["1"]);
 	game._window.draw(test);*/
-	sf::Sprite mainMenuBg;
-	mainMenuBg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["bg"]);
-	mainMenuBg.setScale(sf::Vector2f(2.4f, 2.f));
-	game._window.draw(mainMenuBg);
-
+	_mainMenuBg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["bg"]);
+	_mainMenuBg.setScale(sf::Vector2f(2.4f, 2.f));
+	game._window.draw(_mainMenuBg);
+	//draw game title
+	game._window.draw(_gameTitle);
 };

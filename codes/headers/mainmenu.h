@@ -21,7 +21,10 @@ public:
 private:
 	// Testing text on main menu
 	sf::Font _font;
+	sf::Font _font2;
 	sf::Text _text;
+	sf::Text _gameTitle;
+	sf::Sprite _mainMenuBg;
 };
 
 #endif 
