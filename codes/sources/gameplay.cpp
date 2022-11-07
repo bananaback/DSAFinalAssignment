@@ -11,7 +11,7 @@ GamePlay::GamePlay() {
     _text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     _name = "gameplay";
 	_grid = std::make_shared<Grid>();
-}
+} 
 
 GamePlay::~GamePlay() {
     
