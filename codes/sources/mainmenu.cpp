@@ -21,6 +21,9 @@ MainMenu::MainMenu() {
 	_gameTitle.setStyle(sf::Text::Bold);
 	// Set state name to switch soon
 	_name = "mainmenu";
+	_btns.push_back(std::make_shared<Button>(700, 430, 100, 46, "play"));
+	_btns.push_back(std::make_shared<Button>(700, 540, 100, 46, "setting"));
+	_btns.push_back(std::make_shared<Button>(700, 650, 100, 46, "quit"));
 }
 // Destructor
 MainMenu::~MainMenu() {
@@ -63,4 +66,8 @@ void MainMenu::render(Game &game) {
 	game._window.draw(_mainMenuBg);
 	//draw game title
 	game._window.draw(_gameTitle);
+	for (int i = 0; i < _btns.size(); i++)
+	{
+		_btns[i]->draw(game);
+	}
 };

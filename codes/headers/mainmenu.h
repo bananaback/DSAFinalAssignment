@@ -4,6 +4,7 @@
 
 #include "game.h"
 #include "gamestate.h"
+#include "button.h"
 
 // MainMenu class, inherit from GameState
 class MainMenu : public GameState {
@@ -25,6 +26,7 @@ private:
 	sf::Text _text;
 	sf::Text _gameTitle;
 	sf::Sprite _mainMenuBg;
+	std::vector<std::shared_ptr<Button>> _btns;
 };
 
 #endif 

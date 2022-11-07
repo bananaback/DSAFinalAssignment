@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="codes\sources\animation.cpp" />
+    <ClCompile Include="codes\sources\button.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameplay.cpp" />
     <ClCompile Include="codes\sources\gamestate.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
+    <ClInclude Include="codes\headers\button.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameplay.h" />
     <ClInclude Include="codes\headers\gamestate.h" />
