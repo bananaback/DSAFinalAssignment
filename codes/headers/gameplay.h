@@ -5,6 +5,7 @@
 #include "game.h"
 #include "gamestate.h"
 #include "SFML/Graphics.hpp"
+#include "grid.h"
 
 class GamePlay : public GameState {
 public:
@@ -18,7 +19,7 @@ public:
 	void update(Game &game);
 	// Game play render
 	void render(Game &game);
-
+	std::shared_ptr<Grid> _grid;
 private:
 	sf::Font _monoFont;
 	sf::Text _text;

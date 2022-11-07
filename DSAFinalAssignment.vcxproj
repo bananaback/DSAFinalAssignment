@@ -143,8 +143,10 @@
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameplay.cpp" />
     <ClCompile Include="codes\sources\gamestate.cpp" />
+    <ClCompile Include="codes\sources\grid.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
+    <ClCompile Include="codes\sources\unit.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +154,10 @@
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameplay.h" />
     <ClInclude Include="codes\headers\gamestate.h" />
+    <ClInclude Include="codes\headers\grid.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />
     <ClInclude Include="codes\headers\resourceallocator.h" />
+    <ClInclude Include="codes\headers\unit.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

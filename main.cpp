@@ -8,7 +8,7 @@ int main() {
 	std::shared_ptr<MainMenu> mainMenu(new MainMenu());
 	// Pointer to game play game state
 	std::shared_ptr<GamePlay> gamePlay(new GamePlay());
-	// Pointer to resouce allocator
+	// Pointer to resouce allocator 
 	std::shared_ptr<ResourceAllocator> resouceAllocator(new ResourceAllocator);
 
 	// Make a game!
