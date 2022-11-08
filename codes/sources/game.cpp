@@ -1,5 +1,7 @@
 #include "../headers/game.h"
 #include <iostream>
+#include "../headers/mainmenu.h"
+#include "../headers/gameplay.h" 
 // Constructor
 Game::Game() {
 	// set running to true
@@ -26,9 +28,19 @@ void Game::run() {
 	}
 }
 // Function to init our game
-void Game::init(std::shared_ptr<GameState> gamestate) {
-	_currentState = gamestate;
-	_states.push_back(gamestate);
+void Game::init() {
+	// Pointer to resouce allocator 
+	std::shared_ptr<ResourceAllocator> resouceAllocator(new ResourceAllocator);
+	// Attach resouce allocator to our game
+	ra_ptr = resouceAllocator;
+
+	// Pointer to main menu game state
+	std::shared_ptr<MainMenu> mainMenu(new MainMenu(*this));
+	// Pointer to game play game state
+	std::shared_ptr<GamePlay> gamePlay(new GamePlay(*this));
+	addState(mainMenu);
+	addState(gamePlay);
+	_currentState = mainMenu;
 }
 // Update game logic
 void Game::update() {

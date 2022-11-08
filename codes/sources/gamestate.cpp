@@ -1,4 +1,5 @@
 #include "../headers/gamestate.h"
+
 // Game events handler
 void GameState::handleEvents(Game& game) {
 

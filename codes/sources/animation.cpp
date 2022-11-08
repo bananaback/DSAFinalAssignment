@@ -1,5 +1,5 @@
 #include "../headers/animation.h"
-
+#include <iostream>
 Animation::Animation() {
 	_frame = 0;
 	_frameTime = 0;
@@ -10,8 +10,8 @@ Animation::Animation() {
 Animation::Animation(std::shared_ptr<sf::Texture> t, int x, int y, int w, int h, int count, float frameTime, std::string name) {
 	_frame = 0;
 	_timer = 0;
-	this->_frameTime = _frameTime;
-	this->_name = _name;
+	_frameTime = frameTime;
+	_name = name;
 	for (int i = 0; i < count; i++) {
 		_frames.push_back(sf::IntRect(x + i * w, y, w, h));
 	}
