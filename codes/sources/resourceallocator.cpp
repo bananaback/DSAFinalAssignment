@@ -10,6 +10,10 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/characters/1_side.png", "player", "e");
 	std::cout << addImage("assets/img/topdown_shooter/characters/1_south.png", "player", "s");
 	std::cout << addImage("assets/img/topdown_shooter/characters/1_south2.png", "player", "sgun");
+	std::cout << addImage("assets/img/mainmenu/bg.png", "mainmenu", "bg");
+	std::cout << addImage("assets/img/mainmenu/play.png", "mainmenu", "play");
+	std::cout << addImage("assets/img/mainmenu/quit.png", "mainmenu", "quit");
+	std::cout << addImage("assets/img/mainmenu/setting.png", "mainmenu", "setting");
 }
 
 // Function to add new image resouces, store the pointer to that resource in _imageResouces map
