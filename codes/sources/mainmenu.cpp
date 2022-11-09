@@ -1,5 +1,6 @@
 #include "../headers/mainmenu.h"
 #include <iostream>
+#include "../headers/button.h"
 // Constructor
 MainMenu::MainMenu() {
 	// load font
@@ -43,24 +44,35 @@ void MainMenu::handleEvents(Game &game) {
 			}
 		}
 	}
+	if (pEvent.type == sf::Event::MouseButtonReleased)
+	{
+		if (pEvent.mouseButton.button == sf::Mouse::Left)
+		{
+			for (int i = 0; i < _btns.size(); i++)
+			{
+				if (_btns[i]->checkHover(game))
+				{
+					if (_btns[i]->getName() == "play") game.changeState("gameplay");
+					if (_btns[i]->getName() == "quit") game.setRunning(false);
+
+				}
+			}
+		}
+	}
 };
 // Update game logic
 void MainMenu::update(Game &game) {
-
+	for (int i = 0; i < _btns.size(); i++)
+	{
+		_btns[i]->update(game);
+	}
 };
 // Render game
 void MainMenu::render(Game &game) {
-	/*sf::RectangleShape rectangle;
-	rectangle.setSize(sf::Vector2f(600, 50));
-	rectangle.setOutlineColor(sf::Color::Red);
-	rectangle.setOutlineThickness(5);
-	rectangle.setPosition(10, 20);
-	game._window.draw(rectangle);*/
+	
 	// Draw the text
 	game._window.draw(_text);
-	/*sf::Sprite test;
-	test.setTexture(*game.ra_ptr->_imageResources["player"]["1"]);
-	game._window.draw(test);*/
+	
 	_mainMenuBg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["bg"]);
 	_mainMenuBg.setScale(sf::Vector2f(2.4f, 2.f));
 	game._window.draw(_mainMenuBg);

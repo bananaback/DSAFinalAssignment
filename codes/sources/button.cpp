@@ -9,10 +9,19 @@ Button::Button(float x, float y, float width, float height, std::string name)
 	_height = height;
 	_scaleX = 2;
 	_scaleY = 2;
+	_minScaleX = 2;
+	_minScaleY = 2;
+	_maxScaleX = 3;
+	_maxScaleY = 3;
+	_speed = 5;
 }
 
 Button::~Button()
 {
+}
+std::string Button::getName()
+{
+	return _name;
 }
 
 void Button::draw(Game& game)
@@ -57,7 +66,45 @@ bool Button::checkHover(Game &game)
 	}
 	return false;
 }
-void update()
+void Button::update(Game & game)
 {
-	if ()
+	if (checkHover(game))
+	{
+		if (_scaleX < _maxScaleX)
+		{
+			_scaleX += _speed * game._dt;
+		}
+		else
+		{
+			_scaleX = _maxScaleX;
+		}
+		if (_scaleY < _maxScaleY)
+		{
+			_scaleY += _speed * game._dt;
+		}
+		else
+		{
+			_scaleY = _maxScaleY;
+		}
+	}
+	else
+	{
+		if (_scaleX > _minScaleX)
+		{
+			_scaleX-=_speed*game._dt;
+		}
+		else
+		{
+			_scaleX = _minScaleX;
+		}
+
+		if (_scaleY > _minScaleY)
+		{
+			_scaleY -= _speed * game._dt;
+		}
+		else
+		{
+			_scaleY = _minScaleY;
+		}
+	}
 }
