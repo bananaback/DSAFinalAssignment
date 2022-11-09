@@ -15,9 +15,9 @@ public:
 	void updateCells(Game& game);
 	void draw(Game& game);
 
-	static const int s_gridWidth = 16;
-	static const int s_gridHeight = 9;
-	static const int s_cellSize = 48*2;
+	static const int s_gridWidth = 16; // fixed
+	static const int s_gridHeight = 9; // fixed
+	static const int s_cellSize = 48*2; // fixed
 private:
 	std::shared_ptr<Unit> mCells[s_gridHeight][s_gridWidth];
 };
