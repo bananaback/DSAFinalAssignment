@@ -20,6 +20,7 @@ private:
 	int _assetName[9] = { 0, 2, 4, 2, 0, 1, 3, 1, 0 };
 	sf::Text _playerDebugMessage;
 	sf::Font _monoFont;
+	float _speed;
 };
 
 #endif

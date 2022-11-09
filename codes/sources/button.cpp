@@ -41,15 +41,15 @@ void Button::draw(Game& game)
 	_btnImg.setPosition(_x + _width / 2, _y + _height/ 2);
 	if (_name == "play")
 	{
-		_btnImg.setOrigin(49, 18);
+		_btnImg.setOrigin(49, 18); // a half of sprite size
 	}
 	else if (_name == "quit")
 	{
-		_btnImg.setOrigin(50, 18);
+		_btnImg.setOrigin(50, 18); // a half of sprite size
 	}
 	else if (_name == "setting")
 	{
-		_btnImg.setOrigin(73, 22);
+		_btnImg.setOrigin(73, 22); // a half of sprite size
 	}
 	_btnImg.setScale(_scaleX, _scaleY);
 	game._window.draw(_btnImg);

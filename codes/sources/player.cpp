@@ -9,19 +9,21 @@ Player::Player(float x, float y, float width, float height, Game& game) :Unit(x,
 	_scaleX = 1;
 	_scaleY = 1;
 	_currentAnimation = 0;
+	_speed = 100;
 
 	_monoFont.loadFromFile("assets/fonts/monogram-extended.ttf");
 	_playerDebugMessage.setFont(_monoFont);
 	_playerDebugMessage.setCharacterSize(24);
 	_playerDebugMessage.setFillColor(sf::Color::White);
 
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["e"], 0, 0, 20, 24, 4, (float)0.1, "e"));//0
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["ne"], 0, 0, 20, 24, 4, (float)0.1, "ne"));//1
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["se"], 0, 0, 20, 24, 4, (float)0.1, "se"));//2
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["n"], 0, 0, 20, 24, 4, (float)0.1, "n"));//3
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["s"], 0, 0, 20, 24, 4, (float)0.1, "s"));//4
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["sgun"], 0, 0, 20, 24, 4, (float)0.1, "sgun"));
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["idle"], 0, 0, 16, 21, 1, (float)0.1, "idle"));
+	float frameDuration = 0.1f;
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["e"], 0, 0, 20, 24, 4, frameDuration, "e"));//0
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["ne"], 0, 0, 20, 24, 4, frameDuration, "ne"));//1
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["se"], 0, 0, 20, 24, 4, frameDuration, "se"));//2
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["n"], 0, 0, 20, 24, 4, frameDuration, "n"));//3
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["s"], 0, 0, 20, 24, 4, frameDuration, "s"));//4
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["sgun"], 0, 0, 20, 24, 4, frameDuration, "sgun"));
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["idle"], 0, 0, 20, 24, 1, frameDuration, "idle"));
 }
 
 Player::~Player() {
@@ -31,22 +33,22 @@ Player::~Player() {
 void Player::update(Game& game) {
     bool updateAnim = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        _y -= 100 * game._dt;
+        _y -= _speed * game._dt;
         updateAnim = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        _y += 100 * game._dt;
+        _y += _speed * game._dt;
         updateAnim = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        _x -= 100 * game._dt;
+        _x -= _speed * game._dt;
         updateAnim = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        _x += 100 * game._dt;
+        _x += _speed * game._dt;
         updateAnim = true;
     }
 
@@ -68,10 +70,11 @@ void Player::draw(Game& game) {
 	game._window.draw(_animations[_currentAnimation]->_sprite);
 
 
-	sf::RectangleShape rectangle;
+	/*sf::RectangleShape rectangle;
 	rectangle.setSize(sf::Vector2f(_width, _height));
 	rectangle.setPosition(_x, _y);
 	rectangle.setFillColor(sf::Color(255, 255, 255, 100));
-
+	game._window.draw(rectangle);
+	*/
 	game._window.draw(_playerDebugMessage);
 }
