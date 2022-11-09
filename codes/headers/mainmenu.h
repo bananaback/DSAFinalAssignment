@@ -10,7 +10,7 @@
 class MainMenu : public GameState {
 public:
 	// Constructor
-	MainMenu();
+	MainMenu(Game &game);
 	// Destructor
 	~MainMenu();
 	// Game event handle

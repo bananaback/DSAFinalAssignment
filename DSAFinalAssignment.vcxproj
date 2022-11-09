@@ -146,6 +146,7 @@
     <ClCompile Include="codes\sources\gamestate.cpp" />
     <ClCompile Include="codes\sources\grid.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
+    <ClCompile Include="codes\sources\player.cpp" />
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
     <ClCompile Include="codes\sources\unit.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="codes\headers\gamestate.h" />
     <ClInclude Include="codes\headers\grid.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />
+    <ClInclude Include="codes\headers\player.h" />
     <ClInclude Include="codes\headers\resourceallocator.h" />
     <ClInclude Include="codes\headers\unit.h" />
   </ItemGroup>

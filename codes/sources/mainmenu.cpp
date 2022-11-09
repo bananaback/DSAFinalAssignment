@@ -1,8 +1,9 @@
 #include "../headers/mainmenu.h"
 #include <iostream>
+#include "../headers/gamestate.h"
 #include "../headers/button.h"
 // Constructor
-MainMenu::MainMenu() {
+MainMenu::MainMenu(Game &game){
 	// load font
 	_font.loadFromFile("assets/fonts/monogram-extended.ttf");
 	_font2.loadFromFile("assets/fonts/ThaleahFat.ttf");

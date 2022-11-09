@@ -10,7 +10,7 @@
 class GamePlay : public GameState {
 public:
 	// Constructor
-	GamePlay();
+	GamePlay(Game &game);
 	// Destructor
 	~GamePlay();
 	// Game play events handler

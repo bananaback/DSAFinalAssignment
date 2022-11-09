@@ -3,13 +3,13 @@
 // Constructor
 ResourceAllocator::ResourceAllocator() {
 	// Add resouces here
-	std::cout << addImage("assets/img/topdown_shooter/characters/1.png", "player", "1");
-	std::cout << addImage("assets/img/topdown_shooter/characters/1_diagdown.png", "player", "1_diagdown");
-	std::cout << addImage("assets/img/topdown_shooter/characters/1_diagup.png", "player", "1_diagup");
-	std::cout << addImage("assets/img/topdown_shooter/characters/1_north.png", "player", "1_north");
-	std::cout << addImage("assets/img/topdown_shooter/characters/1_side.png", "player", "1_side");
-	std::cout << addImage("assets/img/topdown_shooter/characters/1_south.png", "player", "1_south");
-	std::cout << addImage("assets/img/topdown_shooter/characters/1_south2.png", "player", "1_south2");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1.png", "player", "idle");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1_diagdown.png", "player", "se");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1_diagup.png", "player", "ne");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1_north.png", "player", "n");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1_side.png", "player", "e");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1_south.png", "player", "s");
+	std::cout << addImage("assets/img/topdown_shooter/characters/1_south2.png", "player", "sgun");
 	std::cout << addImage("assets/img/mainmenu/bg.png", "mainmenu", "bg");
 	std::cout << addImage("assets/img/mainmenu/play.png", "mainmenu", "play");
 	std::cout << addImage("assets/img/mainmenu/quit.png", "mainmenu", "quit");

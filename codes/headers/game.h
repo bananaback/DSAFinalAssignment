@@ -20,7 +20,7 @@ public:
 	// Game run
 	void run();
 	// Game init
-	void init(std::shared_ptr<GameState> gamestate);
+	void init();
 	// Function to add new state to game state list
 	void addState(std::shared_ptr<GameState> gamestate);
 	// Function to change game state
