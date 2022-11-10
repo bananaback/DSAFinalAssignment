@@ -84,9 +84,9 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
     std::shared_ptr<Unit> unit = mCells[x][y];
     while (unit != nullptr) {
         unit->update(game);
-        move(unit, unit->getNextX(), unit->getNextY());
-        unit->setX(unit->getNextX());
-        unit->setY(unit->getNextY());
+        //move(unit, unit->getNextX(), unit->getNextY());
+        //unit->setX(unit->getNextX());
+        //unit->setY(unit->getNextY());
         unit = unit->_next;
     }
 }
