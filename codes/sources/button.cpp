@@ -28,15 +28,15 @@ void Button::draw(Game& game)
 {
 	if (_name=="play")
 	{
-		_btnImg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["play"]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_PLAY]);
 	}
 	else if (_name == "quit")
 	{
-		_btnImg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["quit"]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_QUIT]);
 	}
 	else if (_name == "setting")
 	{
-		_btnImg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["setting"]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_SETTING]);
 	}
 	_btnImg.setPosition(_x + _width / 2, _y + _height/ 2);
 	if (_name == "play")

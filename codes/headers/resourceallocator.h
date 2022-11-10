@@ -14,25 +14,33 @@ public:
 	// Constructor
 	ResourceAllocator();
 
-	// Image
+	// IMAGE
 	
 	// Function to add new image resouces, store the pointer to that resource in _imageResouces map
-	std::string addImage(std::string filePath, std::string parent, std::string child);
-	// Function to get pointer to added image resource
-	std::shared_ptr<sf::Texture> getImage(std::string parent, std::string child);
-	// A map in a map to manage pointer to the loaded image resources
-	std::map < std::string, std::map<std::string, std::shared_ptr<sf::Texture>>> _imageResources;
+	std::string addImage(std::string filePath);
+	
+	// A vector to manage pointer to the loaded image resources
+	std::vector<std::shared_ptr<sf::Texture>> _imageResources;
 
-	// Sound
+	// SOUND
 
 	// ATTENTION! Resouce allocator for sound not implemented yet...
 	
 	// Function to add new sound resouces, store the pointer to that resource in _soundResources map
-	std::string addSound(std::string filePath, std::string parent, std::string child);
-	// Function to get pointer to added sound resource
-	std::shared_ptr<sf::SoundBuffer> getSound(std::string parent, std::string child);
-	// A map in a map to manage pointer to the loaded sound resources
-	std::map < std::string, std::map<std::string, std::shared_ptr<sf::SoundBuffer>>> _soundResources;
+	std::string addSound(std::string filePath);
+	
+	// A vector to manage pointer to the loaded sound resources
+	std::vector<std::shared_ptr<sf::SoundBuffer>> _soundResources;
+
+	// FONT
+	std::string addFont(std::string filePath);
+
+	// A vector to manage pointer to the loaded font resources
+	std::vector<std::shared_ptr<sf::Font>> _fontResources;
+
+	enum IMAGE{PLAYER_IDLE, PLAYER_SE, PLAYER_NE, PLAYER_N, PLAYER_E, PLAYER_S, PLAYER_SGUN, MAINMENU_BG, MAINMENU_PLAY, MAINMENU_QUIT, MAINMENU_SETTING};
+	enum FONT{MONO, THALEAHFAT};
+	enum SOUND{};
 };
 
 #endif // ! RESOUCESALLOCATOR_H

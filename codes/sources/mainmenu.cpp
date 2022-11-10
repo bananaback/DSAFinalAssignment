@@ -4,18 +4,14 @@
 #include "../headers/button.h"
 // Constructor
 MainMenu::MainMenu(Game &game){
-	// load font
-	_font.loadFromFile("assets/fonts/monogram-extended.ttf");
-	_font2.loadFromFile("assets/fonts/ThaleahFat.ttf");
-
 	// init text
-	_text.setFont(_font);
+	_text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 	_text.setPosition(280, 350);
 	_text.setString("This is main menu!");
 	_text.setCharacterSize(24);
 	_text.setFillColor(sf::Color::White);
 	_text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	_gameTitle.setFont(_font2);
+	_gameTitle.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
 	_gameTitle.setPosition(500, 180);
 	_gameTitle.setString("The shooting");
 	_gameTitle.setCharacterSize(120);
@@ -74,7 +70,7 @@ void MainMenu::render(Game &game) {
 	// Draw the text
 	game._window.draw(_text);
 	
-	_mainMenuBg.setTexture(*game.ra_ptr->_imageResources["mainmenu"]["bg"]);
+	_mainMenuBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_BG]);
 	_mainMenuBg.setScale(sf::Vector2f(2.4f, 2.f));
 	game._window.draw(_mainMenuBg);
 	//draw game title
