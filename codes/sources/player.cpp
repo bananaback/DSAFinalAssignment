@@ -17,19 +17,18 @@ Player::Player(float x, float y, float width, float height, Game& game, std::sha
 	_assetWidth = 20;
 	_assetHeight = 24;
 
-	_monoFont.loadFromFile("assets/fonts/monogram-extended.ttf");
-	_playerDebugMessage.setFont(_monoFont);
+	_playerDebugMessage.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 	_playerDebugMessage.setCharacterSize(24);
 	_playerDebugMessage.setFillColor(sf::Color::White);
 
 	float frameDuration = 0.1f;
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["e"], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "e"));//0
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["ne"], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "ne"));//1
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["se"], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "se"));//2
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["n"], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "n"));//3
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["s"], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "s"));//4
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["sgun"], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "sgun"));
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources["player"]["idle"], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_E], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "e"));//0
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_NE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "ne"));//1
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_SE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "se"));//2
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "n"));//3
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_S], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "s"));//4
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_SGUN], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "sgun"));
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
 }
 
 Player::~Player() {

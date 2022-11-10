@@ -2,9 +2,8 @@
 #include <iostream>
 #include "../headers/player.h"
 GamePlay::GamePlay(Game &game) {
-    _monoFont.loadFromFile("assets/fonts/monogram-extended.ttf");
 
-    _text.setFont(_monoFont);
+    _text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
     _text.setPosition(280, 350);
     _text.setString("Game play");
     _text.setCharacterSize(24);

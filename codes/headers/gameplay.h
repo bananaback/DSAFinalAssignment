@@ -21,7 +21,6 @@ public:
 	void render(Game &game);
 	std::shared_ptr<Grid> _grid;
 private:
-	sf::Font _monoFont;
 	sf::Text _text;
 };
 
