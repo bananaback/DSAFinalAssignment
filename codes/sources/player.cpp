@@ -3,6 +3,8 @@
 Player::Player(float x, float y, float width, float height, Game& game) :Unit(x, y) {
 	_x = x;
 	_y = y;
+	_nextX = x;
+	_nextY = y;
 	_width = width;
 	_height = height;
 	_name = "player";
@@ -33,22 +35,22 @@ Player::~Player() {
 void Player::update(Game& game) {
     bool updateAnim = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        _y -= _speed * game._dt;
+        _nextY = _y - _speed * game._dt;
         updateAnim = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        _y += _speed * game._dt;
+        _nextY = _y + _speed * game._dt;
         updateAnim = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        _x -= _speed * game._dt;
+        _nextX = _x - _speed * game._dt;
         updateAnim = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        _x += _speed * game._dt;
+        _nextX = _x + _speed * game._dt;
         updateAnim = true;
     }
 

@@ -15,6 +15,14 @@ float Unit::getY() {
 	return _y;
 }
 
+float Unit::getNextX() {
+	return _nextX;
+}
+
+float Unit::getNextY() {
+	return _nextY;
+}
+
 void Unit::setX(float x) {
 	_x = x;
 }

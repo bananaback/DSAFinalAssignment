@@ -49,7 +49,7 @@ void MainMenu::handleEvents(Game &game) {
 	{
 		if (pEvent.mouseButton.button == sf::Mouse::Left)
 		{
-			for (int i = 0; i < _btns.size(); i++)
+			for (size_t i = 0; i < _btns.size(); i++)
 			{
 				if (_btns[i]->checkHover(game))
 				{
@@ -63,7 +63,7 @@ void MainMenu::handleEvents(Game &game) {
 };
 // Update game logic
 void MainMenu::update(Game &game) {
-	for (int i = 0; i < _btns.size(); i++)
+	for (size_t i = 0; i < _btns.size(); i++)
 	{
 		_btns[i]->update(game);
 	}
@@ -79,7 +79,7 @@ void MainMenu::render(Game &game) {
 	game._window.draw(_mainMenuBg);
 	//draw game title
 	game._window.draw(_gameTitle);
-	for (int i = 0; i < _btns.size(); i++)
+	for (size_t i = 0; i < _btns.size(); i++)
 	{
 		_btns[i]->draw(game);
 	}

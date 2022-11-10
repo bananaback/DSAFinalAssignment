@@ -21,6 +21,7 @@ private:
 	sf::Text _playerDebugMessage;
 	sf::Font _monoFont;
 	float _speed;
+
 };
 
 #endif

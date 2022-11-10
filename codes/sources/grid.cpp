@@ -84,6 +84,9 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
     std::shared_ptr<Unit> unit = mCells[x][y];
     while (unit != nullptr) {
         unit->update(game);
+        move(unit, unit->getNextX(), unit->getNextY());
+        unit->setX(unit->getNextX());
+        unit->setY(unit->getNextY());
         unit = unit->_next;
     }
 }
@@ -99,6 +102,32 @@ void Grid::updateCells(Game& game) {
 
 // ATTENTION, need to sort the list by depth when add new unit to draw thing correctly
 void Grid::draw(Game& game) {
+    // Test visualization
+    for (int i = 0; i < s_gridHeight; i++)
+    {
+        for (int j = 0; j < s_gridWidth; j++)
+        {
+            int c = 0;
+            std::shared_ptr<Unit> unit = mCells[i][j];
+            while (unit != nullptr) {
+                c++;
+                unit = unit->_next;
+            }
+            unit = nullptr;
+            sf::RectangleShape rect(sf::Vector2f(96, 96));
+            if (c == 0) {
+                rect.setFillColor(sf::Color::Green);
+            }
+            else {
+                rect.setFillColor(sf::Color::Blue);
+            }
+            rect.setPosition(sf::Vector2f(1.f * j * s_cellSize, 1.f * i * s_cellSize));
+            rect.setOutlineColor(sf::Color::Black);
+            rect.setOutlineThickness(5.f);
+            game._window.draw(rect);
+        }
+    }
+
     for (int i = 0; i < s_gridHeight; i++)
     {
         for (int j = 0; j < s_gridWidth; j++)
