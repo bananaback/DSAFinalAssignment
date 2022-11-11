@@ -15,6 +15,12 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/mainmenu/quit.png");
 	std::cout << addImage("assets/img/mainmenu/setting.png");
 
+	std::cout << addImage("assets/img/topdown_shooter/guns/cannon/cannon_diagdown.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/cannon/cannon_diagup.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/cannon/cannon_down.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/cannon/cannon_side.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/cannon/cannon_up.png");
+
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
 	std::cout << addFont("assets/fonts/ThaleahFat.ttf");
 }

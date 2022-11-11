@@ -98,7 +98,7 @@ void Grid::updateCells(Game& game) {
 // ATTENTION, need to sort the list by depth when add new unit to draw thing correctly
 void Grid::draw(Game& game) {
     // Test visualization
-    for (int i = 0; i < s_gridHeight; i++) {
+    /*for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {
             int c = 0;
             std::shared_ptr<Unit> unit = mCells[i][j];
@@ -119,7 +119,7 @@ void Grid::draw(Game& game) {
             rect.setOutlineThickness(5.f);
             game._window.draw(rect);
         }
-    }
+    }*/
 
     for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {
