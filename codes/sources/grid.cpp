@@ -3,10 +3,8 @@
 #include <cmath>
 Grid::Grid() {
     // Clear the grid.
-    for (int i = 0; i < s_gridHeight; i++)
-    {
-        for (int j = 0; j < s_gridWidth; j++)
-        {
+    for (int i = 0; i < s_gridHeight; i++) {
+        for (int j = 0; j < s_gridWidth; j++) {
             mCells[i][j] = nullptr;
         }
     }
@@ -60,19 +58,16 @@ void Grid::move(std::shared_ptr<Unit> unit, float destX, float destY) {
     if (oldCellX == cellX && oldCellY == cellY) return;
 
     // Unlink it from the list of its old cell.
-    if (unit->_prev != nullptr)
-    {
+    if (unit->_prev != nullptr) {
         unit->_prev->_next = unit->_next;
     }
 
-    if (unit->_next != nullptr)
-    {
+    if (unit->_next != nullptr) {
         unit->_next->_prev = unit->_prev;
     }
 
     // If it's the head of a list, remove it.
-    if (mCells[oldCellY][oldCellX] == unit)
-    {
+    if (mCells[oldCellY][oldCellX] == unit) {
         mCells[oldCellY][oldCellX] = unit->_next;
     }
 
@@ -103,10 +98,8 @@ void Grid::updateCells(Game& game) {
 // ATTENTION, need to sort the list by depth when add new unit to draw thing correctly
 void Grid::draw(Game& game) {
     // Test visualization
-    for (int i = 0; i < s_gridHeight; i++)
-    {
-        for (int j = 0; j < s_gridWidth; j++)
-        {
+    for (int i = 0; i < s_gridHeight; i++) {
+        for (int j = 0; j < s_gridWidth; j++) {
             int c = 0;
             std::shared_ptr<Unit> unit = mCells[i][j];
             while (unit != nullptr) {
@@ -128,10 +121,8 @@ void Grid::draw(Game& game) {
         }
     }
 
-    for (int i = 0; i < s_gridHeight; i++)
-    {
-        for (int j = 0; j < s_gridWidth; j++)
-        {
+    for (int i = 0; i < s_gridHeight; i++) {
+        for (int j = 0; j < s_gridWidth; j++) {
             std::shared_ptr<Unit> unit = mCells[i][j];
             while (unit != nullptr) {
                 unit->draw(game);

@@ -24,7 +24,7 @@ std::string ResourceAllocator::addImage(std::string filePath) {
 	std::shared_ptr<sf::Texture> resource = std::make_shared<sf::Texture>();
 	// If load fail, return error message
 	if (!resource->loadFromFile(filePath)) {
-		std::string res = "Load file" + filePath + " fail.\n";
+		std::string res = "Load file" + filePath + " failed.\n";
 		return res;
 	}
 	// Load success and return success message
@@ -38,7 +38,7 @@ std::string ResourceAllocator::addFont(std::string filePath)
 	std::shared_ptr<sf::Font> resource = std::make_shared<sf::Font>();
 	// If load fail, return error message
 	if (!resource->loadFromFile(filePath)) {
-		std::string res = "Load file" + filePath + " fail.\n";
+		std::string res = "Load file" + filePath + " failed.\n";
 		return res;
 	}
 	// Load success and return success message
