@@ -1,7 +1,6 @@
 #include "../headers/button.h"
 #include<iostream>
-Button::Button(float x, float y, float width, float height, std::string name)
-{
+Button::Button(float x, float y, float width, float height, std::string name) {
 	_name = name;
 	_x = x;
 	_y = y;
@@ -16,39 +15,31 @@ Button::Button(float x, float y, float width, float height, std::string name)
 	_speed = 5;
 }
 
-Button::~Button()
-{
+Button::~Button() {
+
 }
-std::string Button::getName()
-{
+std::string Button::getName() {
 	return _name;
 }
 
-void Button::draw(Game& game)
-{
-	if (_name=="play")
-	{
+void Button::draw(Game& game) {
+	if (_name=="play") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_PLAY]);
 	}
-	else if (_name == "quit")
-	{
+	else if (_name == "quit") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_QUIT]);
 	}
-	else if (_name == "setting")
-	{
+	else if (_name == "setting") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_SETTING]);
 	}
 	_btnImg.setPosition(_x + _width / 2, _y + _height/ 2);
-	if (_name == "play")
-	{
+	if (_name == "play") {
 		_btnImg.setOrigin(49, 18); // a half of sprite size
 	}
-	else if (_name == "quit")
-	{
+	else if (_name == "quit") {
 		_btnImg.setOrigin(50, 18); // a half of sprite size
 	}
-	else if (_name == "setting")
-	{
+	else if (_name == "setting") {
 		_btnImg.setOrigin(73, 22); // a half of sprite size
 	}
 	_btnImg.setScale(_scaleX, _scaleY);
@@ -56,54 +47,40 @@ void Button::draw(Game& game)
 	
 }
 
-bool Button::checkHover(Game &game)
-{
+bool Button::checkHover(Game &game) {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(game._window);
-	if (mousePos.x >= _x && mousePos.x <= _x + _width
-		&& mousePos.y >= _y && mousePos.y <= _y + _height)
-	{
+	if (mousePos.x >= _x && mousePos.x <= _x + _width && mousePos.y >= _y && mousePos.y <= _y + _height) {
 		return true;
 	}
 	return false;
 }
-void Button::update(Game & game)
-{
-	if (checkHover(game))
-	{
-		if (_scaleX < _maxScaleX)
-		{
+void Button::update(Game & game) {
+	if (checkHover(game)) {
+		if (_scaleX < _maxScaleX) {
 			_scaleX += _speed * game._dt;
 		}
-		else
-		{
+		else {
 			_scaleX = _maxScaleX;
 		}
-		if (_scaleY < _maxScaleY)
-		{
+		if (_scaleY < _maxScaleY) {
 			_scaleY += _speed * game._dt;
 		}
-		else
-		{
+		else {
 			_scaleY = _maxScaleY;
 		}
 	}
-	else
-	{
-		if (_scaleX > _minScaleX)
-		{
+	else {
+		if (_scaleX > _minScaleX) {
 			_scaleX-=_speed*game._dt;
 		}
-		else
-		{
+		else {
 			_scaleX = _minScaleX;
 		}
 
-		if (_scaleY > _minScaleY)
-		{
+		if (_scaleY > _minScaleY) {
 			_scaleY -= _speed * game._dt;
 		}
-		else
-		{
+		else {
 			_scaleY = _minScaleY;
 		}
 	}

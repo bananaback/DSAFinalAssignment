@@ -3,7 +3,7 @@
 #include "../headers/gamestate.h"
 #include "../headers/button.h"
 // Constructor
-MainMenu::MainMenu(Game &game){
+MainMenu::MainMenu(Game &game) {
 	// init text
 	_text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 	_text.setPosition(280, 350);
@@ -41,17 +41,12 @@ void MainMenu::handleEvents(Game &game) {
 			}
 		}
 	}
-	if (pEvent.type == sf::Event::MouseButtonReleased)
-	{
-		if (pEvent.mouseButton.button == sf::Mouse::Left)
-		{
-			for (size_t i = 0; i < _btns.size(); i++)
-			{
-				if (_btns[i]->checkHover(game))
-				{
+	if (pEvent.type == sf::Event::MouseButtonReleased) {
+		if (pEvent.mouseButton.button == sf::Mouse::Left) {
+			for (size_t i = 0; i < _btns.size(); i++) {
+				if (_btns[i]->checkHover(game)) {
 					if (_btns[i]->getName() == "play") game.changeState("gameplay");
 					if (_btns[i]->getName() == "quit") game.setRunning(false);
-
 				}
 			}
 		}
@@ -59,14 +54,12 @@ void MainMenu::handleEvents(Game &game) {
 };
 // Update game logic
 void MainMenu::update(Game &game) {
-	for (size_t i = 0; i < _btns.size(); i++)
-	{
+	for (size_t i = 0; i < _btns.size(); i++) {
 		_btns[i]->update(game);
 	}
 };
 // Render game
 void MainMenu::render(Game &game) {
-	
 	// Draw the text
 	game._window.draw(_text);
 	
@@ -75,8 +68,7 @@ void MainMenu::render(Game &game) {
 	game._window.draw(_mainMenuBg);
 	//draw game title
 	game._window.draw(_gameTitle);
-	for (size_t i = 0; i < _btns.size(); i++)
-	{
+	for (size_t i = 0; i < _btns.size(); i++) {
 		_btns[i]->draw(game);
 	}
 };
