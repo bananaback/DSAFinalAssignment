@@ -79,9 +79,21 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
     std::shared_ptr<Unit> unit = mCells[x][y];
     while (unit != nullptr) {
         unit->update(game);
-        //move(unit, unit->getNextX(), unit->getNextY());
-        //unit->setX(unit->getNextX());
-        //unit->setY(unit->getNextY());
+        move(unit, unit->getNextX(), unit->getNextY());
+        if (unit->_dead) {
+            if (unit->_prev != nullptr) {
+                unit->_prev->_next = unit->_next;
+            }
+            if (unit->_next != nullptr) {
+                unit->_next->_prev = unit->_prev;
+            }
+            if (mCells[x][y] == unit) {
+                mCells[x][y] = unit->_next;
+            }
+            std::cout << unit.use_count() << "\n";
+            unit = nullptr;
+            break;
+        }
         unit = unit->_next;
     }
 }
@@ -98,7 +110,7 @@ void Grid::updateCells(Game& game) {
 // ATTENTION, need to sort the list by depth when add new unit to draw thing correctly
 void Grid::draw(Game& game) {
     // Test visualization
-    /*for (int i = 0; i < s_gridHeight; i++) {
+    for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {
             int c = 0;
             std::shared_ptr<Unit> unit = mCells[i][j];
@@ -119,7 +131,7 @@ void Grid::draw(Game& game) {
             rect.setOutlineThickness(5.f);
             game._window.draw(rect);
         }
-    }*/
+    }
 
     for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {

@@ -5,6 +5,7 @@ Unit::Unit(float x, float y) {
 	_y = y;
 	_prev = nullptr;
 	_next = nullptr;
+	_dead = false;
 }
 
 float Unit::getX() {

@@ -16,9 +16,11 @@ public:
 	void setX(float x);
 	void setY(float y);
 	std::shared_ptr<Unit> _prev, _next;
+	bool _dead;
 protected:
 	float _x, _y;
 	float _nextX, _nextY;
+	
 };
 
 #endif // ! UNIT_H
