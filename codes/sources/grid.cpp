@@ -80,6 +80,7 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
     while (gameObject != nullptr) {
         gameObject->update(game);
         move(gameObject, gameObject->getNextX(), gameObject->getNextY());
+        // remove object 
         if (gameObject->isDead()) {
             if (gameObject->getPrevGameObject() != nullptr) {
                 gameObject->getPrevGameObject()->getNextGameObject() = gameObject->getNextGameObject();
