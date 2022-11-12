@@ -1,7 +1,7 @@
 #include "../headers/player.h"
 #include <iostream>
 #include "../headers/grid.h"
-Player::Player(float x, float y, float width, float height, Game& game, std::shared_ptr<Grid> pGrid) :Unit(x, y) {
+Player::Player(float x, float y, float width, float height, Game& game, std::shared_ptr<Grid> pGrid) :GameObject(x, y) {
 	_x = x;
 	_y = y;
 	_nextX = x;
@@ -59,7 +59,7 @@ void Player::update(Game& game) {
         _nextX = _x + _speed * game._dt;
         updateAnim = true;
     }
-	std::shared_ptr<Unit> thisUnit = shared_from_this();
+	std::shared_ptr<GameObject> thisGameObject = shared_from_this();
 	
 	//_parentGrid->move(thisUnit, thisUnit->getNextX(), thisUnit->getNextY());
 	//std::cout << thisUnit.use_count() << "\n";

@@ -4,13 +4,13 @@
 
 #include <memory>
 #include "game.h"
-#include "unit.h"
+#include "gameobject.h"
 
 class Grid {
 public:
 	Grid();
-	void add(std::shared_ptr<Unit> unit);
-	void move(std::shared_ptr<Unit> unit, float destX, float destY);
+	void add(std::shared_ptr<GameObject> unit);
+	void move(std::shared_ptr<GameObject> unit, float destX, float destY);
 	void updateUnitsInCell(Game &game, int x, int y);
 	void updateCells(Game& game);
 	void draw(Game& game);
@@ -19,7 +19,7 @@ public:
 	static const int s_gridHeight = 9; // fixed
 	static const int s_cellSize = 48*2; // fixed
 private:
-	std::shared_ptr<Unit> mCells[s_gridHeight][s_gridWidth];
+	std::shared_ptr<GameObject> mCells[s_gridHeight][s_gridWidth];
 };
 
 #endif
