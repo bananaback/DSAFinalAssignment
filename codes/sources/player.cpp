@@ -1,7 +1,7 @@
 #include "../headers/player.h"
 #include <iostream>
 #include "../headers/grid.h"
-Player::Player(float x, float y, float width, float height, Game& game, std::shared_ptr<Grid> pGrid) :Unit(x, y) {
+Player::Player(float x, float y, float width, float height, Game& game, std::shared_ptr<Grid> pGrid) :GameObject(x, y) {
 	_x = x;
 	_y = y;
 	_nextX = x;
@@ -34,7 +34,7 @@ Player::Player(float x, float y, float width, float height, Game& game, std::sha
 }
 
 Player::~Player() {
-
+	std::cout << "Player destroyed";
 }
 
 void Player::update(Game& game) {
@@ -42,6 +42,7 @@ void Player::update(Game& game) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         _nextY = _y - _speed * game._dt;
         updateAnim = true;
+		_dead = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
@@ -58,10 +59,12 @@ void Player::update(Game& game) {
         _nextX = _x + _speed * game._dt;
         updateAnim = true;
     }
-	std::shared_ptr<Unit> thisUnit = shared_from_this();
-	_parentGrid->move(thisUnit, thisUnit->getNextX(), thisUnit->getNextY());
-	_x = _nextX;
-	_y = _nextY;
+	std::shared_ptr<GameObject> thisGameObject = shared_from_this();
+	
+	//_parentGrid->move(thisUnit, thisUnit->getNextX(), thisUnit->getNextY());
+	//std::cout << thisUnit.use_count() << "\n";
+	//_x = _nextX;
+	//_y = _nextY;
     if (updateAnim) _animations[_currentAnimation]->update(game._dt);
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(game._window);
     _angle = std::atan2(-(mouse_pos.y - (_y + _width / 2)), -(mouse_pos.x - (_x + _height / 2))) * 180 / (std::atan(1) * 4);

@@ -10,13 +10,11 @@ GamePlay::GamePlay(Game &game) {
     _text.setFillColor(sf::Color::White);
     _text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     _name = "gameplay";
+
+
 	_grid = std::make_shared<Grid>();
-	std::shared_ptr<Player> player(new Player(200.0, 200.0, 48, 42, game, _grid));
-	//std::shared_ptr<Player> player2(new Player(250.0, 200.0, 48, 42, game, _grid));
-	//std::shared_ptr<Player> player3(new Player(300.0, 300.0, 48, 42, game, _grid));
+	std::shared_ptr<Player> player = std::make_shared<Player>(200.0, 200.0, 48, 42, game, _grid);
 	_grid->add(player);
-	//_grid->add(player2);
-	//_grid->add(player3);
 } 
 
 GamePlay::~GamePlay() {

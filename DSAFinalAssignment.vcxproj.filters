@@ -39,13 +39,13 @@
     <ClCompile Include="codes\sources\grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="codes\sources\unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="codes\sources\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="codes\sources\button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="codes\sources\gameobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,13 +71,13 @@
     <ClInclude Include="codes\headers\grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="codes\headers\unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="codes\headers\player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="codes\headers\button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\headers\gameobject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

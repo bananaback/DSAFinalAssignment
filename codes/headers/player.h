@@ -4,11 +4,11 @@
 
 #include "game.h"
 #include "animation.h"
-#include "unit.h"
+#include "gameobject.h"
 #include "grid.h"
 #include <memory>
 
-class Player : public Unit, public std::enable_shared_from_this<Player> {
+class Player : public GameObject, public std::enable_shared_from_this<Player> {
 public:
 	Player(float x, float y, float width, float height, Game &game, std::shared_ptr<Grid> pGrid);
 	~Player();
