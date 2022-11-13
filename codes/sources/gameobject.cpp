@@ -16,6 +16,16 @@ float GameObject::getY() {
 	return _y;
 }
 
+float GameObject::getWidth()
+{
+	return _width;
+}
+
+float GameObject::getHeight()
+{
+	return _height;
+}
+
 float GameObject::getNextX() {
 	return _nextX;
 }
@@ -49,5 +59,9 @@ void GameObject::update(Game& game) {
 }
 
 void GameObject::draw(Game& game) {
+
+}
+
+void GameObject::getHit() {
 
 }
