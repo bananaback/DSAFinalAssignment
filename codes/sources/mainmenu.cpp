@@ -22,6 +22,7 @@ MainMenu::MainMenu(Game &game) {
 	_btns.push_back(std::make_shared<Button>(700, 430, 100, 46, "play"));
 	_btns.push_back(std::make_shared<Button>(700, 540, 100, 46, "setting"));
 	_btns.push_back(std::make_shared<Button>(700, 650, 100, 46, "quit"));
+	_btns.push_back(std::make_shared<Button>(1440, 800, 100, 46, "credit"));
 }
 // Destructor
 MainMenu::~MainMenu() {
@@ -47,6 +48,7 @@ void MainMenu::handleEvents(Game &game) {
 				if (_btns[i]->checkHover(game)) {
 					if (_btns[i]->getName() == "play") game.changeState("gameplay");
 					if (_btns[i]->getName() == "quit") game.setRunning(false);
+					if (_btns[i]->getName() == "credit") game.changeState("credit");
 				}
 			}
 		}

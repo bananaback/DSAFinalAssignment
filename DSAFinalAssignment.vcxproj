@@ -142,6 +142,7 @@
     <ClCompile Include="codes\sources\animation.cpp" />
     <ClCompile Include="codes\sources\bullet.cpp" />
     <ClCompile Include="codes\sources\button.cpp" />
+    <ClCompile Include="codes\sources\credit.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameobject.cpp" />
     <ClCompile Include="codes\sources\gameplay.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="codes\headers\animation.h" />
     <ClInclude Include="codes\headers\bullet.h" />
     <ClInclude Include="codes\headers\button.h" />
+    <ClInclude Include="codes\headers\credit.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameobject.h" />
     <ClInclude Include="codes\headers\gameplay.h" />
