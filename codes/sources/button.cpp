@@ -32,6 +32,12 @@ void Button::draw(Game& game) {
 	else if (_name == "setting") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_SETTING]);
 	}
+	else if (_name == "credit") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_STAR]);
+	}
+	else if (_name == "backmainmenu") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BACK_MAIN_MENU]);
+	}
 	_btnImg.setPosition(_x + _width / 2, _y + _height/ 2);
 	if (_name == "play") {
 		_btnImg.setOrigin(49, 18); // a half of sprite size
@@ -41,6 +47,12 @@ void Button::draw(Game& game) {
 	}
 	else if (_name == "setting") {
 		_btnImg.setOrigin(73, 22); // a half of sprite size
+	}
+	else if (_name == "credit") {
+		_btnImg.setOrigin(19, 17);
+	}
+	else if (_name == "backmainmenu") {
+		_btnImg.setOrigin(15.5, 14);
 	}
 	_btnImg.setScale(_scaleX, _scaleY);
 	game._window.draw(_btnImg);
