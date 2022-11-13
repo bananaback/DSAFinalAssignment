@@ -46,14 +46,6 @@ bool GameObject::isDead() {
 	return _dead;
 }
 
-std::shared_ptr<GameObject> GameObject::getPrevGameObject() {
-	return _prev;
-}
-
-std::shared_ptr<GameObject> GameObject::getNextGameObject() {
-	return _next;
-}
-
 void GameObject::update(Game& game) {
 
 }

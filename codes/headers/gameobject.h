@@ -18,12 +18,12 @@ public:
 	void setX(float x);
 	void setY(float y);
 	bool isDead();
-	std::shared_ptr<GameObject> getPrevGameObject(), getNextGameObject();
+	std::shared_ptr<GameObject> _prev, _next;
 protected:
 	float _x, _y, _width, _height;
 	bool _dead;
 	float _nextX, _nextY;
-	std::shared_ptr<GameObject> _prev, _next;
+	
 };
 
 #endif // ! GAMEOBJECT_H

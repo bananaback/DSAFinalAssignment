@@ -14,6 +14,7 @@ public:
 	~Player();
 	void update(Game& game);
 	void draw(Game& game);
+	void shoot(Game& game);
 	std::shared_ptr<Grid> _parentGrid;
 private:
 	float _width, _height;

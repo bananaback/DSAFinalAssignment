@@ -1,6 +1,7 @@
 #include "../headers/player.h"
 #include <iostream>
 #include "../headers/grid.h"
+#include "../headers/playerbullet.h"
 Player::Player(float x, float y, float width, float height, Game& game, std::shared_ptr<Grid> pGrid) :GameObject(x, y) {
 	_x = x;
 	_y = y;
@@ -34,10 +35,22 @@ Player::Player(float x, float y, float width, float height, Game& game, std::sha
 }
 
 Player::~Player() {
-	std::cout << "Player destroyed";
+	std::cout << "Player destroyed\n";
+}
+
+void Player::shoot(Game& game) {
+	//std::shared_ptr<PlayerBullet> playerBullet = std::make_shared<PlayerBullet>(_x + _width / 2, _y + _height / 2, 10, 10, 100, 5);
+	//_parentGrid->add(playerBullet);
+	std::shared_ptr<Player> player = std::make_shared<Player>(200.0, 200.0, 48, 42, game, _parentGrid);
+	_parentGrid->add(player);
 }
 
 void Player::update(Game& game) {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		//shoot(game);
+		std::cout << "a\n";
+	}
     bool updateAnim = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         _nextY = _y - _speed * game._dt;
@@ -62,7 +75,7 @@ void Player::update(Game& game) {
 	std::shared_ptr<GameObject> thisGameObject = shared_from_this();
 	
 	//_parentGrid->move(thisUnit, thisUnit->getNextX(), thisUnit->getNextY());
-	//std::cout << thisUnit.use_count() << "\n";
+	//std::cout << thisGameObject.use_count() << "\n";
 	//_x = _nextX;
 	//_y = _nextY;
     if (updateAnim) _animations[_currentAnimation]->update(game._dt);

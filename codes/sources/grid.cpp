@@ -1,13 +1,14 @@
 #include "../headers/grid.h"
 #include <iostream>
 #include <cmath>
-Grid::Grid() {
+Grid::Grid(Game& game) {
     // Clear the grid.
     for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {
             mCells[i][j] = nullptr;
         }
     }
+    countGameObject.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 }
 
 void Grid::add(std::shared_ptr<GameObject> gameObject) {
@@ -20,16 +21,23 @@ void Grid::add(std::shared_ptr<GameObject> gameObject) {
     if (cellY >= Grid::s_gridHeight) cellY = s_gridHeight - 1;
     if (cellX >= Grid::s_gridWidth) cellX = s_gridWidth - 1;
 
-    // Add to the front of list for the cell it's in.
-    gameObject->getPrevGameObject() = nullptr;
-    gameObject->getNextGameObject() = mCells[cellY][cellX];
+    /*// Add to the front of list for the cell it's in.
+    gameObject->_prev = nullptr;
+    gameObject->_next = mCells[cellY][cellX];
     mCells[cellY][cellX] = gameObject;
 
-    if (gameObject->getNextGameObject() != nullptr)
+    if (gameObject->_next != nullptr)
     {
-        gameObject->getNextGameObject()->getPrevGameObject() = gameObject;
+        gameObject->_next->_prev = gameObject;
     }
-    // Attention the index of mCells array
+    // Attention the index of mCells array*/
+    if (mCells[cellY][cellX] == nullptr) {
+        mCells[cellY][cellX] = gameObject;
+    } else {
+        mCells[cellY][cellX]->_prev = gameObject;
+        gameObject->_next = mCells[cellY][cellX];
+        mCells[cellY][cellX] = gameObject;
+    }
 }
 
 void Grid::move(std::shared_ptr<GameObject> gameObject, float destX, float destY) {
@@ -43,34 +51,36 @@ void Grid::move(std::shared_ptr<GameObject> gameObject, float destX, float destY
     if (oldCellX >= Grid::s_gridWidth) oldCellX = s_gridWidth - 1;
 
     // See which cell it's moving to.
-    int cellX = (int)(std::floor(destX / Grid::s_cellSize));
-    int cellY = (int)(std::floor(destY / Grid::s_cellSize));
+    int newCellX = (int)(std::floor(destX / Grid::s_cellSize));
+    int newCellY = (int)(std::floor(destY / Grid::s_cellSize));
 
-    if (cellY < 0) cellY = 0;
-    if (cellX < 0) cellX = 0;
-    if (cellY >= Grid::s_gridHeight) cellY = s_gridHeight - 1;
-    if (cellX >= Grid::s_gridWidth) cellX = s_gridWidth - 1;
+    if (newCellY < 0) newCellY = 0;
+    if (newCellX < 0) newCellX = 0;
+    if (newCellY >= Grid::s_gridHeight) newCellY = s_gridHeight - 1;
+    if (newCellX >= Grid::s_gridWidth) newCellX = s_gridWidth - 1;
 
     gameObject->setX(destX);
     gameObject->setY(destY);
 
     // If it didn't change cells, we're done.
-    if (oldCellX == cellX && oldCellY == cellY) return;
+    if (oldCellX == newCellX && oldCellY == newCellY) return;
 
     // Unlink it from the list of its old cell.
-    if (gameObject->getPrevGameObject() != nullptr) {
-        gameObject->getPrevGameObject()->getNextGameObject() = gameObject->getNextGameObject();
+    if (gameObject->_prev != nullptr) {
+        gameObject->_prev->_next = gameObject->_next;
     }
 
-    if (gameObject->getNextGameObject() != nullptr) {
-        gameObject->getNextGameObject()->getPrevGameObject() = gameObject->getPrevGameObject();
+    if (gameObject->_next != nullptr) {
+        gameObject->_next->_prev = gameObject->_prev;
     }
 
     // If it's the head of a list, remove it.
     if (mCells[oldCellY][oldCellX] == gameObject) {
-        mCells[oldCellY][oldCellX] = gameObject->getNextGameObject();
+        mCells[oldCellY][oldCellX] = gameObject->_next;
     }
 
+    gameObject->_next = nullptr;
+    gameObject->_prev = nullptr;
     // Add it back to the grid at its new cell.
     add(gameObject);
 }
@@ -81,21 +91,22 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
         gameObject->update(game);
         move(gameObject, gameObject->getNextX(), gameObject->getNextY());
         // remove object 
-        if (gameObject->isDead()) {
-            if (gameObject->getPrevGameObject() != nullptr) {
-                gameObject->getPrevGameObject()->getNextGameObject() = gameObject->getNextGameObject();
+        /*if (gameObject->isDead()) {
+            if (gameObject->_prev != nullptr) {
+                gameObject->_prev->_next = gameObject->_next;
             }
-            if (gameObject->getNextGameObject() != nullptr) {
-                gameObject->getNextGameObject()->getPrevGameObject() = gameObject->getPrevGameObject();
+            if (gameObject->_next != nullptr) {
+                gameObject->_next->_prev = gameObject->_prev;
             }
             if (mCells[x][y] == gameObject) {
-                mCells[x][y] = gameObject->getNextGameObject();
+                mCells[x][y] = gameObject->_next;
             }
             std::cout << gameObject.use_count() << "\n";
             gameObject = nullptr;
             break;
         }
-        gameObject = gameObject->getNextGameObject();
+        */
+        gameObject = gameObject->_next;
     }
 }
 
@@ -115,7 +126,7 @@ void Grid::checkCollisionInCell(Game& game, int x, int y) {
         std::shared_ptr<GameObject> currentObject = mCells[x][y];
         while (currentObject != nullptr) {
             objectList.push_back(currentObject);
-            currentObject = currentObject->getNextGameObject();
+            currentObject = currentObject->_next;
         }
     }
     for (size_t i = 0; i < objectList.size(); i++) {
@@ -131,7 +142,7 @@ void Grid::checkCollisionInCell(Game& game, int x, int y) {
 void Grid::updateCells(Game& game) {
     for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {
-            checkCollisionInCell(game, i, j);
+            //checkCollisionInCell(game, i, j);
             updateUnitsInCell(game, i, j);
         }
     }
@@ -147,7 +158,7 @@ void Grid::draw(Game& game) {
             std::shared_ptr<GameObject> gameObject = mCells[i][j];
             while (gameObject != nullptr) {
                 c++;
-                gameObject = gameObject->getNextGameObject();
+                gameObject = gameObject->_next;
             }
             gameObject = nullptr;
             sf::RectangleShape rect(sf::Vector2f(96, 96));
@@ -160,7 +171,13 @@ void Grid::draw(Game& game) {
             rect.setPosition(sf::Vector2f(1.f * j * s_cellSize, 1.f * i * s_cellSize));
             rect.setOutlineColor(sf::Color::Black);
             rect.setOutlineThickness(5.f);
+
+            countGameObject.setString(std::to_string(c));
+            countGameObject.setPosition(sf::Vector2f(1.f * j * s_cellSize, 1.f * i * s_cellSize));
+            countGameObject.setFillColor(sf::Color::Black);
+
             game._window.draw(rect);
+            game._window.draw(countGameObject);
         }
     }
 
@@ -169,9 +186,8 @@ void Grid::draw(Game& game) {
             std::shared_ptr<GameObject> gameObject = mCells[i][j];
             while (gameObject != nullptr) {
                 gameObject->draw(game);
-                gameObject = gameObject->getNextGameObject();
+                gameObject = gameObject->_next;
             }
-            gameObject = nullptr;
         }
     }
 }

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="codes\sources\animation.cpp" />
+    <ClCompile Include="codes\sources\bullet.cpp" />
     <ClCompile Include="codes\sources\button.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameobject.cpp" />
@@ -148,11 +149,13 @@
     <ClCompile Include="codes\sources\grid.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
     <ClCompile Include="codes\sources\player.cpp" />
+    <ClCompile Include="codes\sources\playerbullet.cpp" />
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
+    <ClInclude Include="codes\headers\bullet.h" />
     <ClInclude Include="codes\headers\button.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameobject.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="codes\headers\grid.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />
     <ClInclude Include="codes\headers\player.h" />
+    <ClInclude Include="codes\headers\playerbullet.h" />
     <ClInclude Include="codes\headers\resourceallocator.h" />
   </ItemGroup>
   <ItemGroup>

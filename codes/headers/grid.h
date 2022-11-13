@@ -8,7 +8,7 @@
 
 class Grid {
 public:
-	Grid();
+	Grid(Game& game);
 	void add(std::shared_ptr<GameObject> unit);
 	void move(std::shared_ptr<GameObject> unit, float destX, float destY);
 	void checkCollisionInCell(Game& game, int x, int y);
@@ -21,8 +21,10 @@ public:
 	static const int s_cellSize = 48*2; // fixed
 
 	static bool checkCollision(std::shared_ptr<GameObject> obj1, std::shared_ptr<GameObject> obj2);
-private:
 	std::shared_ptr<GameObject> mCells[s_gridHeight][s_gridWidth];
+private:
+	
+	sf::Text countGameObject;
 };
 
 #endif
