@@ -9,8 +9,10 @@ public:
 	GameObject(float x, float y);
 	virtual void update(Game& game);
 	virtual void draw(Game& game);
+	virtual void getHit();
 	float getX();
 	float getY();
+	float getWidth(), getHeight();
 	float getNextX();
 	float getNextY();
 	void setX(float x);

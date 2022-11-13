@@ -11,6 +11,7 @@ public:
 	Grid();
 	void add(std::shared_ptr<GameObject> unit);
 	void move(std::shared_ptr<GameObject> unit, float destX, float destY);
+	void checkCollisionInCell(Game& game, int x, int y);
 	void updateUnitsInCell(Game &game, int x, int y);
 	void updateCells(Game& game);
 	void draw(Game& game);
@@ -18,6 +19,8 @@ public:
 	static const int s_gridWidth = 16; // fixed
 	static const int s_gridHeight = 9; // fixed
 	static const int s_cellSize = 48*2; // fixed
+
+	static bool checkCollision(std::shared_ptr<GameObject> obj1, std::shared_ptr<GameObject> obj2);
 private:
 	std::shared_ptr<GameObject> mCells[s_gridHeight][s_gridWidth];
 };

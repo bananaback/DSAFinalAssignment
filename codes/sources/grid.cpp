@@ -80,6 +80,7 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
     while (gameObject != nullptr) {
         gameObject->update(game);
         move(gameObject, gameObject->getNextX(), gameObject->getNextY());
+        // remove object 
         if (gameObject->isDead()) {
             if (gameObject->getPrevGameObject() != nullptr) {
                 gameObject->getPrevGameObject()->getNextGameObject() = gameObject->getNextGameObject();
@@ -98,9 +99,39 @@ void Grid::updateUnitsInCell(Game& game, int x, int y) {
     }
 }
 
+bool Grid::checkCollision(std::shared_ptr<GameObject> obj1, std::shared_ptr<GameObject> obj2) {
+    if (obj1->getX() > obj2->getX() + obj2->getWidth() || obj2->getX() > obj1->getX() + obj1->getWidth()) return false;
+    if (obj1->getY() > obj2->getY() + obj2->getHeight() || obj2->getY() > obj1->getY() + obj1->getHeight()) return false;
+    return true;
+}
+
+void Grid::checkCollisionInCell(Game& game, int x, int y) {
+    int guideX[9] = {0, -1, 0, 1, 1, 1, 0, -1, -1};
+    int guideY[9] = {0, -1, -1, -1, 0, 1, 1, 1, 0};
+    std::vector<std::shared_ptr<GameObject>> objectList;
+    for (int i = 0; i < 8; i++) {
+        int currY = y + guideY[i];
+        int currX = x + guideX[i];
+        std::shared_ptr<GameObject> currentObject = mCells[x][y];
+        while (currentObject != nullptr) {
+            objectList.push_back(currentObject);
+            currentObject = currentObject->getNextGameObject();
+        }
+    }
+    for (size_t i = 0; i < objectList.size(); i++) {
+        for (size_t j = i+1; j < objectList.size(); j++) {
+            if (checkCollision(objectList[i], objectList[j])) {
+                objectList[i]->getHit();
+                objectList[i]->getHit();
+            }
+        }
+    }
+}
+
 void Grid::updateCells(Game& game) {
     for (int i = 0; i < s_gridHeight; i++) {
         for (int j = 0; j < s_gridWidth; j++) {
+            checkCollisionInCell(game, i, j);
             updateUnitsInCell(game, i, j);
         }
     }
@@ -144,3 +175,5 @@ void Grid::draw(Game& game) {
         }
     }
 }
+
+

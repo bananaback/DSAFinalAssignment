@@ -42,7 +42,7 @@ void Player::update(Game& game) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         _nextY = _y - _speed * game._dt;
         updateAnim = true;
-		_dead = true;
+		//_dead = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
