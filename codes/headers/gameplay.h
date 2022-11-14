@@ -5,6 +5,7 @@
 #include "game.h"
 #include "gamestate.h"
 #include "SFML/Graphics.hpp"
+#include "map.h"
 
 class GamePlay : public GameState {
 public:
@@ -18,8 +19,11 @@ public:
 	void update(Game &game);
 	// Game play render
 	void render(Game &game);
+	void addPlayerBullet(Game& game);
+	void addEnemy();
 private:
 	sf::Text _text;
+	Map _map;
 };
 
 #endif // !GAMEPLAY_H
