@@ -20,10 +20,11 @@ public:
 	// Game play render
 	void render(Game &game);
 	void addPlayerBullet(Game& game);
-	void addEnemy();
+	void addEnemy(Game& game);
 private:
 	sf::Text _text;
 	Map _map;
+	sf::RectangleShape _background;
 };
 
 #endif // !GAMEPLAY_H

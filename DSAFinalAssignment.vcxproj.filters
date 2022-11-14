@@ -60,6 +60,9 @@
     <ClCompile Include="codes\sources\calculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="codes\sources\effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\game.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="codes\headers\calculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\headers\effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,16 +10,20 @@ GamePlay::GamePlay(Game &game) {
     _text.setFillColor(sf::Color::White);
     _text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     _name = "gameplay";
-
+	
+	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
+	_background.setFillColor(sf::Color(0, 255, 183));
 	// add player
-	_map.playerList.push_back(std::make_shared<Player>(200, 200, 50, 50, 100, 100));
+	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 60, 100, 100, game));
 	// add some enemy
-	int enemyNumber = 2;
-	for (int i = 0; i < enemyNumber; i++) addEnemy();
+	addEnemy(game);
 } 
 
-void GamePlay::addEnemy() {
-	_map.enemyList.push_back(std::make_shared<Enemy>(100, 100, 50, 50, 80, 5, 100));
+void GamePlay::addEnemy(Game& game) {
+	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 50, 50, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 50, 50, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 50, 50, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 50, 50, 80, 5, 100, game));
 }
 
 GamePlay::~GamePlay() {
@@ -31,7 +35,7 @@ void GamePlay::addPlayerBullet(Game& game) {
 	// get the current mouse position in the window
 	sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
 	float angle = angleCalc(player->getX()+player->getWidth()/2, player->getY() + player->getHeight()/2, pixelPos.x, pixelPos.y);
-	_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 5, 5, 400, 5, angle));
+	_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
 }
 
 void GamePlay::handleEvents(Game &game) {
@@ -59,5 +63,6 @@ void GamePlay::update(Game &game) {
 }
 
 void GamePlay::render(Game &game) {
+	game._window.draw(_background);
 	_map.drawAll(game);
 }

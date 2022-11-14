@@ -7,6 +7,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "bullet.h"
+#include "effect.h"
 
 class Map {
 public:
@@ -18,6 +19,7 @@ public:
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<std::shared_ptr<Player>> playerList;
 	std::vector<std::shared_ptr<Bullet>> bulletList;
+	std::vector<std::shared_ptr<Effect>> effectList;
 };
 
 #endif // ! MAP_H

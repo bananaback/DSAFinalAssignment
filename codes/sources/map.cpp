@@ -20,6 +20,7 @@ void Map::updateAll(Game& game) {
 				enemy->setHealth(enemy->getHealth() - bullet->getDamage());
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				bullet->setDestroy(true);
+				effectList.push_back(std::make_shared<Effect>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
 				break;
 			}
 		}
@@ -30,6 +31,7 @@ void Map::updateAll(Game& game) {
 	for (size_t i = 0; i < playerList.size(); i++) playerList[i]->update(game);
 	for (size_t i = 0; i < enemyList.size(); i++) enemyList[i]->update(game, playerList[0]->getX() + playerList[0]->getWidth()/2, playerList[0]->getY() + playerList[0]->getHeight()/2);
 	for (size_t i = 0; i < bulletList.size(); i++) bulletList[i]->update(game);
+	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->update(game);
 
 	// clear destroyed object
 	auto it = bulletList.end();
@@ -51,10 +53,19 @@ void Map::updateAll(Game& game) {
 			it2 = enemyList.erase(it2);
 		}
 	}
+
+	auto it3 = effectList.end();
+	while (it3 > effectList.begin()) {
+		it3--;
+		if ((*it3)->isDestroyed()) {
+			it3 = effectList.erase(it3);
+		}
+	}
 }
 
 void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < playerList.size(); i++) playerList[i]->draw(game);
 	for (size_t i = 0; i < enemyList.size(); i++) enemyList[i]->draw(game);
 	for (size_t i = 0; i < bulletList.size(); i++) bulletList[i]->draw(game);
+	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 }
