@@ -1,5 +1,6 @@
 #include "../headers/map.h"
 #include "../headers/calculator.h"
+#include "../headers/explode1effect.h"
 #include <iostream>
 Map::Map() {
 	std::cout << "I'm map\n";
@@ -20,7 +21,7 @@ void Map::updateAll(Game& game) {
 				enemy->setHealth(enemy->getHealth() - bullet->getDamage());
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				bullet->setDestroy(true);
-				effectList.push_back(std::make_shared<Effect>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
+				effectList.push_back(std::make_shared<Explode1Effect>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
 				break;
 			}
 		}

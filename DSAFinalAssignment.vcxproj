@@ -146,6 +146,8 @@
     <ClCompile Include="codes\sources\calculator.cpp" />
     <ClCompile Include="codes\sources\credit.cpp" />
     <ClCompile Include="codes\sources\enemy.cpp" />
+    <ClCompile Include="codes\sources\eplode1effect.cpp" />
+    <ClCompile Include="codes\sources\explodeeffect2.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameobject.cpp" />
     <ClCompile Include="codes\sources\gameplay.cpp" />
@@ -164,6 +166,8 @@
     <ClInclude Include="codes\headers\calculator.h" />
     <ClInclude Include="codes\headers\credit.h" />
     <ClInclude Include="codes\headers\enemy.h" />
+    <ClInclude Include="codes\headers\explode1effect.h" />
+    <ClInclude Include="codes\headers\explodeeffect2.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameobject.h" />
     <ClInclude Include="codes\headers\gameplay.h" />

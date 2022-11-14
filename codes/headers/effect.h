@@ -10,7 +10,7 @@ public:
 	~Effect();
 	void update(Game& game);
 	void draw(Game& game);
-private:
+protected:
 	std::shared_ptr<Animation> _holdingAnimation;
 };
 
