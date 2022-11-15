@@ -63,10 +63,10 @@
     <ClCompile Include="codes\sources\effect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="codes\sources\eplode1effect.cpp">
+    <ClCompile Include="codes\sources\explosioneffect1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="codes\sources\explodeeffect2.cpp">
+    <ClCompile Include="codes\sources\explosioneffect2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,10 +116,10 @@
     <ClInclude Include="codes\headers\effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="codes\headers\explode1effect.h">
+    <ClInclude Include="codes\headers\explosioneffect1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="codes\headers\explodeeffect2.h">
+    <ClInclude Include="codes\headers\explosioneffect2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,7 +12,7 @@ GamePlay::GamePlay(Game &game) {
     _name = "gameplay";
 	
 	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
-	_background.setFillColor(sf::Color(0, 255, 183));
+	_background.setFillColor(sf::Color(9, 184, 0));
 	// add player
 	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 60, 100, 100, game));
 	// add some enemy
