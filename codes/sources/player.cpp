@@ -20,6 +20,13 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_SGUN], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "sgun"));
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
 	_currentAnimation = 0;
+	_coin = 0;
+}
+void Player::setCoin(int c) {
+	_coin = c;
+}
+int Player::getCoin() {
+	return _coin;
 }
 
 Player::~Player() {
