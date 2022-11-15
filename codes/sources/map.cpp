@@ -3,6 +3,12 @@
 #include "../headers/explosioneffect1.h"
 #include "../headers/explosioneffect2.h"
 #include <iostream>
+#include <random>
+
+std::random_device rd; // obtain a random number from hardware
+std::mt19937 gen(rd()); // seed the generator
+std::uniform_int_distribution<> distr(0, 63); // define the range
+
 Map::Map() {
 	std::cout << "I'm map\n";
 }
@@ -22,11 +28,7 @@ void Map::updateAll(Game& game) {
 				enemy->setHealth(enemy->getHealth() - bullet->getDamage());
 				if (enemy->getHealth() <= 0)
 				{
-					collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+20, enemy->getY()+5, 16, 16, game));
-					collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+40, enemy->getY()+15, 16, 16, game));
-					collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+60, enemy->getY()+20, 16, 16, game));
-					collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+80, enemy->getY()+30, 16, 16, game));
-					collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+60, enemy->getY()+40, 16, 16, game));
+					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+distr(gen), enemy->getY() + distr(gen), 16, 16, game));
 				}
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				bullet->setDestroy(true);
@@ -39,7 +41,7 @@ void Map::updateAll(Game& game) {
 	for (size_t i = 0; i < collectableItemList.size(); i++) {
 		std::shared_ptr<CollectableItem> collectableitem = collectableItemList[i];
 		for (size_t j = 0; j < playerList.size(); j++) {
-			std::shared_ptr<Player> player = playerList[i];
+			std::shared_ptr<Player> player = playerList[j];
 			if (AABBVsAABB(collectableitem->getX(), collectableitem->getY(), collectableitem->getX() + collectableitem->getWidth(), collectableitem->getY() + collectableitem->getHeight(), player->getX(), player->getY(), player->getX() + player->getWidth(), player->getY() + player->getHeight())) {
 				collectableitem->setDestroy(true);
 				int c = player->getCoin()+1;
