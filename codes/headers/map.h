@@ -8,6 +8,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "effect.h"
+#include "collectableitem.h"
 
 class Map {
 public:
@@ -20,6 +21,7 @@ public:
 	std::vector<std::shared_ptr<Player>> playerList;
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 	std::vector<std::shared_ptr<Effect>> effectList;
+	std::vector<std::shared_ptr<CollectableItem>> collectableItemList;
 };
 
 #endif // ! MAP_H

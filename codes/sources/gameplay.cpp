@@ -17,13 +17,14 @@ GamePlay::GamePlay(Game &game) {
 	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 60, 100, 100, game));
 	// add some enemy
 	addEnemy(game);
+	
 } 
 
 void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 50, 50, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 50, 50, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 50, 50, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 50, 50, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 50, 50, 40, 5, 20, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 50, 50, 40, 5, 20, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 50, 50, 40, 5, 20, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 50, 50, 40, 5, 20, game));
 }
 
 GamePlay::~GamePlay() {

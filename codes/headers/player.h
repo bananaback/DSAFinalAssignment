@@ -12,12 +12,14 @@ public:
 	~Player();
 	void update(Game& game);
 	void draw(Game& game);
+	void setCoin(int c);
+	int getCoin();
 private:
 	float _speed, _healthPoint, _assetWidth, _assetHeight, _scaleX, _scaleY, _angle;
 	int _assetName[9] = { 0, 2, 4, 2, 0, 1, 3, 1, 0 };
 	sf::Vector2i moveVec;
 	std::vector<std::shared_ptr<Animation>> _animations;
-	int _currentAnimation;
+	int _currentAnimation, _coin;
 	sf::Sprite _gun;
 };
 
