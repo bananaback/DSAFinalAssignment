@@ -24,7 +24,20 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_hurting = 0;
 	_hurtTimer = 0;
 	_appear = true;
+	canGoUp = true;
+	canGoDown = true;
+	canGoLeft = true;
+	canGoDown = true;
 }
+
+void Player::setX(float x) {
+	_x = x;
+}
+
+void Player::setY(float y) {
+	_y = y;
+}
+
 void Player::setCoin(int c) {
 	_coin = c;
 }
@@ -51,6 +64,26 @@ void Player::takeDamage(float d) {
 	}
 }
 
+void Player::setUp(bool b) {
+	canGoUp = b;
+}
+
+void Player::setDown(bool b) {
+	canGoDown = b;
+}
+
+void Player::setLeft(bool b) {
+	canGoLeft = b;
+}
+
+void Player::setRight(bool b) {
+	canGoRight = b;
+}
+
+float Player::getSpeed() {
+	return _speed;
+}
+
 Player::~Player() {
 	moveVec.x = 0;
 	moveVec.y = 0;
@@ -69,20 +102,20 @@ void Player::update(Game& game) {
 		_appear = true;
 	}
 	bool updateAnim = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canGoUp) {
 		moveVec.y = -1;
 		updateAnim = true;
-	} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+	} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && canGoDown) {
 		moveVec.y = 1;
 		updateAnim = true;
 	} else {
 		moveVec.y = 0;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && canGoLeft) {
 		moveVec.x = -1;
 		updateAnim = true;
-	} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && canGoRight) {
 		moveVec.x = 1;
 		updateAnim = true;
 	} else {
@@ -152,12 +185,12 @@ void Player::update(Game& game) {
 }
 
 void Player::draw(Game& game) {
-	/*sf::RectangleShape rectangle;
+	sf::RectangleShape rectangle;
 	rectangle.setSize(sf::Vector2f(_width, _height));
 	rectangle.setOutlineColor(sf::Color::Blue);
-	rectangle.setOutlineThickness(5);
+	//rectangle.setOutlineThickness(5);
 	rectangle.setPosition(_x, _y);
-	game._window.draw(rectangle);*/
+	game._window.draw(rectangle);
 	if (_appear) {
 		if (_angle >= 0) game._window.draw(_gun);
 		_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);

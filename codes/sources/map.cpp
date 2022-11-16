@@ -80,12 +80,77 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+
+	// player and wall collision resolve
+	for (size_t i = 0; i < playerList.size(); i++) {
+		std::shared_ptr<Player> player = playerList[i];
+		player->setUp(true);
+		player->setDown(true);
+		player->setLeft(true);
+		player->setRight(true);
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				player->getX(),
+				player->getY() - 2,
+				player->getWidth(),
+				2,
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				player->setUp(false);
+				break;
+			}
+		}
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				player->getX(),
+				player->getY() + player->getHeight(),
+				player->getWidth(),
+				2,
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				player->setDown(false);
+				break;
+			}
+		}
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				player->getX()-2,
+				player->getY(),
+				2,
+				player->getHeight(),
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				player->setLeft(false);
+				break;
+			}
+		}
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				player->getX() + player->getWidth(),
+				player->getY(),
+				2,
+				player->getHeight(),
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				player->setRight(false);
+				break;
+			}
+		}
+	}
+
 	// update
 	updateList(game, playerList);
 	updateList(game, enemyList, playerList[0]->getX() + playerList[0]->getWidth() / 2, playerList[0]->getY() + playerList[0]->getHeight() / 2);
 	updateList(game, bulletList);
 	updateList(game, effectList);
 	updateList(game, collectableItemList);
+	updateList(game, wallList);
+
+	
 
 	// clear destroyed object
 	removeDestroyedObjects(playerList);
@@ -93,6 +158,7 @@ void Map::updateAll(Game& game) {
 	removeDestroyedObjects(enemyList);
 	removeDestroyedObjects(effectList);
 	removeDestroyedObjects(collectableItemList);
+	removeDestroyedObjects(wallList);
 }
 
 void Map::drawAll(Game& game) {
@@ -101,4 +167,5 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < bulletList.size(); i++) bulletList[i]->draw(game);
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
+	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
 }
