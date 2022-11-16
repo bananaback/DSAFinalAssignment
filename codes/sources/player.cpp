@@ -40,9 +40,13 @@ void Player::setHealth(float h) {
 	_healthPoint = h;
 }
 
+void Player::increaseCoin(int amount) {
+	_coin += amount;
+}
+
 void Player::takeDamage(float d) {
 	if (_hurting <= 0) {
-		setHealth(getHealth() - d);
+		_healthPoint = _healthPoint - d;
 		_hurting = 1;
 	}
 }
