@@ -22,6 +22,7 @@ Enemy::Enemy(float x, float y, float width, float height, float speed, float att
 }
 
 Enemy::~Enemy() {
+	std::cout << _healthPoint << " ";
 	std::cout << "Enemy removed\n";
 }
 

@@ -72,6 +72,9 @@
     <ClCompile Include="codes\sources\collectableitem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="codes\sources\coin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\game.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="codes\headers\collectableitem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\headers\coin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "../headers/calculator.h"
 #include "../headers/explosioneffect1.h"
 #include "../headers/explosioneffect2.h"
+#include "../headers/coin.h"
 #include <iostream>
 #include <random>
 
@@ -28,16 +29,17 @@ void Map::updateAll(Game& game) {
 				enemy->setHealth(enemy->getHealth() - bullet->getDamage());
 				if (enemy->getHealth() <= 0)
 				{
-					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<CollectableItem>(enemy->getX()+distr(gen), enemy->getY() + distr(gen), 16, 16, game));
+					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX()+enemy->getWidth()/2 + distr(gen) - 16, enemy->getY() + enemy->getHeight()/2 + distr(gen) - 16, 32, 32, game));
 				}
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				bullet->setDestroy(true);
-				effectList.push_back(std::make_shared<ExplosionEffect2>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
+				effectList.push_back(std::make_shared<ExplosionEffect1>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
 				break;
 			}
 		}
 	}
 
+	// player and item
 	for (size_t i = 0; i < collectableItemList.size(); i++) {
 		std::shared_ptr<CollectableItem> collectableitem = collectableItemList[i];
 		for (size_t j = 0; j < playerList.size(); j++) {
@@ -47,6 +49,15 @@ void Map::updateAll(Game& game) {
 				int c = player->getCoin()+1;
 				player->setCoin(c);
 			}
+		}
+	}
+
+	// player and enemy
+	for (size_t i = 0; i < playerList.size(); i++) {
+		std::shared_ptr<Player> player = playerList[i];
+		for (size_t j = 0; j < enemyList.size(); j++) {
+			std::shared_ptr<Enemy> enemy = enemyList[j];
+			if (AABBVsAABB(player->getX(), player->getY(), player->getX() + player->getWidth(), player->getY() + player->getHeight(), enemy->getX(), enemy->getY(), enemy->getX() + enemy->getWidth(), enemy->getY() + enemy->getHeight())) player->takeDamage(20);
 		}
 	}
 

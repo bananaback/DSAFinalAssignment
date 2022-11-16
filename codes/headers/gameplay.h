@@ -21,10 +21,12 @@ public:
 	void render(Game &game);
 	void addPlayerBullet(Game& game);
 	void addEnemy(Game& game);
+	void drawPlayerHealthBar(Game& game);
 private:
 	sf::Text _text;
 	Map _map;
 	sf::RectangleShape _background;
+	sf::Sprite _playerHPBarBg, _playerHpBar;
 };
 
 #endif // !GAMEPLAY_H
