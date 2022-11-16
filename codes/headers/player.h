@@ -18,6 +18,9 @@ public:
 	float getHealth();
 	void setHealth(float h);
 	void increaseCoin(int amount);
+	void setX(float x), setY(float y);
+	void setUp(bool b), setDown(bool b), setLeft(bool b), setRight(bool b);
+	float getSpeed();
 private:
 	float _speed, _healthPoint, _assetWidth, _assetHeight, _scaleX, _scaleY, _angle, _hurting, _hurtTimer;
 	int _assetName[9] = { 0, 2, 4, 2, 0, 1, 3, 1, 0 };
@@ -25,7 +28,7 @@ private:
 	std::vector<std::shared_ptr<Animation>> _animations;
 	int _currentAnimation, _coin;
 	sf::Sprite _gun;
-	bool _appear;
+	bool _appear, canGoUp, canGoDown, canGoLeft, canGoRight;
 };
 
 #endif

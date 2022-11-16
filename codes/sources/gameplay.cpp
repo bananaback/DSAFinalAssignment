@@ -25,6 +25,13 @@ GamePlay::GamePlay(Game &game) {
 
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
+
+	for (int i = 0; i < 5; i++) {
+		_map.wallList.push_back(std::make_shared<Wall>(400, 400+32*i, 32, 32, game));
+	}
+	for (int i = 0; i < 5; i++) {
+		_map.wallList.push_back(std::make_shared<Wall>(400+32*i, 400 + 32 * 5, 32, 32, game));
+	}
 } 
 
 void GamePlay::addEnemy(Game& game) {
