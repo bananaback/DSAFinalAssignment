@@ -47,7 +47,7 @@ void GamePlay::addPlayerBullet(Game& game) {
 	std::shared_ptr<Player> player = _map.playerList[0];
 	// get the current mouse position in the window
 	sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
-	float angle = angleCalc(player->getX()+player->getWidth()/2, player->getY() + player->getHeight()/2, pixelPos.x, pixelPos.y);
+	float angle = calculateAngle(player->getX()+player->getWidth()/2, player->getY() + player->getHeight()/2, pixelPos.x, pixelPos.y);
 	_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
 }
 
@@ -73,7 +73,7 @@ void GamePlay::handleEvents(Game &game) {
 
 void GamePlay::update(Game &game) {
 	// update player healthbar
-	_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth()/100, 1));
+	_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth()/100*2, 1));
 	_map.updateAll(game);
 }
 

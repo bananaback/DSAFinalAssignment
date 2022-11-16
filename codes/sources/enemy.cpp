@@ -27,7 +27,7 @@ Enemy::~Enemy() {
 }
 
 void Enemy::update(Game& game, float pX, float pY) {
-	_angle = angleCalc(_x+_width/2, _y+_height/2, pX, pY);
+	_angle = calculateAngle(_x+_width/2, _y+_height/2, pX, pY);
 	float xVel, yVel;
 	xVel = std::cos(_angle)*_speed*game._dt;
 	yVel = std::sin(_angle)*_speed*game._dt;
