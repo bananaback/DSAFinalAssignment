@@ -84,3 +84,7 @@ void Enemy::setHealth(float h)
 {
 	_healthPoint = h;
 }
+
+void Enemy::takeDamage(float d) {
+	_healthPoint -= d;
+}
