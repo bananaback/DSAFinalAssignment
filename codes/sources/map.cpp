@@ -46,7 +46,7 @@ void Map::updateAll(Game& game) {
 		for (size_t j = 0; j < enemyList.size(); j++) {
 			std::shared_ptr<Enemy> enemy = enemyList[j];
 			if (bullet->checkCollision(*enemy)) {
-				enemy->setHealth(enemy->getHealth() - bullet->getDamage());
+				enemy->takeDamage(10);
 				if (enemy->getHealth() <= 0)
 				{
 					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX()+enemy->getWidth()/2 + distr(gen) - 16, enemy->getY() + enemy->getHeight()/2 + distr(gen) - 16, 32, 32, game));
@@ -66,8 +66,7 @@ void Map::updateAll(Game& game) {
 			std::shared_ptr<Player> player = playerList[j];
 			if (collectableitem->checkCollision(*player)) {
 				collectableitem->destroy();
-				int c = player->getCoin()+1;
-				player->setCoin(c);
+				player->increaseCoin(1);
 			}
 		}
 	}

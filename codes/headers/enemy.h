@@ -14,6 +14,7 @@ public:
 	void draw(Game& game);
 	float getHealth();
 	void setHealth(float h);
+	void takeDamage(float d);
 private:
 	float _speed, _attackDamage, _healthPoint, _angle, _assetWidth, _assetHeight, _scaleX, _scaleY;
 	std::vector<std::shared_ptr<Animation>> _animations;
