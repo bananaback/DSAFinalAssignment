@@ -10,7 +10,8 @@ public:
 	~CollectableItem();
 	void update(Game& game);
 	void draw(Game& game);
-private:
+protected:
+	float _scaleX, _scaleY;
 	std::shared_ptr<Animation> _animation;
 
 };

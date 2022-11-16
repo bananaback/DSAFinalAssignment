@@ -17,14 +17,26 @@ GamePlay::GamePlay(Game &game) {
 	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 60, 100, 100, game));
 	// add some enemy
 	addEnemy(game);
-	
+	// init player health bar
+	_playerHpBar.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR_FILL]);
+	_playerHPBarBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR]);
+	_playerHPBarBg.setScale(sf::Vector2f(2.f, 2.f));
+	_playerHPBarBg.setPosition(20, 20);
+
+	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
+	_playerHpBar.setPosition(40, 35);
 } 
 
 void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 50, 50, 40, 5, 20, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 50, 50, 40, 5, 20, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 50, 50, 40, 5, 20, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 50, 50, 40, 5, 20, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 50, 50, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 50, 50, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 50, 50, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 50, 50, 40, 5, 100, game));
+}
+
+void GamePlay::drawPlayerHealthBar(Game& game) {
+	game._window.draw(_playerHPBarBg);
+	game._window.draw(_playerHpBar);
 }
 
 GamePlay::~GamePlay() {
@@ -60,10 +72,13 @@ void GamePlay::handleEvents(Game &game) {
 }
 
 void GamePlay::update(Game &game) {
+	// update player healthbar
+	_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth()/100, 1));
 	_map.updateAll(game);
 }
 
 void GamePlay::render(Game &game) {
 	game._window.draw(_background);
 	_map.drawAll(game);
+	drawPlayerHealthBar(game);
 }

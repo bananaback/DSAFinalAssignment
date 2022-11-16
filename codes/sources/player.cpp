@@ -21,6 +21,9 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
 	_currentAnimation = 0;
 	_coin = 0;
+	_hurting = 0;
+	_hurtTimer = 0;
+	_appear = true;
 }
 void Player::setCoin(int c) {
 	_coin = c;
@@ -29,12 +32,38 @@ int Player::getCoin() {
 	return _coin;
 }
 
+float Player::getHealth() {
+	return _healthPoint;
+}
+
+void Player::setHealth(float h) {
+	_healthPoint = h;
+}
+
+void Player::takeDamage(float d) {
+	if (_hurting <= 0) {
+		setHealth(getHealth() - d);
+		_hurting = 1;
+	}
+}
+
 Player::~Player() {
 	moveVec.x = 0;
 	moveVec.y = 0;
 }
 
 void Player::update(Game& game) {
+	if (_healthPoint < 0) _healthPoint = 0;
+	_hurtTimer += game._dt;
+	if (_hurtTimer >= 0.05) {
+		_hurtTimer = 0;
+		_appear = !_appear;
+	}
+	if (_hurting >= 0) {
+		_hurting -= game._dt;
+	} else {
+		_appear = true;
+	}
 	bool updateAnim = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		moveVec.y = -1;
@@ -125,17 +154,17 @@ void Player::draw(Game& game) {
 	rectangle.setOutlineThickness(5);
 	rectangle.setPosition(_x, _y);
 	game._window.draw(rectangle);*/
-
-	if (_angle >= 0) game._window.draw(_gun);
-
-	_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);
-	_animations[_currentAnimation]->_sprite.setOrigin(_assetWidth / 2, _assetHeight / 2);
-	_animations[_currentAnimation]->_sprite.setScale(_scaleX, _scaleY);
-	game._window.draw(_animations[_currentAnimation]->_sprite);
-	if (_angle < 0) game._window.draw(_gun);
-	sf::RectangleShape healthBar;
+	if (_appear) {
+		if (_angle >= 0) game._window.draw(_gun);
+		_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);
+		_animations[_currentAnimation]->_sprite.setOrigin(_assetWidth / 2, _assetHeight / 2);
+		_animations[_currentAnimation]->_sprite.setScale(_scaleX, _scaleY);
+		game._window.draw(_animations[_currentAnimation]->_sprite);
+		if (_angle < 0) game._window.draw(_gun);
+	}
+	/*sf::RectangleShape healthBar;
 	healthBar.setSize(sf::Vector2f(70.0/100*_healthPoint, 5));
 	healthBar.setOutlineColor(sf::Color::Green);
 	healthBar.setFillColor(sf::Color::Green);
-	healthBar.setPosition(_x - 10, _y - 15);
+	healthBar.setPosition(_x - 10, _y - 15);*/
 }

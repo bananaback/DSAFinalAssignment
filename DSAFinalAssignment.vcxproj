@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="codes\sources\animation.cpp" />
     <ClCompile Include="codes\sources\bullet.cpp" />
+    <ClCompile Include="codes\sources\coin.cpp" />
     <ClCompile Include="codes\sources\collectableitem.cpp" />
     <ClCompile Include="codes\sources\effect.cpp" />
     <ClCompile Include="codes\sources\button.cpp" />
@@ -162,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
     <ClInclude Include="codes\headers\bullet.h" />
+    <ClInclude Include="codes\headers\coin.h" />
     <ClInclude Include="codes\headers\collectableitem.h" />
     <ClInclude Include="codes\headers\effect.h" />
     <ClInclude Include="codes\headers\button.h" />
