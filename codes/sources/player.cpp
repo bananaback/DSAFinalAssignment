@@ -190,7 +190,7 @@ void Player::draw(Game& game) {
 	rectangle.setOutlineColor(sf::Color::Blue);
 	//rectangle.setOutlineThickness(5);
 	rectangle.setPosition(_x, _y);
-	game._window.draw(rectangle);
+	//game._window.draw(rectangle);
 	if (_appear) {
 		if (_angle >= 0) game._window.draw(_gun);
 		_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);

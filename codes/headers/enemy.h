@@ -15,10 +15,13 @@ public:
 	float getHealth();
 	void setHealth(float h);
 	void takeDamage(float d);
+	void setUp(bool b), setDown(bool b), setLeft(bool b), setRight(bool b);
+
 private:
 	float _speed, _attackDamage, _healthPoint, _angle, _assetWidth, _assetHeight, _scaleX, _scaleY;
 	std::vector<std::shared_ptr<Animation>> _animations;
 	int _currentAnimation = 0;
+	bool _canGoUp, _canGoDown, _canGoLeft, _canGoRight;
 };
 
 #endif // ! ENEMY_H
