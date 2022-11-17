@@ -80,6 +80,19 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	// bullet and wall
+	for (size_t i = 0; i < bulletList.size(); i++) {
+		std::shared_ptr<Bullet> bullet = bulletList[i];
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (bullet->checkCollision(*wall)) {
+				bullet->destroy();
+				effectList.push_back(std::make_shared<ExplosionEffect1>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
+				break;
+			}
+		}
+	}
+
 
 	// player and wall collision resolve
 	for (size_t i = 0; i < playerList.size(); i++) {
