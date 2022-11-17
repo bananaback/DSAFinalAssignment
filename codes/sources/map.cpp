@@ -142,6 +142,67 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	// enemy and wall collision resolve
+	for (size_t i = 0; i < enemyList.size(); i++) {
+		std::shared_ptr<Enemy> enemy = enemyList[i];
+		enemy->setUp(true);
+		enemy->setDown(true);
+		enemy->setLeft(true);
+		enemy->setRight(true);
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				enemy->getX(),
+				enemy->getY() - 2,
+				enemy->getWidth(),
+				2,
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				enemy->setUp(false);
+				break;
+			}
+		}
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				enemy->getX(),
+				enemy->getY() + enemy->getHeight(),
+				enemy->getWidth(),
+				2,
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				enemy->setDown(false);
+				break;
+			}
+		}
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				enemy->getX() - 2,
+				enemy->getY(),
+				2,
+				enemy->getHeight(),
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				enemy->setLeft(false);
+				break;
+			}
+		}
+
+		for (size_t j = 0; j < wallList.size(); j++) {
+			std::shared_ptr<Wall> wall = wallList[j];
+			if (checkCollisionBetweenTwoRect(
+				enemy->getX() + enemy->getWidth(),
+				enemy->getY(),
+				2,
+				enemy->getHeight(),
+				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
+				enemy->setRight(false);
+				break;
+			}
+		}
+	}
+
 	// update
 	updateList(game, playerList);
 	updateList(game, enemyList, playerList[0]->getX() + playerList[0]->getWidth() / 2, playerList[0]->getY() + playerList[0]->getHeight() / 2);
