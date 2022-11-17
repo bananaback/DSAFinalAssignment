@@ -1,6 +1,28 @@
 #include "../headers/gameplay.h"
 #include "../headers/calculator.h"
 #include <iostream>
+
+std::vector<std::vector<int>> testMap = {
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 4, 1, 4, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 4, 0, 4, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 4, 1, 4, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 4, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 4, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+};
+
 GamePlay::GamePlay(Game &game) {
 
     _text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
@@ -14,7 +36,7 @@ GamePlay::GamePlay(Game &game) {
 	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
 	_background.setFillColor(sf::Color(9, 184, 0));
 	// add player
-	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 60, 100, 100, game));
+	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 40, 100, 100, game));
 	// add some enemy
 	addEnemy(game);
 	// init player health bar
@@ -26,19 +48,21 @@ GamePlay::GamePlay(Game &game) {
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
 
-	for (int i = 0; i < 5; i++) {
-		_map.wallList.push_back(std::make_shared<Wall>(400, 400+32*i, 32, 32, game));
-	}
-	for (int i = 0; i < 5; i++) {
-		_map.wallList.push_back(std::make_shared<Wall>(400+32*i, 400 + 32 * 5, 32, 32, game));
+	
+	for (size_t i = 0; i < testMap.size(); i++) {
+		for (size_t j = 0; j < testMap[i].size(); j++) {
+			if (testMap[i][j] != 0) {
+				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, testMap[i][j]));
+			}
+		}
 	}
 } 
 
 void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 50, 50, 40, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 50, 50, 40, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 50, 50, 40, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 50, 50, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 40, 40, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 40, 40, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 40, 40, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 40, 40, 40, 5, 100, game));
 }
 
 void GamePlay::drawPlayerHealthBar(Game& game) {

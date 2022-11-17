@@ -75,13 +75,13 @@ void Enemy::update(Game& game, float pX, float pY) {
 }
 
 void Enemy::draw(Game& game) {
-	/*sf::RectangleShape rectangle;
+	sf::RectangleShape rectangle;
 	rectangle.setSize(sf::Vector2f(_width, _height));
 	rectangle.setOutlineColor(sf::Color::Yellow);
 	rectangle.setFillColor(sf::Color::Red);
 	rectangle.setOutlineThickness(5);
 	rectangle.setPosition(_x, _y);
-	game._window.draw(rectangle);*/
+	game._window.draw(rectangle);
 
 	_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);
 	_animations[_currentAnimation]->_sprite.setOrigin(_assetWidth / 2, _assetHeight / 2);

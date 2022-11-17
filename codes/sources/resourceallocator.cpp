@@ -32,6 +32,11 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/other/coin2.png");
 	std::cout << addImage("assets/img/topdown_shooter/health-bar.png");
 	std::cout << addImage("assets/img/topdown_shooter/health-bar-fill.png");
+	std::cout << addImage("assets/img/topdown_shooter/wall/boxwall.png");
+	std::cout << addImage("assets/img/topdown_shooter/wall/greenwall.png");
+	std::cout << addImage("assets/img/topdown_shooter/wall/redwall.png");
+	std::cout << addImage("assets/img/topdown_shooter/wall/bluewall.png");
+	std::cout << addImage("assets/img/topdown_shooter/wall/icewall.png");
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
 	std::cout << addFont("assets/fonts/ThaleahFat.ttf");
