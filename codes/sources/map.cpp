@@ -3,6 +3,8 @@
 #include "../headers/explosioneffect1.h"
 #include "../headers/explosioneffect2.h"
 #include "../headers/coin.h"
+#include "../headers/astar.h"
+#include "../headers/utility.h"
 #include <iostream>
 #include <random>
 
@@ -12,6 +14,10 @@ std::uniform_int_distribution<> distr(0, 63); // define the range
 
 Map::Map() {
 	std::cout << "I'm map\n";
+	playerPosInCell.first = 5;
+	playerPosInCell.second = 5;
+	std::string map1Path = "./data/map1.txt";
+	readMap(map1Path, blockMap);
 }
 
 Map::~Map() {
@@ -216,6 +222,8 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	
+
 	// update
 	updateList(game, playerList);
 	updateList(game, enemyList, playerList[0]->getX() + playerList[0]->getWidth() / 2, playerList[0]->getY() + playerList[0]->getHeight() / 2);
@@ -233,6 +241,26 @@ void Map::updateAll(Game& game) {
 	removeDestroyedObjects(effectList);
 	removeDestroyedObjects(collectableItemList);
 	removeDestroyedObjects(wallList);
+
+	/*// enemy pathfinding
+	float pCenterX = playerList[0]->getX() + playerList[0]->getWidth() / 2;
+	float pCenterY = playerList[0]->getY() + playerList[0]->getHeight() / 2;
+	int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
+	int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
+
+	if (currentPlayerPosInCellX != playerPosInCell.first || currentPlayerPosInCellY != playerPosInCell.second) {
+		for (size_t i = 0; i < enemyList.size(); i++) {
+			std::cout << "I'm here\n";
+			float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
+			float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
+			enemyList[i]->_path = astar(blockMap, (int) std::floor(enemyCenterX / 48),
+				(int) std::floor(enemyCenterY / 48),
+				currentPlayerPosInCellX, currentPlayerPosInCellY);
+		}
+	}
+	// store player position
+	playerPosInCell.first = (int)std::floor(pCenterX/ 48);
+	playerPosInCell.second = (int)std::floor(pCenterY / 48);*/
 }
 
 void Map::drawAll(Game& game) {
@@ -242,4 +270,17 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
+	
+	sf::RectangleShape rectangle;
+	for (int i = 0; i < 18; i++) {
+		for (int j = 0; j < 32; j++) {
+			rectangle.setPosition(sf::Vector2f(j*48, i*48));
+			rectangle.setSize(sf::Vector2f(48.f, 48.f));
+			rectangle.setFillColor(sf::Color(0, 1, 0, 100));
+			rectangle.setOutlineColor(sf::Color(0, 0, 0, 255));
+			rectangle.setOutlineThickness(2);
+			game._window.draw(rectangle);
+		}
+	}
+	
 }
