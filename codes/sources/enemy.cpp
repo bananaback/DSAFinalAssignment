@@ -70,20 +70,20 @@ void Enemy::update(Game& game, float pX, float pY) {
 	float xVel = 0;
 	float yVel = 0;
 
-	if (_path.size() != 0) {
-		int targetX = _path.front().first * 48 + 24;
-		int targetY = _path.front().second * 48 + 24;
+	if (_path.size() >= 2) {
+		int targetY = _path[1].first * 48 + 24;
+		int targetX = _path[1].second * 48 + 24;
 		_angle = calculateAngle(_x + _width / 2, _y + _height / 2, targetX, targetY);
 		xVel = std::cos(_angle) * _speed * game._dt;
 		yVel = std::sin(_angle) * _speed * game._dt;
 
-		if (isArrived(targetX, targetY)) _path.erase(_path.begin());
+		if (isArrived(targetX, targetY)) _path.erase(_path.begin()+1);
 	}
 	
 	
 	if (_healthPoint <= 0) _isDestroyed = true;
-	//if ((xVel >= 0 && _canGoRight) || (xVel < 0 && _canGoLeft)) _x += xVel;
-	//if ((yVel >= 0 && _canGoDown) || (yVel < 0 && _canGoUp)) _y += yVel;
+	if ((xVel >= 0 && _canGoRight) || (xVel < 0 && _canGoLeft)) _x += xVel;
+	if ((yVel >= 0 && _canGoDown) || (yVel < 0 && _canGoUp)) _y += yVel;
 
 	if (std::abs(xVel) > std::abs(yVel)) {
 		if (xVel >= 0) {
@@ -105,13 +105,13 @@ void Enemy::update(Game& game, float pX, float pY) {
 
 void Enemy::draw(Game& game) {
 	sf::RectangleShape rectangle;
-	rectangle.setSize(sf::Vector2f(_width, _height));
+	/*rectangle.setSize(sf::Vector2f(_width, _height));
 	rectangle.setOutlineColor(sf::Color::Yellow);
 	rectangle.setFillColor(sf::Color::Red);
 	rectangle.setOutlineThickness(5);
 	rectangle.setPosition(_x, _y);
 	game._window.draw(rectangle);
-
+	*/
 	_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);
 	_animations[_currentAnimation]->_sprite.setOrigin(_assetWidth / 2, _assetHeight / 2);
 	_animations[_currentAnimation]->_sprite.setScale(_scaleX, _scaleY);
@@ -124,11 +124,11 @@ void Enemy::draw(Game& game) {
 	healthBar.setPosition(_x - 10, _y - 15);
 	game._window.draw(healthBar);
 
-	//sf::RectangleShape rectangle;
+	//draw path
 	for (size_t i = 0; i < _path.size(); i++) {
 		rectangle.setPosition(sf::Vector2f(_path[i].second * 48, _path[i].first * 48));
 		rectangle.setSize(sf::Vector2f(48.f, 48.f));
-		rectangle.setFillColor(sf::Color(1, 0, 0, 100));
+		rectangle.setFillColor(sf::Color(1, 0, 0, 30));
 		rectangle.setOutlineColor(sf::Color(0, 0, 0, 255));
 		rectangle.setOutlineThickness(2);
 		game._window.draw(rectangle);
