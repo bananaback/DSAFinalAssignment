@@ -27,6 +27,7 @@ private:
 	Map _map;
 	sf::RectangleShape _background;
 	sf::Sprite _playerHPBarBg, _playerHpBar;
+	std::vector<std::vector<int>> _currentBlockMap;
 };
 
 #endif // !GAMEPLAY_H

@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="codes\sources\animation.cpp" />
+    <ClCompile Include="codes\sources\astar.cpp" />
+    <ClCompile Include="codes\sources\astarboi.cpp" />
     <ClCompile Include="codes\sources\bullet.cpp" />
     <ClCompile Include="codes\sources\coin.cpp" />
     <ClCompile Include="codes\sources\collectableitem.cpp" />
@@ -158,11 +160,14 @@
     <ClCompile Include="codes\sources\map.cpp" />
     <ClCompile Include="codes\sources\player.cpp" />
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
+    <ClCompile Include="codes\sources\utility.cpp" />
     <ClCompile Include="codes\sources\wall.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
+    <ClInclude Include="codes\headers\astar.h" />
+    <ClInclude Include="codes\headers\astarboi.h" />
     <ClInclude Include="codes\headers\bullet.h" />
     <ClInclude Include="codes\headers\coin.h" />
     <ClInclude Include="codes\headers\collectableitem.h" />
@@ -181,6 +186,7 @@
     <ClInclude Include="codes\headers\map.h" />
     <ClInclude Include="codes\headers\player.h" />
     <ClInclude Include="codes\headers\resourceallocator.h" />
+    <ClInclude Include="codes\headers\utility.h" />
     <ClInclude Include="codes\headers\wall.h" />
   </ItemGroup>
   <ItemGroup>

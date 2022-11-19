@@ -1,27 +1,10 @@
 #include "../headers/gameplay.h"
 #include "../headers/calculator.h"
 #include <iostream>
+#include "../headers/astar.h"
+#include "../headers/astarboi.h"
+#include "../headers/utility.h"
 
-std::vector<std::vector<int>> testMap = {
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 4, 1, 4, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 4, 0, 4, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 4, 1, 4, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 4, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 4, 0, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-};
 
 GamePlay::GamePlay(Game &game) {
 
@@ -48,21 +31,23 @@ GamePlay::GamePlay(Game &game) {
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
 
+	std::string map1Path = "./data/map1.txt";
+	readMap(map1Path, _currentBlockMap);
 	
-	for (size_t i = 0; i < testMap.size(); i++) {
-		for (size_t j = 0; j < testMap[i].size(); j++) {
-			if (testMap[i][j] != 0) {
-				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, testMap[i][j]));
+	for (size_t i = 0; i < _currentBlockMap.size(); i++) {
+		for (size_t j = 0; j < _currentBlockMap[i].size(); j++) {
+			if (_currentBlockMap[i][j] != 0) {
+				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, _currentBlockMap[i][j]));
 			}
 		}
 	}
 } 
 
 void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(100, 400, 40, 40, 40, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(200, 800, 40, 40, 40, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 40, 40, 40, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 40, 40, 40, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(48*4+9, 48*4+9, 30, 30, 80, 5, 100, game));
+	//_map.enemyList.push_back(std::make_shared<Enemy>(200, 700, 30, 30, 80, 5, 100, game));
+	//_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 30, 30, 80, 5, 100, game));
+	//_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 30, 30, 80, 5, 100, game));
 }
 
 void GamePlay::drawPlayerHealthBar(Game& game) {
@@ -92,6 +77,71 @@ void GamePlay::handleEvents(Game &game) {
 		if (pEvent.type == sf::Event::KeyPressed) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
 				game.changeState("mainmenu");
+			}
+			if (pEvent.key.code == sf::Keyboard::Up) {
+				_map.enemyList[0]->setY(_map.enemyList[0]->getY() - 48);
+				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
+				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
+				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
+				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
+				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
+				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
+				_map.enemyList[0]->_path.clear();
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
+			}
+			if (pEvent.key.code == sf::Keyboard::Down) {
+				_map.enemyList[0]->setY(_map.enemyList[0]->getY() + 48);
+				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
+				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
+				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
+				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
+				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
+				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
+				_map.enemyList[0]->_path.clear();
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
+			}
+			if (pEvent.key.code == sf::Keyboard::Left) {
+				_map.enemyList[0]->setX(_map.enemyList[0]->getX() - 48);
+				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
+				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
+				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
+				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
+				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
+				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
+				_map.enemyList[0]->_path.clear();
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
+			}
+			if (pEvent.key.code == sf::Keyboard::Right) {
+				_map.enemyList[0]->setX(_map.enemyList[0]->getX() + 48);
+				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
+				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
+				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
+				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
+				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
+				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
+				_map.enemyList[0]->_path.clear();
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
 			}
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {
