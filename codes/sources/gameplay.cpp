@@ -2,6 +2,7 @@
 #include "../headers/calculator.h"
 #include <iostream>
 #include "../headers/astar.h"
+#include "../headers/astarboi.h"
 #include "../headers/utility.h"
 
 
@@ -86,9 +87,13 @@ void GamePlay::handleEvents(Game &game) {
 				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
 				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
 				_map.enemyList[0]->_path.clear();
-				_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-					std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-					std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
 			}
 			if (pEvent.key.code == sf::Keyboard::Down) {
 				_map.enemyList[0]->setY(_map.enemyList[0]->getY() + 48);
@@ -99,9 +104,12 @@ void GamePlay::handleEvents(Game &game) {
 				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
 				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
 				_map.enemyList[0]->_path.clear();
-				_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-					std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-					std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
 			}
 			if (pEvent.key.code == sf::Keyboard::Left) {
 				_map.enemyList[0]->setX(_map.enemyList[0]->getX() - 48);
@@ -112,9 +120,12 @@ void GamePlay::handleEvents(Game &game) {
 				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
 				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
 				_map.enemyList[0]->_path.clear();
-				_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-					std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-					std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
 			}
 			if (pEvent.key.code == sf::Keyboard::Right) {
 				_map.enemyList[0]->setX(_map.enemyList[0]->getX() + 48);
@@ -125,9 +136,12 @@ void GamePlay::handleEvents(Game &game) {
 				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
 				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
 				_map.enemyList[0]->_path.clear();
-				_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-					std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-					std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
+				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
+				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
+				_map.enemyList[0]->_path = astar(_currentBlockMap,
+					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
 			}
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {

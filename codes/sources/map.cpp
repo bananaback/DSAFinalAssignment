@@ -4,6 +4,7 @@
 #include "../headers/explosioneffect2.h"
 #include "../headers/coin.h"
 #include "../headers/astar.h"
+#include "../headers/astarboi.h"
 #include "../headers/utility.h"
 #include <iostream>
 #include <random>
