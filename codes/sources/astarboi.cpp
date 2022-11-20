@@ -56,7 +56,7 @@ std::vector<std::pair<int, int>> astar(std::vector<std::vector<int>>& a, int sta
             for (auto u_ : trace) {
                 //std::cout << "-> (" << u_.first << ", " << u_.second << ") ";
             }
-            std::cout << std::endl;
+            //std::cout << std::endl;
             return trace;
         }
         is_closed[u_x][u_y] = true;
