@@ -38,6 +38,20 @@ void Button::draw(Game& game) {
 	else if (_name == "backmainmenu") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BACK_MAIN_MENU]);
 	}
+	else if (_name == "cursor_1") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_1]);
+	}
+	else if (_name == "cursor_2") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_2]);
+	}
+	else if (_name == "cursor_3") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_3]);
+	}
+	else if (_name == "cursor_4") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_4]);
+	}
+	else if (_name == "cursor_5") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_5]);
 	else if (_name == "tryagain") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TRY_AGAIN]);
 	}
@@ -63,6 +77,20 @@ void Button::draw(Game& game) {
 	else if (_name == "backmainmenu") {
 		_btnImg.setOrigin(15.5, 14);
 	}
+	else if (_name == "cursor_1") {
+		_btnImg.setOrigin(4.5, 5.5);
+	}
+	else if (_name == "cursor_2") {
+		_btnImg.setOrigin(10, 10.5);
+	}
+	else if (_name == "cursor_3") {
+		_btnImg.setOrigin(11.5, 11.5);
+	}
+	else if (_name == "cursor_4") {
+		_btnImg.setOrigin(13.5, 13.5);
+	}
+	else if (_name == "cursor_5") {
+		_btnImg.setOrigin(16.5, 16.5);
 	else if (_name == "tryagain") {
 		_btnImg.setOrigin(206.5, 128.5);
 	}

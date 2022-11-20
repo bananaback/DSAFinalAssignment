@@ -37,11 +37,16 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/wall/redwall.png");
 	std::cout << addImage("assets/img/topdown_shooter/wall/bluewall.png");
 	std::cout << addImage("assets/img/topdown_shooter/wall/icewall.png");
-	std::cout << addImage("assets/img/gameover/gameoverbg.png");
+  std::cout << addImage("assets/img/gameover/gameoverbg.png");
 	std::cout << addImage("assets/img/gameover/backtomain.png");
 	std::cout << addImage("assets/img/gameover/tryagain.png");
 	std::cout << addImage("assets/img/gameover/giveup.png");
-
+	std::cout << addImage("assets/img/setting/setting_bg.png");
+	std::cout << addImage("assets/img/topdown_shooter/cursors/mouse_pointer.png");
+	std::cout << addImage("assets/img/topdown_shooter/cursors/6crosshair2.png");
+	std::cout << addImage("assets/img/topdown_shooter/cursors/1crosshair2.png");
+	std::cout << addImage("assets/img/topdown_shooter/cursors/7crosshair2.png");
+	std::cout << addImage("assets/img/topdown_shooter/cursors/4crosshair2.png");
 
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
