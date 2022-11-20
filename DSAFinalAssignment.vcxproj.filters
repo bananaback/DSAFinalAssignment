@@ -79,6 +79,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="codes\sources\gameover.cpp">
+    <ClCompile Include="codes\sources\astar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="codes\sources\utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="codes\sources\astarboi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,6 +151,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="codes\headers\gameover.h">
+    <ClInclude Include="codes\headers\astar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\headers\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="codes\headers\astarboi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

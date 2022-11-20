@@ -17,13 +17,14 @@ public:
 	~Map();
 	void updateAll(Game& game);
 	void drawAll(Game& game);
-
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<std::shared_ptr<Player>> playerList;
 	std::vector<std::shared_ptr<Bullet>> bulletList;
 	std::vector<std::shared_ptr<Effect>> effectList;
 	std::vector<std::shared_ptr<CollectableItem>> collectableItemList;
 	std::vector<std::shared_ptr<Wall>> wallList;
+	std::pair<int, int> playerPosInCell;
+	std::vector<std::vector<int>> blockMap;
 };
 
 #endif // ! MAP_H

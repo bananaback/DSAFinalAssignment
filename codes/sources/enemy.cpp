@@ -2,7 +2,11 @@
 #include "../headers/gameobject.h"
 #include "../headers/game.h"
 #include "../headers/calculator.h"
+#include "../headers/astar.h"
+#include "../headers/utility.h"
 #include <iostream>
+
+
 Enemy::Enemy(float x, float y, float width, float height, float speed, float attackDamage, float healthPoint, Game& game) : GameObject(x, y, width, height) {
 	_speed = speed;
 	_attackDamage = attackDamage;
@@ -24,6 +28,7 @@ Enemy::Enemy(float x, float y, float width, float height, float speed, float att
 	_canGoDown = true;
 	_canGoLeft = true;
 	_canGoRight = true;
+
 }
 
 Enemy::~Enemy() {
@@ -47,14 +52,38 @@ void Enemy::setRight(bool b) {
 	_canGoRight = b;
 }
 
+void Enemy::setX(float x) {
+	_x = x;
+}
+
+void Enemy::setY(float y) {
+	_y = y;
+}
+
+bool Enemy::isArrived(float x, float y) {
+	float d = distance(x, y, _x+_width/2, _y+_height/2);
+	if (d <= 5) return true;
+	return false;
+}
+
 void Enemy::update(Game& game, float pX, float pY) {
-	_angle = calculateAngle(_x+_width/2, _y+_height/2, pX, pY);
-	float xVel, yVel;
-	xVel = std::cos(_angle)*_speed*game._dt;
-	yVel = std::sin(_angle)*_speed*game._dt;
+	float xVel = 0;
+	float yVel = 0;
+
+	if (_path.size() != 0) {
+		int targetX = _path.front().first * 48 + 24;
+		int targetY = _path.front().second * 48 + 24;
+		_angle = calculateAngle(_x + _width / 2, _y + _height / 2, targetX, targetY);
+		xVel = std::cos(_angle) * _speed * game._dt;
+		yVel = std::sin(_angle) * _speed * game._dt;
+
+		if (isArrived(targetX, targetY)) _path.erase(_path.begin());
+	}
+	
+	
 	if (_healthPoint <= 0) _isDestroyed = true;
-	if ((xVel >= 0 && _canGoRight) || (xVel < 0 && _canGoLeft)) _x += xVel;
-	if ((yVel >= 0 && _canGoDown) || (yVel < 0 && _canGoUp)) _y += yVel;
+	//if ((xVel >= 0 && _canGoRight) || (xVel < 0 && _canGoLeft)) _x += xVel;
+	//if ((yVel >= 0 && _canGoDown) || (yVel < 0 && _canGoUp)) _y += yVel;
 
 	if (std::abs(xVel) > std::abs(yVel)) {
 		if (xVel >= 0) {
@@ -94,6 +123,16 @@ void Enemy::draw(Game& game) {
 	healthBar.setFillColor(sf::Color::Green);
 	healthBar.setPosition(_x - 10, _y - 15);
 	game._window.draw(healthBar);
+
+	//sf::RectangleShape rectangle;
+	for (size_t i = 0; i < _path.size(); i++) {
+		rectangle.setPosition(sf::Vector2f(_path[i].second * 48, _path[i].first * 48));
+		rectangle.setSize(sf::Vector2f(48.f, 48.f));
+		rectangle.setFillColor(sf::Color(1, 0, 0, 100));
+		rectangle.setOutlineColor(sf::Color(0, 0, 0, 255));
+		rectangle.setOutlineThickness(2);
+		game._window.draw(rectangle);
+	}
 }
 
 float Enemy::getHealth()
