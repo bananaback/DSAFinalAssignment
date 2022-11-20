@@ -154,6 +154,7 @@
     <ClCompile Include="codes\sources\explosioneffect2.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameobject.cpp" />
+    <ClCompile Include="codes\sources\gameover.cpp" />
     <ClCompile Include="codes\sources\gameplay.cpp" />
     <ClCompile Include="codes\sources\gamestate.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="codes\headers\explosioneffect2.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameobject.h" />
+    <ClInclude Include="codes\headers\gameover.h" />
     <ClInclude Include="codes\headers\gameplay.h" />
     <ClInclude Include="codes\headers\gamestate.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />

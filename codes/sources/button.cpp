@@ -38,6 +38,15 @@ void Button::draw(Game& game) {
 	else if (_name == "backmainmenu") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BACK_MAIN_MENU]);
 	}
+	else if (_name == "tryagain") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TRY_AGAIN]);
+	}
+	else if (_name == "backtomain") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BACK_TO_MAIN]);
+	}
+	else if (_name == "giveup") {
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::GIVE_UP]);
+	}
 	_btnImg.setPosition(_x + _width / 2, _y + _height/ 2);
 	if (_name == "play") {
 		_btnImg.setOrigin(49, 18); // a half of sprite size
@@ -53,6 +62,15 @@ void Button::draw(Game& game) {
 	}
 	else if (_name == "backmainmenu") {
 		_btnImg.setOrigin(15.5, 14);
+	}
+	else if (_name == "tryagain") {
+		_btnImg.setOrigin(206.5, 128.5);
+	}
+	else if (_name == "backtomain") {
+		_btnImg.setOrigin(206.5, 128.5);
+	}
+	else if (_name == "giveup") {
+		_btnImg.setOrigin(206.5, 128.5);
 	}
 	_btnImg.setScale(_scaleX, _scaleY);
 	game._window.draw(_btnImg);
