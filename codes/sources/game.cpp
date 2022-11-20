@@ -3,6 +3,8 @@
 #include "../headers/mainmenu.h"
 #include "../headers/gameplay.h" 
 #include "../headers/credit.h"
+#include "../headers/gameover.h"
+
 // Constructor
 Game::Game() {
 	// set running to true
@@ -40,10 +42,13 @@ void Game::init() {
 	// Pointer to game play game state
 	std::shared_ptr<GamePlay> gamePlay(new GamePlay(*this));
 	std::shared_ptr<Credit> credit (new Credit(*this));
+	std::shared_ptr<GameOver> gameOver(new GameOver(*this));
+
 	addState(mainMenu);
 	addState(gamePlay);
 	addState(credit);
-	_currentState = mainMenu;
+	addState(gameOver);
+	_currentState = gameOver;
 }
 // Update game logic
 void Game::update() {

@@ -78,6 +78,7 @@
     <ClCompile Include="codes\sources\wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="codes\sources\gameover.cpp">
     <ClCompile Include="codes\sources\astar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,6 +150,7 @@
     <ClInclude Include="codes\headers\wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="codes\headers\gameover.h">
     <ClInclude Include="codes\headers\astar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
