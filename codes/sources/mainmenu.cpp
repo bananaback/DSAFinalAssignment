@@ -49,6 +49,7 @@ void MainMenu::handleEvents(Game &game) {
 					if (_btns[i]->getName() == "play") game.changeState("gameplay");
 					if (_btns[i]->getName() == "quit") game.setRunning(false);
 					if (_btns[i]->getName() == "credit") game.changeState("credit");
+					if (_btns[i]->getName() == "setting") game.changeState("setting");
 				}
 			}
 		}
