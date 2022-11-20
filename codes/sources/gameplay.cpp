@@ -44,10 +44,10 @@ GamePlay::GamePlay(Game &game) {
 } 
 
 void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(48*4+9, 48*4+9, 30, 30, 80, 5, 100, game));
-	//_map.enemyList.push_back(std::make_shared<Enemy>(200, 700, 30, 30, 80, 5, 100, game));
-	//_map.enemyList.push_back(std::make_shared<Enemy>(300, 200, 30, 30, 80, 5, 100, game));
-	//_map.enemyList.push_back(std::make_shared<Enemy>(400, 100, 30, 30, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
+	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
 }
 
 void GamePlay::drawPlayerHealthBar(Game& game) {
@@ -78,7 +78,7 @@ void GamePlay::handleEvents(Game &game) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
 				game.changeState("mainmenu");
 			}
-			if (pEvent.key.code == sf::Keyboard::Up) {
+			/*if (pEvent.key.code == sf::Keyboard::Up) {
 				_map.enemyList[0]->setY(_map.enemyList[0]->getY() - 48);
 				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
 				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
@@ -143,6 +143,7 @@ void GamePlay::handleEvents(Game &game) {
 					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
 					currentPlayerPosInCellY, currentPlayerPosInCellX);
 			}
+			*/
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {
 			if (pEvent.mouseButton.button == sf::Mouse::Left) {

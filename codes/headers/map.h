@@ -24,7 +24,7 @@ public:
 	std::vector<std::shared_ptr<CollectableItem>> collectableItemList;
 	std::vector<std::shared_ptr<Wall>> wallList;
 	std::pair<int, int> playerPosInCell;
-	std::vector<std::vector<int>> blockMap;
+	std::vector<std::vector<int>> blockMap, blockEnemyMap;
 };
 
 #endif // ! MAP_H

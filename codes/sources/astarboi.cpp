@@ -54,9 +54,9 @@ std::vector<std::pair<int, int>> astar(std::vector<std::vector<int>>& a, int sta
         if (u == dest) {
             auto trace = astar_trace(root, dest, parent);
             for (auto u_ : trace) {
-                std::cout << "-> (" << u_.first << ", " << u_.second << ") ";
+                //std::cout << "-> (" << u_.first << ", " << u_.second << ") ";
             }
-            std::cout << std::endl;
+            //std::cout << std::endl;
             return trace;
         }
         is_closed[u_x][u_y] = true;
