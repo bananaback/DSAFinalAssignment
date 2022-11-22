@@ -1,4 +1,5 @@
 #include "../headers/gameobject.h"
+#include "../headers/calculator.h"
 #include <memory>
 GameObject::GameObject(float x, float y, float width, float height) {
 	_x = x;
@@ -49,4 +50,36 @@ bool GameObject::checkCollision(GameObject& other) {
 	if (l1 > r2 || l2 > r1) return false;
 	if (t1 > b2 || t2 > b1) return false;
 	return true;
+}
+
+int GameObject::getCollisionStatus(GameObject& other, int offset) {
+    int collisionFlag = 0;
+    int otherX = other.getX(), otherY = other.getY();
+    int otherW = other.getWidth(), otherH = other.getHeight();
+
+    if (checkCollisionBetweenTwoRect(
+        _x, _y - offset, _width, _height + offset,
+        otherX, otherY, otherW, otherH)) {
+        collisionFlag |= COLLISION_UP;
+    }
+
+    if (checkCollisionBetweenTwoRect(
+        _x, _y, _width, _height + offset,
+        otherX, otherY, otherW, otherH)) {
+        collisionFlag |= COLLISION_DOWN;
+    }
+
+    if (checkCollisionBetweenTwoRect(
+        _x - offset, _y, _width + offset, _height,
+        otherX, otherY, otherW, otherH)) {
+        collisionFlag |= COLLISION_LEFT;
+    }
+
+    if (checkCollisionBetweenTwoRect(
+        _x, _y, _width + offset, _height,
+        otherX, otherY, otherW, otherH)) {
+        collisionFlag |= COLLISION_RIGHT;
+    }
+
+    return collisionFlag;
 }

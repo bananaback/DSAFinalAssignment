@@ -105,62 +105,15 @@ void Map::updateAll(Game& game) {
 	// player and wall collision resolve
 	for (size_t i = 0; i < playerList.size(); i++) {
 		std::shared_ptr<Player> player = playerList[i];
-		player->setUp(true);
-		player->setDown(true);
-		player->setLeft(true);
-		player->setRight(true);
-
+		int playerCollisionFlag = 0;
 		for (size_t j = 0; j < wallList.size(); j++) {
 			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				player->getX(),
-				player->getY() - 2,
-				player->getWidth(),
-				2,
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				player->setUp(false);
-				break;
-			}
+			playerCollisionFlag |= player->getCollisionStatus(*wall, 2);
 		}
-
-		for (size_t j = 0; j < wallList.size(); j++) {
-			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				player->getX(),
-				player->getY() + player->getHeight(),
-				player->getWidth(),
-				2,
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				player->setDown(false);
-				break;
-			}
-		}
-
-		for (size_t j = 0; j < wallList.size(); j++) {
-			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				player->getX()-2,
-				player->getY(),
-				2,
-				player->getHeight(),
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				player->setLeft(false);
-				break;
-			}
-		}
-
-		for (size_t j = 0; j < wallList.size(); j++) {
-			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				player->getX() + player->getWidth(),
-				player->getY(),
-				2,
-				player->getHeight(),
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				player->setRight(false);
-				break;
-			}
-		}
+		player->setLeft((playerCollisionFlag & GameObject::COLLISION_LEFT) == 0);
+		player->setRight((playerCollisionFlag & GameObject::COLLISION_RIGHT) == 0);
+		player->setDown((playerCollisionFlag & GameObject::COLLISION_DOWN) == 0);
+		player->setUp((playerCollisionFlag & GameObject::COLLISION_UP) == 0);
 	}
 
 	// enemy and wall collision resolve
