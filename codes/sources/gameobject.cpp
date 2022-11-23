@@ -1,4 +1,5 @@
 #include "../headers/gameobject.h"
+#include "../headers/calculator.h"
 #include <memory>
 GameObject::GameObject(float x, float y, float width, float height) {
 	_x = x;

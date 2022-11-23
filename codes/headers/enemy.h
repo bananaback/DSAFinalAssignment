@@ -2,11 +2,11 @@
 #ifndef  ENEMY_H
 #define ENEMY_H
 
-#include "gameobject.h"
+#include "character.h"
 #include "game.h"
 #include "animation.h"
 
-class Enemy : public GameObject {
+class Enemy : public Character {
 public:
 	Enemy(float x, float y, float width, float height, float speed, float attackDamage, float healthPoint, Game& game);
 	~Enemy();
@@ -23,8 +23,6 @@ private:
 	float _speed, _attackDamage, _healthPoint, _angle, _assetWidth, _assetHeight, _scaleX, _scaleY;
 	std::vector<std::shared_ptr<Animation>> _animations;
 	int _currentAnimation = 0;
-	bool _canGoUp, _canGoDown, _canGoLeft, _canGoRight;
-	
 };
 
 #endif // ! ENEMY_H

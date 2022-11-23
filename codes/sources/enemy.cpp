@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-Enemy::Enemy(float x, float y, float width, float height, float speed, float attackDamage, float healthPoint, Game& game) : GameObject(x, y, width, height) {
+Enemy::Enemy(float x, float y, float width, float height, float speed, float attackDamage, float healthPoint, Game& game) : Character(x, y, width, height) {
 	_speed = speed;
 	_attackDamage = attackDamage;
 	_healthPoint = healthPoint;
@@ -23,12 +23,6 @@ Enemy::Enemy(float x, float y, float width, float height, float speed, float att
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SLIME_SIDE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "side"));//2
 	//_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "explode"));//3
 	_currentAnimation = 0;
-
-	_canGoUp = true;
-	_canGoDown = true;
-	_canGoLeft = true;
-	_canGoRight = true;
-
 }
 
 Enemy::~Enemy() {
@@ -37,19 +31,19 @@ Enemy::~Enemy() {
 }
 
 void Enemy::setUp(bool b) {
-	_canGoUp = b;
+	canGoUp = b;
 }
 
 void Enemy::setDown(bool b) {
-	_canGoDown = b;
+	canGoDown = b;
 }
 
 void Enemy::setLeft(bool b) {
-	_canGoLeft = b;
+	canGoLeft = b;
 }
 
 void Enemy::setRight(bool b) {
-	_canGoRight = b;
+	canGoRight = b;
 }
 
 void Enemy::setX(float x) {
@@ -82,8 +76,8 @@ void Enemy::update(Game& game, float pX, float pY) {
 	
 	
 	if (_healthPoint <= 0) _isDestroyed = true;
-	if ((xVel >= 0 && _canGoRight) || (xVel < 0 && _canGoLeft)) _x += xVel;
-	if ((yVel >= 0 && _canGoDown) || (yVel < 0 && _canGoUp)) _y += yVel;
+	if ((xVel >= 0 && canGoRight) || (xVel < 0 && canGoLeft)) _x += xVel;
+	if ((yVel >= 0 && canGoDown) || (yVel < 0 && canGoUp)) _y += yVel;
 
 	if (std::abs(xVel) > std::abs(yVel)) {
 		if (xVel >= 0) {
@@ -123,7 +117,6 @@ void Enemy::draw(Game& game) {
 	healthBar.setFillColor(sf::Color::Green);
 	healthBar.setPosition(_x - 10, _y - 15);
 	game._window.draw(healthBar);
-
 	//draw path
 	for (size_t i = 0; i < _path.size(); i++) {
 		rectangle.setPosition(sf::Vector2f(_path[i].second * 48, _path[i].first * 48));

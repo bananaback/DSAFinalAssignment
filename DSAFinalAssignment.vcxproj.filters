@@ -1,171 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="codes\sources\animation.cpp" />
+    <ClCompile Include="codes\sources\astar.cpp" />
+    <ClCompile Include="codes\sources\astarboi.cpp" />
+    <ClCompile Include="codes\sources\bullet.cpp" />
+    <ClCompile Include="codes\sources\coin.cpp" />
+    <ClCompile Include="codes\sources\collectableitem.cpp" />
+    <ClCompile Include="codes\sources\effect.cpp" />
+    <ClCompile Include="codes\sources\button.cpp" />
+    <ClCompile Include="codes\sources\calculator.cpp" />
+    <ClCompile Include="codes\sources\credit.cpp" />
+    <ClCompile Include="codes\sources\enemy.cpp" />
+    <ClCompile Include="codes\sources\explosioneffect1.cpp" />
+    <ClCompile Include="codes\sources\explosioneffect2.cpp" />
+    <ClCompile Include="codes\sources\game.cpp" />
+    <ClCompile Include="codes\sources\gameobject.cpp" />
+    <ClCompile Include="codes\sources\gameover.cpp" />
+    <ClCompile Include="codes\sources\gameplay.cpp" />
+    <ClCompile Include="codes\sources\gamestate.cpp" />
+    <ClCompile Include="codes\sources\mainmenu.cpp" />
+    <ClCompile Include="codes\sources\map.cpp" />
+    <ClCompile Include="codes\sources\player.cpp" />
+    <ClCompile Include="codes\sources\resourceallocator.cpp" />
+    <ClCompile Include="codes\sources\setting.cpp" />
+    <ClCompile Include="codes\sources\utility.cpp" />
+    <ClCompile Include="codes\sources\wall.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="codes\sources\character.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\gamestate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\mainmenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\resourceallocator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\gameplay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\credit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\gameobject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\calculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\effect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\explosioneffect1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\explosioneffect2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\collectableitem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\coin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\wall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\gameover.cpp">
-    <ClCompile Include="codes\sources\astar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\astarboi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codes\sources\setting.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="codes\headers\game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\gamestate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\mainmenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\resourceallocator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\gameplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\credit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\gameobject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\calculator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\effect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\explosioneffect1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\explosioneffect2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\collectableitem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\coin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\wall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\gameover.h">
-    <ClInclude Include="codes\headers\astar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\astarboi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codes\headers\setting.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="codes\headers\animation.h" />
+    <ClInclude Include="codes\headers\astar.h" />
+    <ClInclude Include="codes\headers\astarboi.h" />
+    <ClInclude Include="codes\headers\bullet.h" />
+    <ClInclude Include="codes\headers\coin.h" />
+    <ClInclude Include="codes\headers\collectableitem.h" />
+    <ClInclude Include="codes\headers\effect.h" />
+    <ClInclude Include="codes\headers\button.h" />
+    <ClInclude Include="codes\headers\calculator.h" />
+    <ClInclude Include="codes\headers\credit.h" />
+    <ClInclude Include="codes\headers\enemy.h" />
+    <ClInclude Include="codes\headers\explosioneffect1.h" />
+    <ClInclude Include="codes\headers\explosioneffect2.h" />
+    <ClInclude Include="codes\headers\game.h" />
+    <ClInclude Include="codes\headers\gameobject.h" />
+    <ClInclude Include="codes\headers\gameover.h" />
+    <ClInclude Include="codes\headers\gameplay.h" />
+    <ClInclude Include="codes\headers\gamestate.h" />
+    <ClInclude Include="codes\headers\mainmenu.h" />
+    <ClInclude Include="codes\headers\map.h" />
+    <ClInclude Include="codes\headers\player.h" />
+    <ClInclude Include="codes\headers\resourceallocator.h" />
+    <ClInclude Include="codes\headers\setting.h" />
+    <ClInclude Include="codes\headers\utility.h" />
+    <ClInclude Include="codes\headers\wall.h" />
+    <ClInclude Include="codes\headers\character.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

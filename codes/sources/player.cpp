@@ -1,7 +1,7 @@
 #include "../headers/player.h"
 #include "../headers/gameobject.h"
 #include <iostream>
-Player::Player(float x, float y, float width, float height, float speed, float healthPoint, Game& game) : GameObject(x, y, width, height) {
+Player::Player(float x, float y, float width, float height, float speed, float healthPoint, Game& game) : Character(x, y, width, height) {
 	_speed = speed;
 	_healthPoint = healthPoint;
 	std::cout << "I'm player\n";
@@ -24,10 +24,6 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_hurting = 0;
 	_hurtTimer = 0;
 	_appear = true;
-	canGoUp = true;
-	canGoDown = true;
-	canGoLeft = true;
-	canGoDown = true;
 }
 
 void Player::setX(float x) {
