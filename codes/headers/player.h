@@ -2,11 +2,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "gameobject.h"
 #include "game.h"
 #include "animation.h"
+#include "character.h"
 
-class Player : public GameObject {
+class Player : public Character {
 public:
 	Player(float x, float y, float width, float height, float speed, float healthPoint, Game& game);
 	~Player();
@@ -28,7 +28,7 @@ private:
 	std::vector<std::shared_ptr<Animation>> _animations;
 	int _currentAnimation, _coin;
 	sf::Sprite _gun;
-	bool _appear, canGoUp, canGoDown, canGoLeft, canGoRight;
+	bool _appear;
 };
 
 #endif

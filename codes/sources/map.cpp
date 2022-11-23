@@ -105,75 +105,20 @@ void Map::updateAll(Game& game) {
 	// player and wall collision resolve
 	for (size_t i = 0; i < playerList.size(); i++) {
 		std::shared_ptr<Player> player = playerList[i];
-		int playerCollisionFlag = 0;
+		player->resetMove();
 		for (size_t j = 0; j < wallList.size(); j++) {
 			std::shared_ptr<Wall> wall = wallList[j];
-			playerCollisionFlag |= player->getCollisionStatus(*wall, 2);
+			player->resolveCollisionWithWall(*wall, 2);
 		}
-		player->setLeft((playerCollisionFlag & GameObject::COLLISION_LEFT) == 0);
-		player->setRight((playerCollisionFlag & GameObject::COLLISION_RIGHT) == 0);
-		player->setDown((playerCollisionFlag & GameObject::COLLISION_DOWN) == 0);
-		player->setUp((playerCollisionFlag & GameObject::COLLISION_UP) == 0);
 	}
 
 	// enemy and wall collision resolve
 	for (size_t i = 0; i < enemyList.size(); i++) {
 		std::shared_ptr<Enemy> enemy = enemyList[i];
-		enemy->setUp(true);
-		enemy->setDown(true);
-		enemy->setLeft(true);
-		enemy->setRight(true);
-
+		enemy->resetMove();
 		for (size_t j = 0; j < wallList.size(); j++) {
 			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				enemy->getX(),
-				enemy->getY() - 2,
-				enemy->getWidth(),
-				2,
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				enemy->setUp(false);
-				break;
-			}
-		}
-
-		for (size_t j = 0; j < wallList.size(); j++) {
-			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				enemy->getX(),
-				enemy->getY() + enemy->getHeight(),
-				enemy->getWidth(),
-				2,
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				enemy->setDown(false);
-				break;
-			}
-		}
-
-		for (size_t j = 0; j < wallList.size(); j++) {
-			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				enemy->getX() - 2,
-				enemy->getY(),
-				2,
-				enemy->getHeight(),
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				enemy->setLeft(false);
-				break;
-			}
-		}
-
-		for (size_t j = 0; j < wallList.size(); j++) {
-			std::shared_ptr<Wall> wall = wallList[j];
-			if (checkCollisionBetweenTwoRect(
-				enemy->getX() + enemy->getWidth(),
-				enemy->getY(),
-				2,
-				enemy->getHeight(),
-				wall->getX(), wall->getY(), wall->getWidth(), wall->getHeight())) {
-				enemy->setRight(false);
-				break;
-			}
+			enemy->resolveCollisionWithWall(*wall, 2);
 		}
 	}
 

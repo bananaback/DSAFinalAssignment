@@ -143,6 +143,7 @@
     <ClCompile Include="codes\sources\astar.cpp" />
     <ClCompile Include="codes\sources\astarboi.cpp" />
     <ClCompile Include="codes\sources\bullet.cpp" />
+    <ClCompile Include="codes\sources\character.cpp" />
     <ClCompile Include="codes\sources\coin.cpp" />
     <ClCompile Include="codes\sources\collectableitem.cpp" />
     <ClCompile Include="codes\sources\effect.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="codes\headers\astar.h" />
     <ClInclude Include="codes\headers\astarboi.h" />
     <ClInclude Include="codes\headers\bullet.h" />
+    <ClInclude Include="codes\headers\character.h" />
     <ClInclude Include="codes\headers\coin.h" />
     <ClInclude Include="codes\headers\collectableitem.h" />
     <ClInclude Include="codes\headers\effect.h" />
