@@ -2,12 +2,13 @@
 #ifndef  GAME_H
 #define GAME_H
 
+#include <memory>
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
-
 #include "gamestate.h"
 #include "resourceallocator.h"
-#include <memory>
+
 
 // Game class
 class Game {
@@ -32,7 +33,7 @@ public:
 	std::shared_ptr<ResourceAllocator> ra_ptr;
 	// Game window
 	sf::RenderWindow _window;
-	
+
 	// This is for delta time
 	sf::Clock _clock;
 	float _dt;

@@ -1,5 +1,5 @@
-#include "../headers/game.h"
 #include <iostream>
+#include "../headers/game.h"
 #include "../headers/mainmenu.h"
 #include "../headers/gameplay.h" 
 #include "../headers/credit.h"
@@ -11,7 +11,7 @@ Game::Game() {
 	// set running to true
 	_running = true;
 	// create a new game window
-	_window.create(sf::VideoMode(48*2*16, 48*2*9), "Infinity topdown shooter game!");
+	_window.create(sf::VideoMode(48 * 2 * 16, 48 * 2 * 9), "Infinity topdown shooter game!");
 	// initialize dt
 	_dt = 0;
 }
@@ -42,7 +42,7 @@ void Game::init() {
 	std::shared_ptr<MainMenu> mainMenu(new MainMenu(*this));
 	// Pointer to game play game state
 	std::shared_ptr<GamePlay> gamePlay(new GamePlay(*this));
-	std::shared_ptr<Credit> credit (new Credit(*this));
+	std::shared_ptr<Credit> credit(new Credit(*this));
 	std::shared_ptr<Setting> setting(new Setting(*this));
 	std::shared_ptr<GameOver> gameOver(new GameOver(*this));
 

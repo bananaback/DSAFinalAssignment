@@ -6,6 +6,6 @@
 #include <vector>
 #include <fstream>
 
-void readMap(std::string filePath, std::vector<std::vector<int>> &matrix);
+void readMap(std::string filePath, std::vector<std::vector<int>>& matrix);
 
 #endif // !UTILITY_H

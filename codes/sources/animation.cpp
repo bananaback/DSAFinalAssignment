@@ -1,5 +1,6 @@
-#include "../headers/animation.h"
 #include <iostream>
+#include "../headers/animation.h"
+
 Animation::Animation() {
 	_frame = 0;
 	_frameTime = 0;

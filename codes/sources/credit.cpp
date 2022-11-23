@@ -8,7 +8,7 @@ Credit::Credit(Game& game)
 	_creditText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::FONT_CREDIT]);
 	_creditText.setString("CREDIT");
 	_creditText.setFillColor(sf::Color::Black);
-	_creditText.setScale(sf::Vector2f(5.f,5.f));
+	_creditText.setScale(sf::Vector2f(5.f, 5.f));
 	_creditText.setPosition(sf::Vector2f(540.f, 100.f));
 
 	_person1.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
@@ -57,7 +57,7 @@ void Credit::handleEvents(Game& game)
 		}
 	}
 	if (pEvent.type == sf::Event::MouseButtonReleased) {
-		if (pEvent.mouseButton.button == sf::Mouse::Left) if (_backMainMenu->checkHover(game))game.changeState("mainmenu");	
+		if (pEvent.mouseButton.button == sf::Mouse::Left) if (_backMainMenu->checkHover(game))game.changeState("mainmenu");
 	}
 }
 

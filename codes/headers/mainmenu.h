@@ -10,15 +10,15 @@
 class MainMenu : public GameState {
 public:
 	// Constructor
-	MainMenu(Game &game);
+	MainMenu(Game& game);
 	// Destructor
 	~MainMenu();
 	// Game event handle
-	void handleEvents(Game &game);
+	void handleEvents(Game& game);
 	// Update game logic
-	void update(Game &game);
+	void update(Game& game);
 	// Render game
-	void render(Game &game);
+	void render(Game& game);
 private:
 	// Testing text on main menu
 	sf::Text _text;

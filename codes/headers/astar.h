@@ -3,8 +3,8 @@
 #include <vector>
 #include <algorithm>
 
-#define MAP_WIDTH 32
-#define MAP_HEIGHT 18
+const int MAP_WIDTH = 32;
+const int MAP_HEIGHT = 18;
 
 void remove(std::vector<std::pair<int, int>>& currentSet, const std::pair<int, int>& currentNode);
 bool contains(const std::vector<std::pair<int, int>>& currentSet, const std::pair<int, int>& currentNode);

@@ -1,6 +1,7 @@
+#include <iostream>
 #include "../headers/player.h"
 #include "../headers/gameobject.h"
-#include <iostream>
+
 Player::Player(float x, float y, float width, float height, float speed, float healthPoint, Game& game) : Character(x, y, width, height) {
 	_speed = speed;
 	_healthPoint = healthPoint;
@@ -94,27 +95,32 @@ void Player::update(Game& game) {
 	}
 	if (_hurting >= 0) {
 		_hurting -= game._dt;
-	} else {
+	}
+	else {
 		_appear = true;
 	}
 	bool updateAnim = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canGoUp) {
 		moveVec.y = -1;
 		updateAnim = true;
-	} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && canGoDown) {
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && canGoDown) {
 		moveVec.y = 1;
 		updateAnim = true;
-	} else {
+	}
+	else {
 		moveVec.y = 0;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && canGoLeft) {
 		moveVec.x = -1;
 		updateAnim = true;
-	} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && canGoRight) {
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && canGoRight) {
 		moveVec.x = 1;
 		updateAnim = true;
-	} else {
+	}
+	else {
 		moveVec.x = 0;
 	}
 	_x += moveVec.x * _speed * game._dt;

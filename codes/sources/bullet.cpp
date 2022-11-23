@@ -1,6 +1,7 @@
+#include <iostream>
 #include "../headers/bullet.h"
 #include "../headers/gameobject.h"
-#include <iostream>
+
 Bullet::Bullet(float x, float y, float width, float height, float speed, float damage, float angle, Game& game) : GameObject(x, y, width, height) {
 	_speed = speed;
 	_damage = damage;
@@ -19,8 +20,8 @@ Bullet::~Bullet() {
 }
 
 void Bullet::update(Game& game) {
-	_x += std::cos(_angle)*_speed*game._dt;
-	_y += std::sin(_angle)*_speed*game._dt;
+	_x += std::cos(_angle) * _speed * game._dt;
+	_y += std::sin(_angle) * _speed * game._dt;
 	_timer += game._dt;
 	if (_timer > _lifeTime) {
 		_isDestroyed = true;

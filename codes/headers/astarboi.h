@@ -13,13 +13,13 @@ typedef std::pair<int, std::pair<int, int>> pq_iter;
 
 int heuristic(std::pair<int, int> u, std::pair<int, int> dest);
 void astar_init(
-    int m, int n,
-    std::vector<std::vector<bool>>& is_closed,
-    std::vector<std::vector<int>>& g,
-    std::vector<std::vector<std::pair<int, int>>>& parent
+	int m, int n,
+	std::vector<std::vector<bool>>& is_closed,
+	std::vector<std::vector<int>>& g,
+	std::vector<std::vector<std::pair<int, int>>>& parent
 );
 std::vector<std::pair<int, int>> astar_trace(
-    std::pair<int, int> root, std::pair<int, int> dest,
-    const std::vector<std::vector<std::pair<int, int>>>& parent
+	std::pair<int, int> root, std::pair<int, int> dest,
+	const std::vector<std::vector<std::pair<int, int>>>& parent
 );
 std::vector<std::pair<int, int>> astar(std::vector<std::vector<int>>& a, int start_x, int start_y, int dest_x, int dest_y);

@@ -15,20 +15,20 @@ public:
 	ResourceAllocator();
 
 	// IMAGE
-	
+
 	// Function to add new image resouces, store the pointer to that resource in _imageResouces map
 	std::string addImage(std::string filePath);
-	
+
 	// A vector to manage pointer to the loaded image resources
 	std::vector<std::shared_ptr<sf::Texture>> _imageResources;
 
 	// SOUND
 
 	// ATTENTION! Resouce allocator for sound not implemented yet...
-	
+
 	// Function to add new sound resouces, store the pointer to that resource in _soundResources map
 	std::string addSound(std::string filePath);
-	
+
 	// A vector to manage pointer to the loaded sound resources
 	std::vector<std::shared_ptr<sf::SoundBuffer>> _soundResources;
 
@@ -43,10 +43,10 @@ public:
 		MAINMENU_QUIT, MAINMENU_SETTING, CANNON_DIAGDOWN, CANNON_DIAGUP,
 		CANNON_DOWN, CANNON_SIDE, CANNON_UP, MAINMENU_STAR, CREDIT_BG, BACK_MAIN_MENU, SLIME_BACK, SLIME_FRONT,
 		SLIME_SIDE, CANNONBALL, EXPLOSION_BIG, EXPLOSION_SMALL, COIN_BIG, HEALTHBAR, HEALTHBAR_FILL, BOXWALL, GREENWALL, REDWALL,
-		BLUEWALL, ICEWALL, GAMEOVER_BG, BACK_TO_MAIN, TRY_AGAIN, GIVE_UP, SETTING_BG, CURSOR_1, CURSOR_2, CURSOR_3, CURSOR_4, CURSOR_5
+		BLUEWALL, ICEWALL, GAMEOVER_BG, BACK_TO_MAIN, TRY_AGAIN, GIVE_UP, SETTING_BG, CURSOR_1, CURSOR_2, CURSOR_3, CURSOR_4, CURSOR_5,
 	};
-	enum FONT{MONO, THALEAHFAT, FONT_CREDIT};
-	enum SOUND{};
+	enum FONT { MONO, THALEAHFAT, FONT_CREDIT };
+	enum SOUND {};
 };
 
 #endif // ! RESOUCESALLOCATOR_H

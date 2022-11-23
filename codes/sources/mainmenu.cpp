@@ -1,9 +1,9 @@
-#include "../headers/mainmenu.h"
 #include <iostream>
+#include "../headers/mainmenu.h"
 #include "../headers/gamestate.h"
 #include "../headers/button.h"
 // Constructor
-MainMenu::MainMenu(Game &game) {
+MainMenu::MainMenu(Game& game) {
 	// init text
 	_text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 	_text.setPosition(280, 350);
@@ -29,7 +29,7 @@ MainMenu::~MainMenu() {
 
 };
 // Handle game events
-void MainMenu::handleEvents(Game &game) {
+void MainMenu::handleEvents(Game& game) {
 	sf::Event pEvent;
 	while (game._window.pollEvent(pEvent)) {
 		if (pEvent.type == sf::Event::Closed) {
@@ -56,16 +56,16 @@ void MainMenu::handleEvents(Game &game) {
 	}
 };
 // Update game logic
-void MainMenu::update(Game &game) {
+void MainMenu::update(Game& game) {
 	for (size_t i = 0; i < _btns.size(); i++) {
 		_btns[i]->update(game);
 	}
 };
 // Render game
-void MainMenu::render(Game &game) {
+void MainMenu::render(Game& game) {
 	// Draw the text
 	game._window.draw(_text);
-	
+
 	_mainMenuBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_BG]);
 	_mainMenuBg.setScale(sf::Vector2f(2.4f, 2.f));
 	game._window.draw(_mainMenuBg);
