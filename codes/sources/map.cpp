@@ -1,3 +1,5 @@
+#include <iostream>
+#include <random>
 #include "../headers/map.h"
 #include "../headers/calculator.h"
 #include "../headers/explosioneffect1.h"
@@ -6,8 +8,7 @@
 #include "../headers/astar.h"
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
-#include <iostream>
-#include <random>
+
 
 std::random_device rd; // obtain a random number from hardware
 std::mt19937 gen(rd()); // seed the generator
@@ -57,7 +58,7 @@ void Map::updateAll(Game& game) {
 				enemy->takeDamage(10);
 				if (enemy->getHealth() <= 0)
 				{
-					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX()+enemy->getWidth()/2 + distr(gen) - 16, enemy->getY() + enemy->getHeight()/2 + distr(gen) - 16, 32, 32, game));
+					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX() + enemy->getWidth() / 2 + distr(gen) - 16, enemy->getY() + enemy->getHeight() / 2 + distr(gen) - 16, 32, 32, game));
 				}
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				bullet->destroy();
@@ -122,7 +123,7 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
-	
+
 
 	// update
 	updateList(game, playerList);
@@ -132,7 +133,7 @@ void Map::updateAll(Game& game) {
 	updateList(game, collectableItemList);
 	updateList(game, wallList);
 
-	
+
 
 	// clear destroyed object
 	removeDestroyedObjects(playerList);
@@ -155,18 +156,18 @@ void Map::updateAll(Game& game) {
 			float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
 			blockEnemyMap[(int)std::floor(enemyCenterY / 48)][(int)std::floor(enemyCenterX / 48)] = 1;
 		}
-		
+
 		for (size_t i = 0; i < enemyList.size(); i++) {
 			//std::cout << "I'm here\n";
 			float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
 			float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
-			enemyList[i]->_path = astar(blockEnemyMap, (int) std::floor(enemyCenterY / 48),
-				(int) std::floor(enemyCenterX / 48),
+			enemyList[i]->_path = astar(blockEnemyMap, (int)std::floor(enemyCenterY / 48),
+				(int)std::floor(enemyCenterX / 48),
 				currentPlayerPosInCellY, currentPlayerPosInCellX);
 		}
 	}
 	// store player position
-	playerPosInCell.first = (int)std::floor(pCenterY/ 48);
+	playerPosInCell.first = (int)std::floor(pCenterY / 48);
 	playerPosInCell.second = (int)std::floor(pCenterX / 48);
 }
 
@@ -177,7 +178,7 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
-	
+
 	// for path finding debug
 	/*sf::RectangleShape rectangle;
 	for (int i = 0; i < 18; i++) {
@@ -190,5 +191,5 @@ void Map::drawAll(Game& game) {
 			game._window.draw(rectangle);
 		}
 	}*/
-	
+
 }

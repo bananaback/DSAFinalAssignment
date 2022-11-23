@@ -1,6 +1,7 @@
-#include "../headers/utility.h";
 #include <iostream>
-void readMap(std::string filePath, std::vector<std::vector<int>> &matrix) {
+#include "../headers/utility.h";
+
+void readMap(std::string filePath, std::vector<std::vector<int>>& matrix) {
 	std::string myText;
 	std::ifstream myReadFile(filePath);
 	if (!myReadFile.is_open()) std::cout << "Failed\n";
@@ -8,7 +9,11 @@ void readMap(std::string filePath, std::vector<std::vector<int>> &matrix) {
 		// Output the text from the file
 		//std::cout << myText << "\n";
 		std::vector<int> temp;
-		for (int i = 0; i < myText.length(); i++) if (myText[i] >= '0' && myText[i] <= '9') temp.push_back((int)myText[i] - 48);
+		for (int i = 0; i < myText.length(); i++) {
+			if (myText[i] >= '0' && myText[i] <= '9') {
+				temp.push_back((int)myText[i] - 48);
+			}
+		}
 		matrix.push_back(temp);
 	}
 }

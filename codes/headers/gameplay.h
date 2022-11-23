@@ -10,15 +10,15 @@
 class GamePlay : public GameState {
 public:
 	// Constructor
-	GamePlay(Game &game);
+	GamePlay(Game& game);
 	// Destructor
 	~GamePlay();
 	// Game play events handler
-	void handleEvents(Game &game);
+	void handleEvents(Game& game);
 	// Game play logic update
-	void update(Game &game);
+	void update(Game& game);
 	// Game play render
-	void render(Game &game);
+	void render(Game& game);
 	void addPlayerBullet(Game& game);
 	void addEnemy(Game& game);
 	void drawPlayerHealthBar(Game& game);

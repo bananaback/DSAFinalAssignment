@@ -1,5 +1,6 @@
-#include "../headers/resourceallocator.h"
 #include <iostream>
+#include "../headers/resourceallocator.h"
+
 // Constructor
 ResourceAllocator::ResourceAllocator() {
 	// Add resouces here
@@ -37,7 +38,7 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/wall/redwall.png");
 	std::cout << addImage("assets/img/topdown_shooter/wall/bluewall.png");
 	std::cout << addImage("assets/img/topdown_shooter/wall/icewall.png");
-  std::cout << addImage("assets/img/gameover/gameoverbg.png");
+	std::cout << addImage("assets/img/gameover/gameoverbg.png");
 	std::cout << addImage("assets/img/gameover/backtomain.png");
 	std::cout << addImage("assets/img/gameover/tryagain.png");
 	std::cout << addImage("assets/img/gameover/giveup.png");

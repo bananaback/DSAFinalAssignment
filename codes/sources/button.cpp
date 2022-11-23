@@ -1,5 +1,6 @@
-#include "../headers/button.h"
 #include<iostream>
+#include "../headers/button.h"
+
 Button::Button(float x, float y, float width, float height, std::string name) {
 	_name = name;
 	_x = x;
@@ -23,7 +24,7 @@ std::string Button::getName() {
 }
 
 void Button::draw(Game& game) {
-	if (_name=="play") {
+	if (_name == "play") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_PLAY]);
 	}
 	else if (_name == "quit") {
@@ -62,7 +63,7 @@ void Button::draw(Game& game) {
 	else if (_name == "giveup") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::GIVE_UP]);
 	}
-	_btnImg.setPosition(_x + _width / 2, _y + _height/ 2);
+	_btnImg.setPosition(_x + _width / 2, _y + _height / 2);
 	if (_name == "play") {
 		_btnImg.setOrigin(49, 18); // a half of sprite size
 	}
@@ -104,17 +105,17 @@ void Button::draw(Game& game) {
 	}
 	_btnImg.setScale(_scaleX, _scaleY);
 	game._window.draw(_btnImg);
-	
+
 }
 
-bool Button::checkHover(Game &game) {
+bool Button::checkHover(Game& game) {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(game._window);
 	if (mousePos.x >= _x && mousePos.x <= _x + _width && mousePos.y >= _y && mousePos.y <= _y + _height) {
 		return true;
 	}
 	return false;
 }
-void Button::update(Game & game) {
+void Button::update(Game& game) {
 	if (checkHover(game)) {
 		if (_scaleX < _maxScaleX) {
 			_scaleX += _speed * game._dt;
@@ -131,7 +132,7 @@ void Button::update(Game & game) {
 	}
 	else {
 		if (_scaleX > _minScaleX) {
-			_scaleX-=_speed*game._dt;
+			_scaleX -= _speed * game._dt;
 		}
 		else {
 			_scaleX = _minScaleX;

@@ -4,7 +4,7 @@
 #include "gameobject.h"
 #include "game.h"
 #include "animation.h"
-class CollectableItem : public GameObject{
+class CollectableItem : public GameObject {
 public:
 	CollectableItem(float x, float y, float width, float height, Game& game);
 	~CollectableItem();

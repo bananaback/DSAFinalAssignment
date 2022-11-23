@@ -8,7 +8,7 @@ Coin::Coin(float x, float y, float width, float height, Game& game) : Collectabl
 }
 
 Coin::~Coin() {
-	
+
 }
 
 void Coin::update(Game& game) {

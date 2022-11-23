@@ -1,5 +1,5 @@
-#include "../headers/setting.h"
 #include <iostream>
+#include "../headers/setting.h"
 #include "../headers/gamestate.h"
 #include "../headers/button.h"
 //Constructor
@@ -22,7 +22,7 @@ Setting::Setting(Game& game) {
 	_btns.push_back(std::make_shared<Button>(800, 650, 100, 46, "cursor_3"));
 	_btns.push_back(std::make_shared<Button>(910, 650, 100, 46, "cursor_4"));
 	_btns.push_back(std::make_shared<Button>(1020, 650, 100, 46, "cursor_5"));
-	
+
 	_backMainMenu = std::make_shared<Button>(50, 50, 31, 28, "backmainmenu");
 }
 
@@ -67,5 +67,5 @@ void Setting::render(Game& game)
 		_btns[i]->draw(game);
 	}
 	_backMainMenu->draw(game);
-	
+
 }
