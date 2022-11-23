@@ -70,8 +70,7 @@ std::string ResourceAllocator::addImage(std::string filePath) {
 	return res;
 }
 
-std::string ResourceAllocator::addFont(std::string filePath)
-{
+std::string ResourceAllocator::addFont(std::string filePath) {
 	std::shared_ptr<sf::Font> resource = std::make_shared<sf::Font>();
 	// If load fail, return error message
 	if (!resource->loadFromFile(filePath)) {
@@ -86,7 +85,6 @@ std::string ResourceAllocator::addFont(std::string filePath)
 
 // NOT IMPLEMENTED YET
 
-std::string ResourceAllocator::addSound(std::string filePath)
-{
+std::string ResourceAllocator::addSound(std::string filePath) {
 	return "nothinghere";
 }

@@ -37,8 +37,7 @@ void updateList(Game& game, std::vector<std::shared_ptr<T>>& t_list, Args... arg
 template <typename T>
 void removeDestroyedObjects(std::vector<std::shared_ptr<T>>& t_list) {
 	auto it = t_list.end();
-	while (it > t_list.begin())
-	{
+	while (it > t_list.begin()) {
 		it--;
 		if ((*it)->isDestroyed()) {
 			*it = nullptr;

@@ -3,8 +3,7 @@
 #include "../headers/gamestate.h"
 #include "../headers/button.h"
 //#include "../headers/game.h"
-GameOver::GameOver(Game& game)
-{
+GameOver::GameOver(Game& game) {
 	_name = "gameover";
 	_gameOverText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::FONT_CREDIT]);
 	_gameOverText.setString("GAME OVER");
@@ -17,12 +16,11 @@ GameOver::GameOver(Game& game)
 	_btns.push_back(std::make_shared<Button>(680, 650, 100, 46, "giveup"));
 }
 
-GameOver::~GameOver()
-{
+GameOver::~GameOver() {
+
 }
 
-void GameOver::handleEvents(Game& game)
-{
+void GameOver::handleEvents(Game& game) {
 	sf::Event pEvent;
 	while (game._window.pollEvent(pEvent)) {
 		if (pEvent.type == sf::Event::Closed) {
@@ -48,15 +46,13 @@ void GameOver::handleEvents(Game& game)
 	}
 }
 
-void GameOver::update(Game& game)
-{
+void GameOver::update(Game& game) {
 	for (size_t i = 0; i < _btns.size(); i++) {
 		_btns[i]->update(game);
 	}
 }
 
-void GameOver::render(Game& game)
-{
+void GameOver::render(Game& game) {
 	_gameOverbg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::GAMEOVER_BG]);
 	_gameOverbg.setScale(sf::Vector2f(12.f, 12.f));
 	game._window.draw(_gameOverbg);
