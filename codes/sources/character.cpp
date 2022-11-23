@@ -16,15 +16,15 @@ void Character::resolveCollisionWithWall(Wall& wall, int offset) {
 	int otherY = wall.getY();
 	int otherW = wall.getWidth();
 	int otherH = wall.getHeight();
-    canGoUp = canGoUp && !checkCollisionBetweenTwoRect(
+   	canGoUp = canGoUp && !checkCollisionBetweenTwoRect(
         _x, _y - offset, _width, offset,
         otherX, otherY, otherW, otherH);
 
-    canGoDown = canGoDown && !checkCollisionBetweenTwoRect(
+    	canGoDown = canGoDown && !checkCollisionBetweenTwoRect(
         _x, _y + _height, _width, offset,
         otherX, otherY, otherW, otherH);
 
-    canGoLeft = canGoLeft && !checkCollisionBetweenTwoRect(
+    	canGoLeft = canGoLeft && !checkCollisionBetweenTwoRect(
         _x - offset, _y, offset, _height,
         otherX, otherY, otherW, otherH);
 
