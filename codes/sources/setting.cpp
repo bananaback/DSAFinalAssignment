@@ -26,12 +26,11 @@ Setting::Setting(Game& game) {
 	_backMainMenu = std::make_shared<Button>(50, 50, 31, 28, "backmainmenu");
 }
 
-Setting::~Setting()
-{
+Setting::~Setting() {
+
 }
 
-void Setting::handleEvents(Game& game)
-{
+void Setting::handleEvents(Game& game) {
 	sf::Event pEvent;
 	while (game._window.pollEvent(pEvent)) {
 		if (pEvent.type == sf::Event::Closed) {
@@ -49,16 +48,14 @@ void Setting::handleEvents(Game& game)
 	}
 }
 
-void Setting::update(Game& game)
-{
+void Setting::update(Game& game) {
 	_backMainMenu->update(game);
 	for (size_t i = 0; i < _btns.size(); i++) {
 		_btns[i]->update(game);
 	}
 }
 
-void Setting::render(Game& game)
-{
+void Setting::render(Game& game) {
 	_background.setScale(sf::Vector2f(1.1f, 0.9f));
 	game._window.draw(_background);
 	game._window.draw(_cursorBg);
@@ -67,5 +64,4 @@ void Setting::render(Game& game)
 		_btns[i]->draw(game);
 	}
 	_backMainMenu->draw(game);
-
 }

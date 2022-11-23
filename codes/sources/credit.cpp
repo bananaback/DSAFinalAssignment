@@ -1,8 +1,7 @@
 #include "../headers/credit.h"
 #include "../headers/game.h"
 
-Credit::Credit(Game& game)
-{
+Credit::Credit(Game& game) {
 	_name = "credit";
 	_background.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CREDIT_BG]);
 	_creditText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::FONT_CREDIT]);
@@ -38,12 +37,11 @@ Credit::Credit(Game& game)
 	_backMainMenu = std::make_shared<Button>(50, 50, 31, 28, "backmainmenu");
 }
 
-Credit::~Credit()
-{
+Credit::~Credit() {
+
 }
 
-void Credit::handleEvents(Game& game)
-{
+void Credit::handleEvents(Game& game) {
 	sf::Event pEvent;
 	while (game._window.pollEvent(pEvent)) {
 		if (pEvent.type == sf::Event::Closed) {
@@ -61,13 +59,11 @@ void Credit::handleEvents(Game& game)
 	}
 }
 
-void Credit::update(Game& game)
-{
+void Credit::update(Game& game) {
 	_backMainMenu->update(game);
 }
 
-void Credit::render(Game& game)
-{
+void Credit::render(Game& game) {
 	_background.setScale(sf::Vector2f(2.4f, 2.f));
 	game._window.draw(_background);
 	game._window.draw(_creditText);

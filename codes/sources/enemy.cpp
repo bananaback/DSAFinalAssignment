@@ -117,13 +117,11 @@ void Enemy::draw(Game& game) {
 	}
 }
 
-float Enemy::getHealth()
-{
+float Enemy::getHealth() {
 	return _healthPoint;
 }
 
-void Enemy::setHealth(float h)
-{
+void Enemy::setHealth(float h) {
 	_healthPoint = h;
 }
 
