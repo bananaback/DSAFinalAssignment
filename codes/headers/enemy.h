@@ -15,7 +15,6 @@ public:
 	float getHealth();
 	void setHealth(float h);
 	void takeDamage(float d);
-	void setUp(bool b), setDown(bool b), setLeft(bool b), setRight(bool b);
 	bool isArrived(float x, float y);
 	std::vector<std::pair<int, int>> _path;
 	void setX(float x), setY(float y);
