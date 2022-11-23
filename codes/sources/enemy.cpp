@@ -30,22 +30,6 @@ Enemy::~Enemy() {
 	std::cout << "Enemy removed\n";
 }
 
-void Enemy::setUp(bool b) {
-	canGoUp = b;
-}
-
-void Enemy::setDown(bool b) {
-	canGoDown = b;
-}
-
-void Enemy::setLeft(bool b) {
-	canGoLeft = b;
-}
-
-void Enemy::setRight(bool b) {
-	canGoRight = b;
-}
-
 void Enemy::setX(float x) {
 	_x = x;
 }
