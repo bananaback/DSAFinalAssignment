@@ -19,7 +19,7 @@ GamePlay::GamePlay(Game& game) {
 	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
 	_background.setFillColor(sf::Color(9, 184, 0));
 	// add player
-	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 40, 100, 100, game));
+	_map.playerList.push_back(std::make_shared<Player>(200, 500, 40, 40, 100, 100, game));
 	// add some enemy
 	addEnemy(game);
 	// init player health bar
@@ -31,8 +31,20 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
 
-	std::string map1Path = "./data/map1.txt";
-	readMap(map1Path, _map.blockData);
+	_currentLevel = 1; // load from .txt soon
+	addWall(game, _currentLevel);
+
+	//_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
+	
+	
+	fadeInInit(game);
+}
+
+void GamePlay::addWall(Game& game, int currentLevel) {
+	if (currentLevel == 1) {
+		std::string map1Path = "./data/map1.txt";
+		readMap(map1Path, _map.blockData);
+	}
 
 	for (size_t i = 0; i < _map.blockData.size(); i++) {
 		for (size_t j = 0; j < _map.blockData[i].size(); j++) {
@@ -41,8 +53,61 @@ GamePlay::GamePlay(Game& game) {
 			}
 		}
 	}
+}
 
-	_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
+void GamePlay::fadeInInit(Game& game) {
+	auto it = _flyingTextList.end();
+	while (it > _flyingTextList.begin()) {
+		it--;
+		*it = nullptr;
+		it = _flyingTextList.erase(it);
+	}
+	_state = "fadein";
+	_timer = 0;
+	_blX = 0;
+	_brX = 16*48;
+	_addReady = false;
+	_addLevel = false;
+	_addGo = false;
+	
+	_backgroundLeft.setPosition(_blX, 0);
+	_backgroundLeft.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundLeft.setFillColor(sf::Color(156, 250, 255));
+
+	_backgroundRight.setPosition(_brX, 0);
+	_backgroundRight.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundRight.setFillColor(sf::Color(156, 250, 255));
+	
+	_blackCover.setPosition(0, 0);
+	_blackCover.setSize(sf::Vector2f(32.0f * 48, 18.0f * 48));
+	_blackCover.setFillColor(sf::Color::Black);
+	_blackCoverOpacity = 255;
+	
+	
+}
+
+void GamePlay::fadeOutInit(Game& game) {
+	auto it = _typingTextList.end();
+	while (it > _typingTextList.begin()) {
+		it--;
+		*it = nullptr;
+		it = _typingTextList.erase(it);
+	}
+	_state = "fadeout";
+	_timer = 0;
+	_blX = -16 * 48;
+	_brX = 32 * 48;
+
+	_addLevelComplete = false;
+	_addContinue = false;
+
+	_backgroundLeft.setPosition(_blX, 0);
+	_backgroundLeft.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundLeft.setFillColor(sf::Color(252, 145, 5));
+
+	_backgroundRight.setPosition(_brX, 0);
+	_backgroundRight.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundRight.setFillColor(sf::Color(252, 145, 5));
 }
 
 void GamePlay::addEnemy(Game& game) {
@@ -78,7 +143,14 @@ void GamePlay::handleEvents(Game& game) {
 		}
 		if (pEvent.type == sf::Event::KeyPressed) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
-				game.changeState("mainmenu");
+				//game.changeState("mainmenu");
+			}
+			if (pEvent.key.code == sf::Keyboard::Enter) {
+				fadeOutInit(game);
+			}
+			if (pEvent.key.code == sf::Keyboard::C) {
+				_currentLevel++;
+				fadeInInit(game);
 			}
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {
@@ -90,13 +162,110 @@ void GamePlay::handleEvents(Game& game) {
 }
 
 void GamePlay::update(Game& game) {
-	// update player healthbar
-	_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
-	_map.updateAll(game);
+	if (_state == "fadein") {
+		_timer += game._dt;
+		if (_addReady == false && _timer >= 1) {
+			_flyingTextList.push_back(std::make_shared<FlyingText>(-100, 250, 200, 1200, "black", "READY", game));
+			_addReady = true;
+		}
+		if (_addLevel == false && _timer >= 2) {
+			_flyingTextList.push_back(std::make_shared<FlyingText>(-100, 250, 200, 1200, "black", "LEVEl "+std::to_string(_currentLevel), game));
+			_addLevel = true;
+		}
+		if (_addGo == false && _timer >= 3) {
+			_flyingTextList.push_back(std::make_shared<FlyingText>(-100, 250, 200, 1200, "black", "GO!", game));
+			_addGo = true;
+		}
+		if (_timer >= 4) {
+			_blX -= game._dt * 600;
+			_brX += game._dt * 600;
+		}
+		_backgroundLeft.setPosition(_blX, 0);
+		_backgroundRight.setPosition(_brX, 0);
+		for (size_t i = 0; i < _flyingTextList.size(); i++) {
+			_flyingTextList[i]->update(game);
+		}
+		if (_blackCoverOpacity > 0) {
+			_blackCoverOpacity -= game._dt * 150;
+		} else {
+			_blackCoverOpacity = 0;
+		}
+		if (_timer > 5) {
+			auto it = _flyingTextList.end();
+			while (it > _flyingTextList.begin()) {
+				it--;
+				*it = nullptr;
+				it = _flyingTextList.erase(it);
+			}
+			_state = "gameplay";
+		}
+		auto it = _flyingTextList.end();
+		while (it > _flyingTextList.begin()) {
+			it--;
+			if ((*it)->isDestroyed()) {
+				*it = nullptr;
+				it = _flyingTextList.erase(it);
+			}
+		}
+	} else if (_state == "gameplay") {
+		// update player healthbar
+		_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
+		_map.updateAll(game);
+	} else if (_state == "fadeout") {
+		_timer += game._dt;
+		if (_addLevelComplete == false && _timer >= 1) {
+			_typingTextList.push_back(std::make_shared<TypingText>(200, 150, 150, 0.1, "LEVEL " + std::to_string(_currentLevel) + " COMPLETE", game));
+			_addLevelComplete = true;
+		}
+		if (_addContinue == false && _timer >= 3) {
+			_typingTextList.push_back(std::make_shared<TypingText>(350, 350, 100, 0.1, "PRESS C TO CONTINUE", game));
+			_addContinue = true;
+		}
+		if (_blX < 0) {
+			_blX += game._dt * 600;
+		} else {
+			_blX = 0;
+		}
+		if (_brX > 16 * 48) {
+			_brX -= game._dt * 600;
+		} else {
+			_brX = 16 * 48;
+		}
+		_backgroundLeft.setPosition(_blX, 0);
+		_backgroundRight.setPosition(_brX, 0);
+		for (size_t i = 0; i < _typingTextList.size(); i++) {
+			_typingTextList[i]->update(game);
+		}
+	}
 }
 
 void GamePlay::render(Game& game) {
-	game._window.draw(_background);
-	_map.drawAll(game);
-	drawPlayerHealthBar(game);
+	if (_state == "fadein") {
+		game._window.draw(_background);
+		_map.drawAll(game);
+		drawPlayerHealthBar(game);
+		game._window.draw(_backgroundLeft);
+		game._window.draw(_backgroundRight);
+		for (size_t i = 0; i < _flyingTextList.size(); i++) {
+			_flyingTextList[i]->draw(game);
+		}
+		_blackCover.setFillColor(sf::Color(0, 0, 0, _blackCoverOpacity));
+		game._window.draw(_blackCover);
+	} else if (_state == "gameplay") {
+		game._window.draw(_background);
+		_map.drawAll(game);
+		drawPlayerHealthBar(game);
+	} else if (_state == "fadeout") {
+		game._window.draw(_background);
+		_map.drawAll(game);
+		drawPlayerHealthBar(game);
+		game._window.draw(_backgroundLeft);
+		game._window.draw(_backgroundRight);
+		for (size_t i = 0; i < _typingTextList.size(); i++) {
+			_typingTextList[i]->draw(game);
+		}
+	}
 }
+// To do: build map and clear map properly
+// add end game screen and saving 
+// ask two teamates about map design

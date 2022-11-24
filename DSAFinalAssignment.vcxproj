@@ -153,6 +153,7 @@
     <ClCompile Include="codes\sources\enemy.cpp" />
     <ClCompile Include="codes\sources\explosioneffect1.cpp" />
     <ClCompile Include="codes\sources\explosioneffect2.cpp" />
+    <ClCompile Include="codes\sources\flyingtext.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameobject.cpp" />
     <ClCompile Include="codes\sources\gameover.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="codes\sources\player.cpp" />
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
     <ClCompile Include="codes\sources\setting.cpp" />
+    <ClCompile Include="codes\sources\typingtext.cpp" />
     <ClCompile Include="codes\sources\utility.cpp" />
     <ClCompile Include="codes\sources\wall.cpp" />
     <ClCompile Include="main.cpp" />
@@ -183,6 +185,7 @@
     <ClInclude Include="codes\headers\enemy.h" />
     <ClInclude Include="codes\headers\explosioneffect1.h" />
     <ClInclude Include="codes\headers\explosioneffect2.h" />
+    <ClInclude Include="codes\headers\flyingtext.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameobject.h" />
     <ClInclude Include="codes\headers\gameover.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="codes\headers\player.h" />
     <ClInclude Include="codes\headers\resourceallocator.h" />
     <ClInclude Include="codes\headers\setting.h" />
+    <ClInclude Include="codes\headers\typingtext.h" />
     <ClInclude Include="codes\headers\utility.h" />
     <ClInclude Include="codes\headers\wall.h" />
   </ItemGroup>
