@@ -11,7 +11,7 @@ public:
 	~CollectableItem();
 	void update(Game& game);
 	void draw(Game& game);
-	virtual void active(Player& player) = 0;
+	virtual void activate(Player& player) = 0;
 protected:
 	float _scaleX, _scaleY;
 	std::shared_ptr<Animation> _animation;

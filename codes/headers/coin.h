@@ -11,7 +11,7 @@ public:
 	~Coin();
 	void update(Game& game);
 	void draw(Game& game);
-	void active(Player& player) override;
+	void activate(Player& player) override;
 private:
 	int _value;
 };
