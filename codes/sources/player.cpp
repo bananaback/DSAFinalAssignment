@@ -54,6 +54,10 @@ void Player::increaseCoin(int amount) {
 	_coin += amount;
 }
 
+void Player::increaseHealth(double regenValue) {
+	_healthPoint += regenValue;
+}
+
 void Player::takeDamage(float d) {
 	if (_hurting <= 0) {
 		_healthPoint = _healthPoint - d;

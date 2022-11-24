@@ -18,6 +18,7 @@ public:
 	float getHealth();
 	void setHealth(float h);
 	void increaseCoin(int amount);
+	void increaseHealth(double regenValue);
 	void setX(float x), setY(float y);
 	void setUp(bool b), setDown(bool b), setLeft(bool b), setRight(bool b);
 	float getSpeed();

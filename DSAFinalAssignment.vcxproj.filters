@@ -28,6 +28,7 @@
     <ClCompile Include="codes\sources\wall.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="codes\sources\character.cpp" />
+    <ClCompile Include="codes\sources\medkit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="codes\headers\utility.h" />
     <ClInclude Include="codes\headers\wall.h" />
     <ClInclude Include="codes\headers\character.h" />
+    <ClInclude Include="codes\headers\medkit.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

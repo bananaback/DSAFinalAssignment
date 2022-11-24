@@ -18,9 +18,7 @@ Map::Map() {
 	std::cout << "I'm map\n";
 	playerPosInCell.first = 5;
 	playerPosInCell.second = 5;
-	std::string map1Path = "./data/map1.txt";
-	readMap(map1Path, blockMap);
-	blockEnemyMap = blockMap;
+	blockEnemyMap = blockData;
 }
 
 Map::~Map() {
@@ -73,8 +71,8 @@ void Map::updateAll(Game& game) {
 		for (size_t j = 0; j < playerList.size(); j++) {
 			std::shared_ptr<Player> player = playerList[j];
 			if (collectableitem->checkCollision(*player)) {
+				collectableitem->active(*player);
 				collectableitem->destroy();
-				player->increaseCoin(1);
 			}
 		}
 	}
@@ -149,7 +147,7 @@ void Map::updateAll(Game& game) {
 	int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
 
 	if (currentPlayerPosInCellX != playerPosInCell.second || currentPlayerPosInCellY != playerPosInCell.first) {
-		blockEnemyMap = blockMap;
+		blockEnemyMap = blockData;
 		for (size_t i = 0; i < enemyList.size(); i++) {
 			float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
 			float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
