@@ -32,12 +32,12 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setPosition(40, 35);
 
 	std::string map1Path = "./data/map1.txt";
-	readMap(map1Path, _currentBlockMap);
+	readMap(map1Path, _map.blockData);
 
-	for (size_t i = 0; i < _currentBlockMap.size(); i++) {
-		for (size_t j = 0; j < _currentBlockMap[i].size(); j++) {
-			if (_currentBlockMap[i][j] != 0) {
-				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, _currentBlockMap[i][j]));
+	for (size_t i = 0; i < _map.blockData.size(); i++) {
+		for (size_t j = 0; j < _map.blockData[i].size(); j++) {
+			if (_map.blockData[i][j] != 0) {
+				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, _map.blockData[i][j]));
 			}
 		}
 	}

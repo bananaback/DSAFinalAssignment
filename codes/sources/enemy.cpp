@@ -107,14 +107,14 @@ void Enemy::draw(Game& game) {
 	healthBar.setPosition(_x - 10, _y - 15);
 	game._window.draw(healthBar);
 	//draw path
-	for (size_t i = 0; i < _path.size(); i++) {
+	/*for (size_t i = 0; i < _path.size(); i++) {
 		rectangle.setPosition(sf::Vector2f(_path[i].second * 48, _path[i].first * 48));
 		rectangle.setSize(sf::Vector2f(48.f, 48.f));
 		rectangle.setFillColor(sf::Color(1, 0, 0, 30));
 		rectangle.setOutlineColor(sf::Color(0, 0, 0, 255));
 		rectangle.setOutlineThickness(2);
 		game._window.draw(rectangle);
-	}
+	}*/
 }
 
 float Enemy::getHealth() {
