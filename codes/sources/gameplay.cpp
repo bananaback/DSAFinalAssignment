@@ -4,7 +4,7 @@
 #include "../headers/astar.h"
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
-
+#include "../headers/medkit.h"
 
 GamePlay::GamePlay(Game& game) {
 
@@ -41,6 +41,8 @@ GamePlay::GamePlay(Game& game) {
 			}
 		}
 	}
+
+	_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
 }
 
 void GamePlay::addEnemy(Game& game) {

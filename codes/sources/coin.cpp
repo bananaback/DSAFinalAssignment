@@ -5,6 +5,7 @@ Coin::Coin(float x, float y, float width, float height, Game& game) : Collectabl
 	_animation = std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::COIN_BIG], 0, 0, 16, 16, 8, 0.1, "coin");
 	_scaleX = 2;
 	_scaleY = 2;
+	_value = 1;
 }
 
 Coin::~Coin() {
@@ -17,4 +18,8 @@ void Coin::update(Game& game) {
 
 void Coin::draw(Game& game) {
 	CollectableItem::draw(game);
+}
+
+void Coin::active(Player& player) {
+	player.increaseCoin(_value);
 }

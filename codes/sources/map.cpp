@@ -73,8 +73,8 @@ void Map::updateAll(Game& game) {
 		for (size_t j = 0; j < playerList.size(); j++) {
 			std::shared_ptr<Player> player = playerList[j];
 			if (collectableitem->checkCollision(*player)) {
+				collectableitem->active(*player);
 				collectableitem->destroy();
-				player->increaseCoin(1);
 			}
 		}
 	}
