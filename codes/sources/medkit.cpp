@@ -18,6 +18,6 @@ void Medkit::draw(Game& game) {
 	CollectableItem::draw(game);
 }
 
-void Medkit::active(Player& player) {
+void Medkit::activate(Player& player) {
 	player.increaseHealth(_regenValue);
 }

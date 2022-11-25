@@ -20,6 +20,6 @@ void Coin::draw(Game& game) {
 	CollectableItem::draw(game);
 }
 
-void Coin::active(Player& player) {
+void Coin::activate(Player& player) {
 	player.increaseCoin(_value);
 }

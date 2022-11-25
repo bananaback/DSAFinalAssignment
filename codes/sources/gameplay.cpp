@@ -18,10 +18,7 @@ GamePlay::GamePlay(Game& game) {
 
 	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
 	_background.setFillColor(sf::Color(9, 184, 0));
-	// add player
-	_map.playerList.push_back(std::make_shared<Player>(200, 200, 40, 40, 100, 100, game));
-	// add some enemy
-	addEnemy(game);
+	
 	// init player health bar
 	_playerHpBar.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR_FILL]);
 	_playerHPBarBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR]);
@@ -31,25 +28,67 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
 
-	std::string map1Path = "./data/map1.txt";
-	readMap(map1Path, _map.blockData);
+	_currentLevel = 1; // load from .txt soon
 
-	for (size_t i = 0; i < _map.blockData.size(); i++) {
-		for (size_t j = 0; j < _map.blockData[i].size(); j++) {
-			if (_map.blockData[i][j] != 0) {
-				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, _map.blockData[i][j]));
-			}
-		}
-	}
-
-	_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
+	//_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
+	
+	_map.build(game, _currentLevel);
+	fadeInInit(game);
 }
 
-void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+template <typename T>
+void removeObjects(std::vector<std::shared_ptr<T>>& t_list) {
+	auto it = t_list.end();
+	while (it > t_list.begin()) {
+		it--;
+		*it = nullptr;
+		it = t_list.erase(it);
+	}
+}
+
+void GamePlay::fadeInInit(Game& game) {
+	removeObjects(_flyingTextList);
+	_state = "fadein";
+	_timer = 0;
+	_blX = 0;
+	_brX = 16*48;
+	_addReady = false;
+	_addLevel = false;
+	_addGo = false;
+	
+	_backgroundLeft.setPosition(_blX, 0);
+	_backgroundLeft.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundLeft.setFillColor(sf::Color(156, 250, 255));
+
+	_backgroundRight.setPosition(_brX, 0);
+	_backgroundRight.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundRight.setFillColor(sf::Color(156, 250, 255));
+	
+	_blackCover.setPosition(0, 0);
+	_blackCover.setSize(sf::Vector2f(32.0f * 48, 18.0f * 48));
+	_blackCover.setFillColor(sf::Color::Black);
+	_blackCoverOpacity = 255;
+	
+	
+}
+
+void GamePlay::fadeOutInit(Game& game) {
+	removeObjects(_typingTextList);
+	_state = "fadeout";
+	_timer = 0;
+	_blX = -16 * 48;
+	_brX = 32 * 48;
+
+	_addLevelComplete = false;
+	_addContinue = false;
+
+	_backgroundLeft.setPosition(_blX, 0);
+	_backgroundLeft.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundLeft.setFillColor(sf::Color(252, 145, 5));
+
+	_backgroundRight.setPosition(_brX, 0);
+	_backgroundRight.setSize(sf::Vector2f(16.0f * 48, 18.0f * 48));
+	_backgroundRight.setFillColor(sf::Color(252, 145, 5));
 }
 
 void GamePlay::drawPlayerHealthBar(Game& game) {
@@ -62,11 +101,13 @@ GamePlay::~GamePlay() {
 }
 
 void GamePlay::addPlayerBullet(Game& game) {
-	std::shared_ptr<Player> player = _map.playerList[0];
-	// get the current mouse position in the window
-	sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
-	float angle = calculateAngle(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, pixelPos.x, pixelPos.y);
-	_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
+	if (_map.playerList.size() > 0) {
+		std::shared_ptr<Player> player = _map.playerList[0];
+		// get the current mouse position in the window
+		sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
+		float angle = calculateAngle(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, pixelPos.x, pixelPos.y);
+		_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
+	}
 }
 
 void GamePlay::handleEvents(Game& game) {
@@ -78,74 +119,17 @@ void GamePlay::handleEvents(Game& game) {
 		}
 		if (pEvent.type == sf::Event::KeyPressed) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
-				game.changeState("mainmenu");
+				//game.changeState("mainmenu");
 			}
-			/*if (pEvent.key.code == sf::Keyboard::Up) {
-				_map.enemyList[0]->setY(_map.enemyList[0]->getY() - 48);
-				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
-				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
-				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
-				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
-				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
-				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
-				_map.enemyList[0]->_path.clear();
-				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
-
-				_map.enemyList[0]->_path = astar(_currentBlockMap,
-					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
-					currentPlayerPosInCellY, currentPlayerPosInCellX);
+			if (pEvent.key.code == sf::Keyboard::Enter) {
+				fadeOutInit(game);
 			}
-			if (pEvent.key.code == sf::Keyboard::Down) {
-				_map.enemyList[0]->setY(_map.enemyList[0]->getY() + 48);
-				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
-				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
-				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
-				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
-				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
-				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
-				_map.enemyList[0]->_path.clear();
-				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
-				_map.enemyList[0]->_path = astar(_currentBlockMap,
-					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
-					currentPlayerPosInCellY, currentPlayerPosInCellX);
+			if (pEvent.key.code == sf::Keyboard::C) {
+				_map.clear(game);
+				_currentLevel++;
+				_map.build(game, _currentLevel);
+				fadeInInit(game);
 			}
-			if (pEvent.key.code == sf::Keyboard::Left) {
-				_map.enemyList[0]->setX(_map.enemyList[0]->getX() - 48);
-				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
-				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
-				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
-				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
-				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
-				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
-				_map.enemyList[0]->_path.clear();
-				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
-				_map.enemyList[0]->_path = astar(_currentBlockMap,
-					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
-					currentPlayerPosInCellY, currentPlayerPosInCellX);
-			}
-			if (pEvent.key.code == sf::Keyboard::Right) {
-				_map.enemyList[0]->setX(_map.enemyList[0]->getX() + 48);
-				float pCenterX = _map.playerList[0]->getX() + _map.playerList[0]->getWidth() / 2;
-				float pCenterY = _map.playerList[0]->getY() + _map.playerList[0]->getHeight() / 2;
-				int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
-				int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
-				float enemyCenterX = _map.enemyList[0]->getX() + _map.enemyList[0]->getWidth() / 2;
-				float enemyCenterY = _map.enemyList[0]->getY() + _map.enemyList[0]->getHeight() / 2;
-				_map.enemyList[0]->_path.clear();
-				//_map.enemyList[0]->_path = pathFinding(_currentBlockMap,
-				//	std::make_pair((int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48)),
-				//	std::make_pair(currentPlayerPosInCellY, currentPlayerPosInCellX));
-				_map.enemyList[0]->_path = astar(_currentBlockMap,
-					(int)std::floor(enemyCenterY / 48), (int)std::floor(enemyCenterX / 48),
-					currentPlayerPosInCellY, currentPlayerPosInCellX);
-			}
-			*/
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {
 			if (pEvent.mouseButton.button == sf::Mouse::Left) {
@@ -156,13 +140,107 @@ void GamePlay::handleEvents(Game& game) {
 }
 
 void GamePlay::update(Game& game) {
-	// update player healthbar
-	_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
-	_map.updateAll(game);
+	if (_state == "fadein") {
+		_timer += game._dt;
+		if (_addReady == false && _timer >= 1) {
+			_flyingTextList.push_back(std::make_shared<FlyingText>(-100, 250, 200, 1200, "black", "READY", game));
+			_addReady = true;
+		}
+		if (_addLevel == false && _timer >= 2) {
+			_flyingTextList.push_back(std::make_shared<FlyingText>(-100, 250, 200, 1200, "black", "LEVEl "+std::to_string(_currentLevel), game));
+			_addLevel = true;
+		}
+		if (_addGo == false && _timer >= 3) {
+			_flyingTextList.push_back(std::make_shared<FlyingText>(-100, 250, 200, 1200, "black", "GO!", game));
+			_addGo = true;
+		}
+		if (_timer >= 4) {
+			_blX -= game._dt * 600;
+			_brX += game._dt * 600;
+		}
+		_backgroundLeft.setPosition(_blX, 0);
+		_backgroundRight.setPosition(_brX, 0);
+		for (size_t i = 0; i < _flyingTextList.size(); i++) {
+			_flyingTextList[i]->update(game);
+		}
+		if (_blackCoverOpacity > 0) {
+			_blackCoverOpacity -= game._dt * 150;
+		} else {
+			_blackCoverOpacity = 0;
+		}
+		if (_timer > 5.5) {
+			removeObjects(_flyingTextList);
+			_state = "gameplay";
+		}
+		auto it = _flyingTextList.end();
+		while (it > _flyingTextList.begin()) {
+			it--;
+			if ((*it)->isDestroyed()) {
+				*it = nullptr;
+				it = _flyingTextList.erase(it);
+			}
+		}
+	} else if (_state == "gameplay") {
+		// update player healthbar
+		if (_map.playerList.size() >= 1) {
+			_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
+		}
+		_map.updateAll(game);
+	} else if (_state == "fadeout") {
+		_timer += game._dt;
+		if (_addLevelComplete == false && _timer >= 1) {
+			_typingTextList.push_back(std::make_shared<TypingText>(200, 150, 150, 0.1, "LEVEL " + std::to_string(_currentLevel) + " COMPLETE", game));
+			_addLevelComplete = true;
+		}
+		if (_addContinue == false && _timer >= 3) {
+			_typingTextList.push_back(std::make_shared<TypingText>(350, 350, 100, 0.1, "PRESS C TO CONTINUE", game));
+			_addContinue = true;
+		}
+		if (_blX < 0) {
+			_blX += game._dt * 600;
+		} else {
+			_blX = 0;
+		}
+		if (_brX > 16 * 48) {
+			_brX -= game._dt * 600;
+		} else {
+			_brX = 16 * 48;
+		}
+		_backgroundLeft.setPosition(_blX, 0);
+		_backgroundRight.setPosition(_brX, 0);
+		for (size_t i = 0; i < _typingTextList.size(); i++) {
+			_typingTextList[i]->update(game);
+		}
+	}
 }
 
 void GamePlay::render(Game& game) {
-	game._window.draw(_background);
-	_map.drawAll(game);
-	drawPlayerHealthBar(game);
+	if (_state == "fadein") {
+		game._window.draw(_background);
+		_map.drawAll(game);
+		drawPlayerHealthBar(game);
+		game._window.draw(_backgroundLeft);
+		game._window.draw(_backgroundRight);
+		for (size_t i = 0; i < _flyingTextList.size(); i++) {
+			_flyingTextList[i]->draw(game);
+		}
+		_blackCover.setFillColor(sf::Color(0, 0, 0, _blackCoverOpacity));
+		game._window.draw(_blackCover);
+	} else if (_state == "gameplay") {
+		game._window.draw(_background);
+		_map.drawAll(game);
+		drawPlayerHealthBar(game);
+	} else if (_state == "fadeout") {
+		game._window.draw(_background);
+		_map.drawAll(game);
+		drawPlayerHealthBar(game);
+		game._window.draw(_backgroundLeft);
+		game._window.draw(_backgroundRight);
+		for (size_t i = 0; i < _typingTextList.size(); i++) {
+			_typingTextList[i]->draw(game);
+		}
+	}
 }
+// To do: build map and clear map properly
+// add end game screen and saving 
+// ask two teamates about map design

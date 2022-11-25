@@ -51,7 +51,7 @@ void Game::init() {
 	addState(credit);
 	addState(setting);
 	addState(gameOver);
-	_currentState = gameOver;
+	_currentState = mainMenu;
 }
 // Update game logic
 void Game::update() {

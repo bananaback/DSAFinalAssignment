@@ -17,6 +17,11 @@ public:
 	~Map();
 	void updateAll(Game& game);
 	void drawAll(Game& game);
+	void build(Game& game, int currentLevel);
+	void clear(Game& game);
+	void addWall(Game& game, int currentLevel);
+	void addPlayer(Game& game, int currentLevel);
+	void addEnemy(Game& game, int currentLevel);
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<std::shared_ptr<Player>> playerList;
 	std::vector<std::shared_ptr<Bullet>> bulletList;
