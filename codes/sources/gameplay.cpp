@@ -18,10 +18,7 @@ GamePlay::GamePlay(Game& game) {
 
 	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
 	_background.setFillColor(sf::Color(9, 184, 0));
-	// add player
-	_map.playerList.push_back(std::make_shared<Player>(200, 500, 40, 40, 100, 100, game));
-	// add some enemy
-	addEnemy(game);
+	
 	// init player health bar
 	_playerHpBar.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR_FILL]);
 	_playerHPBarBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR]);
@@ -32,36 +29,25 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setPosition(40, 35);
 
 	_currentLevel = 1; // load from .txt soon
-	addWall(game, _currentLevel);
 
 	//_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
 	
-	
+	_map.build(game, _currentLevel);
 	fadeInInit(game);
 }
 
-void GamePlay::addWall(Game& game, int currentLevel) {
-	if (currentLevel == 1) {
-		std::string map1Path = "./data/map1.txt";
-		readMap(map1Path, _map.blockData);
-	}
-
-	for (size_t i = 0; i < _map.blockData.size(); i++) {
-		for (size_t j = 0; j < _map.blockData[i].size(); j++) {
-			if (_map.blockData[i][j] != 0) {
-				_map.wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, _map.blockData[i][j]));
-			}
-		}
+template <typename T>
+void removeObjects(std::vector<std::shared_ptr<T>>& t_list) {
+	auto it = t_list.end();
+	while (it > t_list.begin()) {
+		it--;
+		*it = nullptr;
+		it = t_list.erase(it);
 	}
 }
 
 void GamePlay::fadeInInit(Game& game) {
-	auto it = _flyingTextList.end();
-	while (it > _flyingTextList.begin()) {
-		it--;
-		*it = nullptr;
-		it = _flyingTextList.erase(it);
-	}
+	removeObjects(_flyingTextList);
 	_state = "fadein";
 	_timer = 0;
 	_blX = 0;
@@ -87,12 +73,7 @@ void GamePlay::fadeInInit(Game& game) {
 }
 
 void GamePlay::fadeOutInit(Game& game) {
-	auto it = _typingTextList.end();
-	while (it > _typingTextList.begin()) {
-		it--;
-		*it = nullptr;
-		it = _typingTextList.erase(it);
-	}
+	removeObjects(_typingTextList);
 	_state = "fadeout";
 	_timer = 0;
 	_blX = -16 * 48;
@@ -110,13 +91,6 @@ void GamePlay::fadeOutInit(Game& game) {
 	_backgroundRight.setFillColor(sf::Color(252, 145, 5));
 }
 
-void GamePlay::addEnemy(Game& game) {
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-	_map.enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
-}
-
 void GamePlay::drawPlayerHealthBar(Game& game) {
 	game._window.draw(_playerHPBarBg);
 	game._window.draw(_playerHpBar);
@@ -127,11 +101,13 @@ GamePlay::~GamePlay() {
 }
 
 void GamePlay::addPlayerBullet(Game& game) {
-	std::shared_ptr<Player> player = _map.playerList[0];
-	// get the current mouse position in the window
-	sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
-	float angle = calculateAngle(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, pixelPos.x, pixelPos.y);
-	_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
+	if (_map.playerList.size() > 0) {
+		std::shared_ptr<Player> player = _map.playerList[0];
+		// get the current mouse position in the window
+		sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
+		float angle = calculateAngle(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, pixelPos.x, pixelPos.y);
+		_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
+	}
 }
 
 void GamePlay::handleEvents(Game& game) {
@@ -149,7 +125,9 @@ void GamePlay::handleEvents(Game& game) {
 				fadeOutInit(game);
 			}
 			if (pEvent.key.code == sf::Keyboard::C) {
+				_map.clear(game);
 				_currentLevel++;
+				_map.build(game, _currentLevel);
 				fadeInInit(game);
 			}
 		}
@@ -190,13 +168,8 @@ void GamePlay::update(Game& game) {
 		} else {
 			_blackCoverOpacity = 0;
 		}
-		if (_timer > 5) {
-			auto it = _flyingTextList.end();
-			while (it > _flyingTextList.begin()) {
-				it--;
-				*it = nullptr;
-				it = _flyingTextList.erase(it);
-			}
+		if (_timer > 5.5) {
+			removeObjects(_flyingTextList);
 			_state = "gameplay";
 		}
 		auto it = _flyingTextList.end();
@@ -209,7 +182,9 @@ void GamePlay::update(Game& game) {
 		}
 	} else if (_state == "gameplay") {
 		// update player healthbar
-		_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
+		if (_map.playerList.size() >= 1) {
+			_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
+		}
 		_map.updateAll(game);
 	} else if (_state == "fadeout") {
 		_timer += game._dt;

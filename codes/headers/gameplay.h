@@ -22,10 +22,8 @@ public:
 	// Game play render
 	void render(Game& game);
 	void addPlayerBullet(Game& game);
-	void addEnemy(Game& game);
 	void drawPlayerHealthBar(Game& game);
 	void fadeInInit(Game& game), fadeOutInit(Game& game);
-	void addWall(Game& game, int currentLevel);
 	std::string _state;
 private:
 	sf::Text _text;

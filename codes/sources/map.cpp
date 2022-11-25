@@ -44,6 +44,66 @@ void removeDestroyedObjects(std::vector<std::shared_ptr<T>>& t_list) {
 	}
 }
 
+template <typename T>
+void removeObjects(std::vector<std::shared_ptr<T>>& t_list) {
+	auto it = t_list.end();
+	while (it > t_list.begin()) {
+		it--;
+		*it = nullptr;
+		it = t_list.erase(it);
+	}
+}
+
+void Map::addWall(Game& game, int currentLevel) {
+	blockData.clear();
+	if (currentLevel == 1) {
+		std::string map1Path = "./data/map1.txt";
+		readMap(map1Path, blockData);
+	}
+
+	for (size_t i = 0; i < blockData.size(); i++) {
+		for (size_t j = 0; j < blockData[i].size(); j++) {
+			if (blockData[i][j] != 0) {
+				wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, blockData[i][j]));
+			}
+		}
+	}
+}
+
+void Map::addPlayer(Game& game, int currentLevel) {
+	float pX, pY;
+	if (currentLevel == 1) {
+		pX = 300;
+		pY = 500;
+	}
+	// add player
+	playerList.push_back(std::make_shared<Player>(pX, pY, 40, 40, 100, 100, game));
+}
+
+void Map::addEnemy(Game& game, int currentLevel) {
+	if (currentLevel == 1) {
+		enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
+		enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+		enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
+		enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+	}
+}
+
+void Map::build(Game& game, int currentLevel) {
+	addWall(game, currentLevel);
+	addPlayer(game, currentLevel);
+	addEnemy(game, currentLevel);
+}
+
+void Map::clear(Game& game) {
+	removeObjects(enemyList);
+	removeObjects(bulletList);
+	removeObjects(effectList);
+	removeObjects(collectableItemList);
+	removeObjects(wallList);
+	removeObjects(playerList);
+}
+
 void Map::updateAll(Game& game) {
 	// collision check O(mn+np+pq...)
 		// bullet and enemy
@@ -124,7 +184,10 @@ void Map::updateAll(Game& game) {
 
 	// update
 	updateList(game, playerList);
-	updateList(game, enemyList, playerList[0]->getX() + playerList[0]->getWidth() / 2, playerList[0]->getY() + playerList[0]->getHeight() / 2);
+	if (playerList.size() >= 1) {
+		updateList(game, enemyList, playerList[0]->getX() + playerList[0]->getWidth() / 2,
+			playerList[0]->getY() + playerList[0]->getHeight() / 2);
+	}
 	updateList(game, bulletList);
 	updateList(game, effectList);
 	updateList(game, collectableItemList);
@@ -140,32 +203,35 @@ void Map::updateAll(Game& game) {
 	removeDestroyedObjects(collectableItemList);
 	removeDestroyedObjects(wallList);
 
-	// enemy pathfinding
-	float pCenterX = playerList[0]->getX() + playerList[0]->getWidth() / 2;
-	float pCenterY = playerList[0]->getY() + playerList[0]->getHeight() / 2;
-	int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
-	int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
+	if (playerList.size() >= 1) {
+		// enemy pathfinding
+		float pCenterX = playerList[0]->getX() + playerList[0]->getWidth() / 2;
+		float pCenterY = playerList[0]->getY() + playerList[0]->getHeight() / 2;
+		int currentPlayerPosInCellX = (int)std::floor(pCenterX / 48);
+		int currentPlayerPosInCellY = (int)std::floor(pCenterY / 48);
 
-	if (currentPlayerPosInCellX != playerPosInCell.second || currentPlayerPosInCellY != playerPosInCell.first) {
-		blockEnemyMap = blockData;
-		for (size_t i = 0; i < enemyList.size(); i++) {
-			float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
-			float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
-			blockEnemyMap[(int)std::floor(enemyCenterY / 48)][(int)std::floor(enemyCenterX / 48)] = 1;
-		}
+		if (currentPlayerPosInCellX != playerPosInCell.second || currentPlayerPosInCellY != playerPosInCell.first) {
+			blockEnemyMap = blockData;
+			for (size_t i = 0; i < enemyList.size(); i++) {
+				float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
+				float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
+				std::cout << (int)std::floor(enemyCenterY / 48) << "\n";
+				blockEnemyMap[(int)std::floor(enemyCenterY / 48)][(int)std::floor(enemyCenterX / 48)] = 1;
+			}
 
-		for (size_t i = 0; i < enemyList.size(); i++) {
-			//std::cout << "I'm here\n";
-			float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
-			float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
-			enemyList[i]->_path = astar(blockEnemyMap, (int)std::floor(enemyCenterY / 48),
-				(int)std::floor(enemyCenterX / 48),
-				currentPlayerPosInCellY, currentPlayerPosInCellX);
+			for (size_t i = 0; i < enemyList.size(); i++) {
+				//std::cout << "I'm here\n";
+				float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
+				float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
+				enemyList[i]->_path = astar(blockEnemyMap, (int)std::floor(enemyCenterY / 48),
+					(int)std::floor(enemyCenterX / 48),
+					currentPlayerPosInCellY, currentPlayerPosInCellX);
+			}
 		}
+		// store player position
+		playerPosInCell.first = (int)std::floor(pCenterY / 48);
+		playerPosInCell.second = (int)std::floor(pCenterX / 48);
 	}
-	// store player position
-	playerPosInCell.first = (int)std::floor(pCenterY / 48);
-	playerPosInCell.second = (int)std::floor(pCenterX / 48);
 }
 
 void Map::drawAll(Game& game) {
