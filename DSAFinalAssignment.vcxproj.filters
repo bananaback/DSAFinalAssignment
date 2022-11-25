@@ -31,6 +31,7 @@
     <ClCompile Include="codes\sources\medkit.cpp" />
     <ClCompile Include="codes\sources\flyingtext.cpp" />
     <ClCompile Include="codes\sources\typingtext.cpp" />
+    <ClCompile Include="codes\sources\ending.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -62,6 +63,7 @@
     <ClInclude Include="codes\headers\medkit.h" />
     <ClInclude Include="codes\headers\flyingtext.h" />
     <ClInclude Include="codes\headers\typingtext.h" />
+    <ClInclude Include="codes\headers\ending.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

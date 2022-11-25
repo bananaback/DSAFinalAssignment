@@ -150,6 +150,7 @@
     <ClCompile Include="codes\sources\button.cpp" />
     <ClCompile Include="codes\sources\calculator.cpp" />
     <ClCompile Include="codes\sources\credit.cpp" />
+    <ClCompile Include="codes\sources\ending.cpp" />
     <ClCompile Include="codes\sources\enemy.cpp" />
     <ClCompile Include="codes\sources\explosioneffect1.cpp" />
     <ClCompile Include="codes\sources\explosioneffect2.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="codes\headers\button.h" />
     <ClInclude Include="codes\headers\calculator.h" />
     <ClInclude Include="codes\headers\credit.h" />
+    <ClInclude Include="codes\headers\ending.h" />
     <ClInclude Include="codes\headers\enemy.h" />
     <ClInclude Include="codes\headers\explosioneffect1.h" />
     <ClInclude Include="codes\headers\explosioneffect2.h" />
