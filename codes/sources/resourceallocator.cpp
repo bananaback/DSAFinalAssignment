@@ -49,6 +49,9 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/cursors/7crosshair2.png");
 	std::cout << addImage("assets/img/topdown_shooter/cursors/4crosshair2.png");
 	std::cout << addImage("assets/img/topdown_shooter/other/powerup.png");
+	std::cout << addImage("assets/img/ending/28.png");
+	std::cout << addImage("assets/img/ending/1.png");
+	std::cout << addImage("assets/img/ending/2.png");
 
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
