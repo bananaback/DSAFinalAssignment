@@ -6,6 +6,7 @@
 #include "../headers/setting.h"
 #include "../headers/gameover.h"
 #include "../headers/ending.h"
+#include "../headers/saving.h"
 
 // Constructor
 Game::Game() {
@@ -47,6 +48,7 @@ void Game::init() {
 	std::shared_ptr<Setting> setting(new Setting(*this));
 	std::shared_ptr<GameOver> gameOver(new GameOver(*this));
 	std::shared_ptr<Ending> ending(new Ending(*this));
+	std::shared_ptr<Saving> saving(new Saving(*this));
 
 	addState(mainMenu);
 	addState(gamePlay);
@@ -54,6 +56,7 @@ void Game::init() {
 	addState(setting);
 	addState(gameOver);
 	addState(ending);
+	addState(saving);
 	_currentState = ending;
 }
 // Update game logic

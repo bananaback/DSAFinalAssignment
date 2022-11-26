@@ -165,6 +165,7 @@
     <ClCompile Include="codes\sources\medkit.cpp" />
     <ClCompile Include="codes\sources\player.cpp" />
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
+    <ClCompile Include="codes\sources\saving.cpp" />
     <ClCompile Include="codes\sources\setting.cpp" />
     <ClCompile Include="codes\sources\typingtext.cpp" />
     <ClCompile Include="codes\sources\utility.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="codes\headers\medkit.h" />
     <ClInclude Include="codes\headers\player.h" />
     <ClInclude Include="codes\headers\resourceallocator.h" />
+    <ClInclude Include="codes\headers\saving.h" />
     <ClInclude Include="codes\headers\setting.h" />
     <ClInclude Include="codes\headers\typingtext.h" />
     <ClInclude Include="codes\headers\utility.h" />

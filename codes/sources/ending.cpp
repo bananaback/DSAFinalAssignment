@@ -62,7 +62,7 @@ void Ending::handleEvents(Game& game) {
 				for (size_t i = 0; i < _btnList.size(); i++) {
 					if (_btnList[i]._isHover) {
 						if (_btnList[i]._name == "yes") {
-
+							game.changeState("saving");
 						} else if (_btnList[i]._name == "no") {
 							game.changeState("mainmenu");
 						}

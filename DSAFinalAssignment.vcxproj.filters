@@ -32,6 +32,7 @@
     <ClCompile Include="codes\sources\flyingtext.cpp" />
     <ClCompile Include="codes\sources\typingtext.cpp" />
     <ClCompile Include="codes\sources\ending.cpp" />
+    <ClCompile Include="codes\sources\saving.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -64,6 +65,7 @@
     <ClInclude Include="codes\headers\flyingtext.h" />
     <ClInclude Include="codes\headers\typingtext.h" />
     <ClInclude Include="codes\headers\ending.h" />
+    <ClInclude Include="codes\headers\saving.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
