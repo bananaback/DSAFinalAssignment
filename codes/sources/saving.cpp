@@ -196,9 +196,12 @@ void Saving::handleEvents(Game& game) {
 					score = myText.substr(found + 1, myText.size() - 1);
 					std::cout << name << " " << score << "\n";
 					if (name.size() == 0) name = "NONAME";
+					for (auto x : name) x = std::toupper(x);
 					playerList.push_back(std::make_pair(name, std::stoi(score)));
 				}
 				MyReadFile.close();
+				for (auto x : _userName._currentContext) x = std::toupper(x);
+				if (_userName._currentContext.size() == 0) _userName._currentContext = "NONAME";
 				playerList.push_back(std::make_pair(_userName._currentContext, 500));
 				std::sort(playerList.begin(), playerList.end(), comp);
 				int length = playerList.size();
@@ -207,7 +210,8 @@ void Saving::handleEvents(Game& game) {
 				for (int i = 0; i < length; i++) {
 					myOutFile << playerList[i].first << ";" << playerList[i].second << "\n";
 				}
-				game.changeState("highscore");
+				myOutFile.close();
+				game.changeState("highscore", 0, 1);
 			}
 			
 		}

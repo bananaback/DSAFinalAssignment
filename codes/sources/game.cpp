@@ -89,10 +89,12 @@ void Game::addState(std::shared_ptr<GameState> gamestate) {
 	_states.push_back(gamestate);
 }
 // Function to switch game state with state name
-void Game::changeState(std::string name) {
+void Game::changeState(std::string name, bool clear, bool build) {
+	if (clear) _currentState->clear(*this);
 	for (size_t i = 0; i < _states.size(); i++) {
 		if (_states[i]->_name == name) {
 			_currentState = _states[i];
 		}
 	}
+	if (build) _currentState->build(*this);
 }
