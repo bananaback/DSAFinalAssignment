@@ -52,6 +52,7 @@ void Button::draw(Game& game) {
 	}
 	else if (_name == "cursor_5") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_5]);
+	}
 	else if (_name == "tryagain") {
 		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TRY_AGAIN]);
 	}
@@ -91,6 +92,7 @@ void Button::draw(Game& game) {
 	}
 	else if (_name == "cursor_5") {
 		_btnImg.setOrigin(16.5, 16.5);
+	}
 	else if (_name == "tryagain") {
 		_btnImg.setOrigin(206.5, 128.5);
 	}

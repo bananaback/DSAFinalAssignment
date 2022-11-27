@@ -1,6 +1,7 @@
 #include "../headers/player.h"
 #include "../headers/gameobject.h"
 #include <iostream>
+#include <cmath>
 Player::Player(float x, float y, float width, float height, float speed, float healthPoint, Game& game) : GameObject(x, y, width, height) {
 	_speed = speed;
 	_healthPoint = healthPoint;

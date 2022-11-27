@@ -5,7 +5,7 @@
 #include "../headers/astar.h"
 #include "../headers/utility.h"
 #include <iostream>
-
+#include <cmath>
 
 Enemy::Enemy(float x, float y, float width, float height, float speed, float attackDamage, float healthPoint, Game& game) : GameObject(x, y, width, height) {
 	_speed = speed;

@@ -1,6 +1,7 @@
 #include "../headers/bullet.h"
 #include "../headers/gameobject.h"
 #include <iostream>
+#include <cmath>
 Bullet::Bullet(float x, float y, float width, float height, float speed, float damage, float angle, Game& game) : GameObject(x, y, width, height) {
 	_speed = speed;
 	_damage = damage;
