@@ -9,7 +9,7 @@ Highscore::Highscore(Game& game) {
 	_highscoreTitle.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
 	_highscoreTitle.setCharacterSize(100);
 	_highscoreTitle.setFillColor(sf::Color::Black);
-	_highscoreTitle.setPosition(sf::Vector2f(500, 100));
+	_highscoreTitle.setPosition(sf::Vector2f(350, 50));
 	_highscoreTitle.setString("TOP 10 BEST PLAYER");
 }
 
