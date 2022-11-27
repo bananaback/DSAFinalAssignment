@@ -53,6 +53,11 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/ending/1.png");
 	std::cout << addImage("assets/img/ending/2.png");
 	std::cout << addImage("assets/img/saving/7.png");
+	std::cout << addImage("assets/img/score/back3.png");
+	std::cout << addImage("assets/img/score/explosion.png");
+	std::cout << addImage("assets/img/score/gem3.png");
+	std::cout << addImage("assets/img/score/number.png");
+
 
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
