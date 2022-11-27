@@ -23,11 +23,27 @@ void CandidateInfor::update(Game& game) {
 
 }
 
+float CandidateInfor::getX() {
+	return _x;
+}
+
+float CandidateInfor::getY() {
+	return _y;
+}
+
+std::string CandidateInfor::getName() {
+	return _name;
+}
+
+int CandidateInfor::getScore() {
+	return _score;
+}
+
 void CandidateInfor::draw(Game& game) {
-	sf::RectangleShape rect;
-	rect.setSize(sf::Vector2f(_width, _height));
-	rect.setFillColor(sf::Color::White);
-	rect.setPosition(sf::Vector2f(_x, _y));
-	game._window.draw(rect);
-	game._window.draw(_text);
+	//sf::RectangleShape rect;
+	//rect.setSize(sf::Vector2f(_width, _height));
+	//rect.setFillColor(sf::Color::White);
+	//rect.setPosition(sf::Vector2f(_x, _y));
+	//game._window.draw(rect);
+	//game._window.draw(_text);
 }

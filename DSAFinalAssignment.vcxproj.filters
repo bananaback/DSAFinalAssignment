@@ -76,4 +76,7 @@
     <None Include=".gitignore" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\highscore.txt" />
+  </ItemGroup>
 </Project>

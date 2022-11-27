@@ -10,6 +10,10 @@ public:
 	~CandidateInfor();
 	void update(Game& game);
 	void draw(Game& game);
+	std::string getName();
+	int getScore();
+	float getX();
+	float getY();
 private:
 	float _x, _y, _width, _height;
 	std::string _name; 
