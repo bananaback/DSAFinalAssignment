@@ -4,6 +4,7 @@
 
 #include "gamestate.h"
 #include "SFML/Graphics.hpp"
+#include "candidateinfor.h"
 
 class Highscore : public GameState {
 public:
@@ -15,7 +16,7 @@ public:
 private:
 	sf::Sprite _highscoreBg;
 	sf::Text _highscoreTitle;
-
+	std::vector<std::shared_ptr<CandidateInfor>> _candidateList;
 };
 
 #endif // ! HIGHSCORE_H
