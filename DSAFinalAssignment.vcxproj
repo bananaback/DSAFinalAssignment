@@ -160,6 +160,7 @@
     <ClCompile Include="codes\sources\gameover.cpp" />
     <ClCompile Include="codes\sources\gameplay.cpp" />
     <ClCompile Include="codes\sources\gamestate.cpp" />
+    <ClCompile Include="codes\sources\highscore.cpp" />
     <ClCompile Include="codes\sources\mainmenu.cpp" />
     <ClCompile Include="codes\sources\map.cpp" />
     <ClCompile Include="codes\sources\medkit.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="codes\headers\gameover.h" />
     <ClInclude Include="codes\headers\gameplay.h" />
     <ClInclude Include="codes\headers\gamestate.h" />
+    <ClInclude Include="codes\headers\highscore.h" />
     <ClInclude Include="codes\headers\mainmenu.h" />
     <ClInclude Include="codes\headers\map.h" />
     <ClInclude Include="codes\headers\medkit.h" />
