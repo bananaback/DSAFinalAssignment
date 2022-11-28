@@ -29,6 +29,7 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setPosition(40, 35);
 
 	_currentLevel = 1; // load from .txt soon
+	_endLevel = 10;
 
 	//_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
 	
@@ -126,9 +127,14 @@ void GamePlay::handleEvents(Game& game) {
 			}
 			if (pEvent.key.code == sf::Keyboard::C) {
 				_map.clear(game);
-				_currentLevel++;
-				_map.build(game, _currentLevel);
-				fadeInInit(game);
+				if (_currentLevel != _endLevel)
+				{
+					_currentLevel++;
+					_map.build(game, _currentLevel);
+					fadeInInit(game);
+				} else {
+					game.changeState("saving", 1, 0);
+				}
 			}
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {

@@ -39,7 +39,7 @@ private:
 	std::vector<std::shared_ptr<FlyingText>> _flyingTextList;
 	std::vector<std::shared_ptr<TypingText>> _typingTextList;
 
-	int _currentLevel;
+	int _currentLevel, _endLevel;
 };
 
 #endif // !GAMEPLAY_H

@@ -60,7 +60,7 @@ void Game::init() {
 	addState(ending);
 	addState(saving);
 	addState(highscore);
-	_currentState = saving;
+	_currentState = mainMenu;
 }
 // Update game logic
 void Game::update() {

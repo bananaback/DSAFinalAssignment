@@ -59,6 +59,11 @@ void Highscore::handleEvents(Game& game) {
 			// End game
 			game.setRunning(false);
 		}
+		if (pEvent.type == sf::Event::KeyPressed) {
+			if (pEvent.key.code == sf::Keyboard::Enter) {
+				game.changeState("mainmenu", 0, 0);
+			}
+		}
 	}
 }
 

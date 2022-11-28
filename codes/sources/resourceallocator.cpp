@@ -58,11 +58,17 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/score/gem3.png");
 	std::cout << addImage("assets/img/score/number.png");
 	std::cout << addImage("assets/fonts/font-20x20.png");
+	std::cout << addImage("assets/img/tiles.png");
 
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
 	std::cout << addFont("assets/fonts/ThaleahFat.ttf");
 	std::cout << addFont("assets/fonts/04B_19.ttf");
+
+	for (int i = 0; i < 540; i++) {
+		sf::IntRect temp(i%36*16, i/36*16, 16, 16);
+		_tilesImgRects.push_back(temp);
+	}
 
 	for (int i = 0; i < 120; i++) {
 		sf::IntRect temp((i % 15)*20, (i / 15)*20, 20, 20);
