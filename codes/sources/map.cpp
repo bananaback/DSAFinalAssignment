@@ -19,6 +19,8 @@ Map::Map() {
 	playerPosInCell.first = 5;
 	playerPosInCell.second = 5;
 	blockEnemyMap = blockData;
+
+	singleTile.setOrigin(sf::Vector2f(8.f, 8.f));
 }
 
 Map::~Map() {
@@ -57,14 +59,23 @@ void removeObjects(std::vector<std::shared_ptr<T>>& t_list) {
 void Map::addWall(Game& game, int currentLevel) {
 	blockData.clear();
 	if (currentLevel == 1) {
-		std::string map1Path = "./data/map1.txt";
+		/*std::string map1Path = "./data/block/map_2bl.txt";
 		readMap(map1Path, blockData);
+
+		std::string backgroundPath = "./data/background/map_2bg.txt";
+		readMap(backgroundPath, backgroundData);*/
 	}
+	std::string mapPath = "./data/block/map" + std::to_string(currentLevel) + ".txt";
+	readMap(mapPath, blockData);
+
+	backgroundData.clear();
+	std::string backgroundPath = "./data/background/map" + std::to_string(currentLevel) + ".txt";
+	readMap(backgroundPath, backgroundData);
 
 	for (size_t i = 0; i < blockData.size(); i++) {
 		for (size_t j = 0; j < blockData[i].size(); j++) {
 			if (blockData[i][j] != 0) {
-				wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, blockData[i][j]));
+				wallList.push_back(std::make_shared<Wall>(48 * j, 48 * i, 48, 48, game, blockData[i][j]-1));
 			}
 		}
 	}
@@ -83,9 +94,9 @@ void Map::addPlayer(Game& game, int currentLevel) {
 void Map::addEnemy(Game& game, int currentLevel) {
 	if (currentLevel == 1) {
 		enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-		enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+		//enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
 		enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-		enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+		//enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
 	}
 }
 
@@ -234,7 +245,20 @@ void Map::updateAll(Game& game) {
 	}
 }
 
+void Map::drawBackground(Game& game) {
+	for (size_t i = 0; i < backgroundData.size(); i++) {
+		for (size_t j = 0; j < backgroundData[i].size(); j++) {
+			singleTile.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TILES]);
+			singleTile.setTextureRect(game.ra_ptr->_tilesImgRects[backgroundData[i][j]-1]);
+			singleTile.setPosition(sf::Vector2f(j*48+24, i*48+24));
+			singleTile.setScale(sf::Vector2f(3.f, 3.f));
+			game._window.draw(singleTile);
+		}
+	}
+}
+
 void Map::drawAll(Game& game) {
+	drawBackground(game);
 	for (size_t i = 0; i < playerList.size(); i++) playerList[i]->draw(game);
 	for (size_t i = 0; i < enemyList.size(); i++) enemyList[i]->draw(game);
 	for (size_t i = 0; i < bulletList.size(); i++) bulletList[i]->draw(game);
