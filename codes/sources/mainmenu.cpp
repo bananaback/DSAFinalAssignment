@@ -28,6 +28,7 @@ MainMenu::MainMenu(Game& game) {
 MainMenu::~MainMenu() {
 
 };
+
 // Handle game events
 void MainMenu::handleEvents(Game& game) {
 	sf::Event pEvent;
@@ -38,7 +39,7 @@ void MainMenu::handleEvents(Game& game) {
 		}
 		if (pEvent.type == sf::Event::KeyPressed) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
-				game.changeState("gameplay");
+				game.changeState("gameplay", 0, 0);
 			}
 		}
 	}
@@ -46,10 +47,10 @@ void MainMenu::handleEvents(Game& game) {
 		if (pEvent.mouseButton.button == sf::Mouse::Left) {
 			for (size_t i = 0; i < _btns.size(); i++) {
 				if (_btns[i]->checkHover(game)) {
-					if (_btns[i]->getName() == "play") game.changeState("gameplay");
+					if (_btns[i]->getName() == "play") game.changeState("gameplay", 0, 0);
 					if (_btns[i]->getName() == "quit") game.setRunning(false);
-					if (_btns[i]->getName() == "credit") game.changeState("credit");
-					if (_btns[i]->getName() == "setting") game.changeState("setting");
+					if (_btns[i]->getName() == "credit") game.changeState("credit", 0, 0);
+					if (_btns[i]->getName() == "setting") game.changeState("setting", 0, 0);
 				}
 			}
 		}

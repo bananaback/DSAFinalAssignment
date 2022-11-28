@@ -34,6 +34,7 @@
     <ClCompile Include="codes\sources\ending.cpp" />
     <ClCompile Include="codes\sources\saving.cpp" />
     <ClCompile Include="codes\sources\highscore.cpp" />
+    <ClCompile Include="codes\sources\candidateinfor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -68,10 +69,14 @@
     <ClInclude Include="codes\headers\ending.h" />
     <ClInclude Include="codes\headers\saving.h" />
     <ClInclude Include="codes\headers\highscore.h" />
+    <ClInclude Include="codes\headers\candidateinfor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\highscore.txt" />
   </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ public:
 	// Function to add new state to game state list
 	void addState(std::shared_ptr<GameState> gamestate);
 	// Function to change game state
-	void changeState(std::string name);
+	void changeState(std::string name, bool clear, bool build);
 	// Function to end game
 	void setRunning(bool r);
 

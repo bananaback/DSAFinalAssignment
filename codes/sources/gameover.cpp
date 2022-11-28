@@ -29,7 +29,7 @@ void GameOver::handleEvents(Game& game) {
 		}
 		if (pEvent.type == sf::Event::KeyPressed) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
-				game.changeState("gameplay");
+				game.changeState("gameplay", 0, 0);
 			}
 		}
 	}
@@ -37,9 +37,9 @@ void GameOver::handleEvents(Game& game) {
 		if (pEvent.mouseButton.button == sf::Mouse::Left) {
 			for (size_t i = 0; i < _btns.size(); i++) {
 				if (_btns[i]->checkHover(game)) {
-					if (_btns[i]->getName() == "tryagain") game.changeState("gameplay");
+					if (_btns[i]->getName() == "tryagain") game.changeState("gameplay", 0, 0);
 					if (_btns[i]->getName() == "giveup") game.setRunning(false);
-					if (_btns[i]->getName() == "backtomain") game.changeState("mainmenu");
+					if (_btns[i]->getName() == "backtomain") game.changeState("mainmenu", 0, 0);
 				}
 			}
 		}

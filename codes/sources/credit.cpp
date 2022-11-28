@@ -50,12 +50,12 @@ void Credit::handleEvents(Game& game) {
 		}
 		if (pEvent.type == sf::Event::KeyPressed) {
 			if (pEvent.key.code == sf::Keyboard::Space) {
-				game.changeState("gameplay");
+				game.changeState("gameplay", 0, 0);
 			}
 		}
 	}
 	if (pEvent.type == sf::Event::MouseButtonReleased) {
-		if (pEvent.mouseButton.button == sf::Mouse::Left) if (_backMainMenu->checkHover(game))game.changeState("mainmenu");
+		if (pEvent.mouseButton.button == sf::Mouse::Left) if (_backMainMenu->checkHover(game))game.changeState("mainmenu", 0, 0);
 	}
 }
 

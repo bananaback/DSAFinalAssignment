@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "../headers/saving.h"
 #include "../headers/game.h"
@@ -44,6 +45,10 @@ Saving::Saving(Game& game) {
 
 Saving::~Saving() {
 
+}
+
+bool comp(std::pair<std::string, int> a, std::pair <std::string, int> b) {
+	return a.second > b.second;
 }
 
 void Saving::handleEvents(Game& game) {
@@ -179,7 +184,34 @@ void Saving::handleEvents(Game& game) {
 				}
 			}
 			if (pEvent.key.code == sf::Keyboard::Enter) {
-				// go to highscore
+				std::ifstream MyReadFile("data/highscore.txt");
+				std::string myText;
+				std::vector<std::pair<std::string, int>> playerList;
+				while (std::getline(MyReadFile, myText)) {
+					std::cout << myText << "\n";
+					size_t found = myText.find(";");
+					std::string name = "";
+					std::string score = "";
+					name = myText.substr(0, found);
+					score = myText.substr(found + 1, myText.size() - 1);
+					std::cout << name << " " << score << "\n";
+					if (name.size() == 0) name = "NONAME";
+					for (auto x : name) x = std::toupper(x);
+					playerList.push_back(std::make_pair(name, std::stoi(score)));
+				}
+				MyReadFile.close();
+				for (auto x : _userName._currentContext) x = std::toupper(x);
+				if (_userName._currentContext.size() == 0) _userName._currentContext = "NONAME";
+				playerList.push_back(std::make_pair(_userName._currentContext, 500));
+				std::sort(playerList.begin(), playerList.end(), comp);
+				int length = playerList.size();
+				if (length > 10) length = 10;
+				std::ofstream myOutFile("data/highscore.txt");
+				for (int i = 0; i < length; i++) {
+					myOutFile << playerList[i].first << ";" << playerList[i].second << "\n";
+				}
+				myOutFile.close();
+				game.changeState("highscore", 0, 1);
 			}
 			
 		}
