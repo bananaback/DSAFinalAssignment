@@ -133,7 +133,7 @@ void GamePlay::handleEvents(Game& game) {
 					_map.build(game, _currentLevel);
 					fadeInInit(game);
 				} else {
-					game.changeState("saving", 1, 0);
+					game.changeState("ending", 1, 0);
 				}
 			}
 		}

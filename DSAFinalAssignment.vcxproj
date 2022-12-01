@@ -144,6 +144,7 @@
     <ClCompile Include="codes\sources\astarboi.cpp" />
     <ClCompile Include="codes\sources\bullet.cpp" />
     <ClCompile Include="codes\sources\candidateinfor.cpp" />
+    <ClCompile Include="codes\sources\cannondisplay.cpp" />
     <ClCompile Include="codes\sources\character.cpp" />
     <ClCompile Include="codes\sources\coin.cpp" />
     <ClCompile Include="codes\sources\collectableitem.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="codes\sources\typingtext.cpp" />
     <ClCompile Include="codes\sources\utility.cpp" />
     <ClCompile Include="codes\sources\wall.cpp" />
+    <ClCompile Include="codes\sources\weapondisplay.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +182,7 @@
     <ClInclude Include="codes\headers\astarboi.h" />
     <ClInclude Include="codes\headers\bullet.h" />
     <ClInclude Include="codes\headers\candidateinfor.h" />
+    <ClInclude Include="codes\headers\cannondisplay.h" />
     <ClInclude Include="codes\headers\character.h" />
     <ClInclude Include="codes\headers\coin.h" />
     <ClInclude Include="codes\headers\collectableitem.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="codes\headers\typingtext.h" />
     <ClInclude Include="codes\headers\utility.h" />
     <ClInclude Include="codes\headers\wall.h" />
+    <ClInclude Include="codes\headers\weapondisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

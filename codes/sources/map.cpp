@@ -83,21 +83,21 @@ void Map::addWall(Game& game, int currentLevel) {
 
 void Map::addPlayer(Game& game, int currentLevel) {
 	float pX, pY;
-	if (currentLevel == 1) {
+	//if (currentLevel == 1) {
 		pX = 300;
 		pY = 500;
-	}
+	//}
 	// add player
 	playerList.push_back(std::make_shared<Player>(pX, pY, 40, 40, 100, 100, game));
 }
 
 void Map::addEnemy(Game& game, int currentLevel) {
-	if (currentLevel == 1) {
+	//if (currentLevel == 1) {
 		enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-		//enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
+		enemyList.push_back(std::make_shared<Enemy>(48 * 4 + 9, 48 * 11 + 9, 30, 30, 80, 5, 100, game));
 		enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 4 + 9, 30, 30, 80, 5, 100, game));
-		//enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 17 + 9, 30, 30, 80, 5, 100, game));
-	}
+		enemyList.push_back(std::make_shared<Enemy>(48 * 28 + 9, 48 * 11 + 9, 30, 30, 80, 5, 100, game));
+	//}
 }
 
 void Map::build(Game& game, int currentLevel) {
