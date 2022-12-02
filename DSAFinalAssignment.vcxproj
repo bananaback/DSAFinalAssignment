@@ -156,6 +156,7 @@
     <ClCompile Include="codes\sources\enemy.cpp" />
     <ClCompile Include="codes\sources\explosioneffect1.cpp" />
     <ClCompile Include="codes\sources\explosioneffect2.cpp" />
+    <ClCompile Include="codes\sources\flamethrower.cpp" />
     <ClCompile Include="codes\sources\flyingtext.cpp" />
     <ClCompile Include="codes\sources\game.cpp" />
     <ClCompile Include="codes\sources\gameobject.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="codes\headers\enemy.h" />
     <ClInclude Include="codes\headers\explosioneffect1.h" />
     <ClInclude Include="codes\headers\explosioneffect2.h" />
+    <ClInclude Include="codes\headers\flamethrower.h" />
     <ClInclude Include="codes\headers\flyingtext.h" />
     <ClInclude Include="codes\headers\game.h" />
     <ClInclude Include="codes\headers\gameobject.h" />

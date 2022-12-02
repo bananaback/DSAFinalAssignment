@@ -6,6 +6,7 @@
 #include "animation.h"
 #include "character.h"
 #include "cannon.h"
+#include "flamethrower.h"
 
 class Player : public Character {
 public:
