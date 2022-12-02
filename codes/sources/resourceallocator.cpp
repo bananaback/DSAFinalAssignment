@@ -59,6 +59,11 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/score/number.png");
 	std::cout << addImage("assets/fonts/font-20x20.png");
 	std::cout << addImage("assets/img/tiles.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_up.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_diagup.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_side.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_diagdown.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_down.png");
 
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");

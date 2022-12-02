@@ -37,6 +37,7 @@
     <ClCompile Include="codes\sources\candidateinfor.cpp" />
     <ClCompile Include="codes\sources\weapon.cpp" />
     <ClCompile Include="codes\sources\cannon.cpp" />
+    <ClCompile Include="codes\sources\flamethrower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -74,6 +75,7 @@
     <ClInclude Include="codes\headers\candidateinfor.h" />
     <ClInclude Include="codes\headers\weapon.h" />
     <ClInclude Include="codes\headers\cannon.h" />
+    <ClInclude Include="codes\headers\flamethrower.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
