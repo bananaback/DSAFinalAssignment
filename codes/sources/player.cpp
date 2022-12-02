@@ -26,7 +26,7 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_hurtTimer = 0;
 	_appear = true;
 
-	_weaponDisplayList.push_back(std::make_shared<FlameThrower>(game, 0, 0, 2));
+	_weaponDisplayList.push_back(std::make_shared<Cannon>(game, 0, 0, 2));
 }
 
 void Player::setX(float x) {
