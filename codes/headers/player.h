@@ -5,6 +5,7 @@
 #include "game.h"
 #include "animation.h"
 #include "character.h"
+#include "cannon.h"
 
 class Player : public Character {
 public:
@@ -27,6 +28,7 @@ private:
 	int _assetName[9] = { 0, 2, 4, 2, 0, 1, 3, 1, 0 };
 	sf::Vector2i moveVec;
 	std::vector<std::shared_ptr<Animation>> _animations;
+	std::vector<std::shared_ptr<Weapon>> _weaponDisplayList;
 	int _currentAnimation, _coin;
 	sf::Sprite _gun;
 	bool _appear;

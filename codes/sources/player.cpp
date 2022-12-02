@@ -25,6 +25,8 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_hurting = 0;
 	_hurtTimer = 0;
 	_appear = true;
+
+	_weaponDisplayList.push_back(std::make_shared<Cannon>(game, 0, 0, 2));
 }
 
 void Player::setX(float x) {
@@ -137,7 +139,7 @@ void Player::update(Game& game) {
 	int a = std::floor((_angle + 180 + 22.5) / 45);
 	_currentAnimation = _assetName[a];
 
-	if (a == 0 || a == 8) {
+	/*if (a == 0 || a == 8) {
 		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_SIDE]);
 		_gun.setPosition(sf::Vector2f(_x + _width / 2 + 10, _y + _height / 2 + 5));
 		_gun.setScale(sf::Vector2f(2.0, 2.0));
@@ -184,7 +186,9 @@ void Player::update(Game& game) {
 		_gun.setPosition(sf::Vector2f(_x + _width / 2 + 15, _y + _height / 2 - 10));
 		_gun.setScale(sf::Vector2f(2.0, 2.0));
 		_gun.setTextureRect(sf::IntRect(0, 0, 15, 13));
-	}
+	}*/
+
+	_weaponDisplayList[0]->update(game, _angle, _x + _width / 2, _y + _height / 2);
 
 
 	if (std::abs(_angle) < 67.5) _scaleX = -3.f; else _scaleX = 3.f;
@@ -198,12 +202,12 @@ void Player::draw(Game& game) {
 	rectangle.setPosition(_x, _y);
 	//game._window.draw(rectangle);
 	if (_appear) {
-		if (_angle >= 0) game._window.draw(_gun);
+		if (_angle >= 0) _weaponDisplayList[0]->draw(game);
 		_animations[_currentAnimation]->_sprite.setPosition(_x + _width / 2, _y + _height / 2);
 		_animations[_currentAnimation]->_sprite.setOrigin(_assetWidth / 2, _assetHeight / 2);
 		_animations[_currentAnimation]->_sprite.setScale(_scaleX, _scaleY);
 		game._window.draw(_animations[_currentAnimation]->_sprite);
-		if (_angle < 0) game._window.draw(_gun);
+		if (_angle < 0)  _weaponDisplayList[0]->draw(game);
 	}
 	/*sf::RectangleShape healthBar;
 	healthBar.setSize(sf::Vector2f(70.0/100*_healthPoint, 5));
