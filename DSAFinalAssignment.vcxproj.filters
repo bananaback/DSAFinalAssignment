@@ -35,6 +35,8 @@
     <ClCompile Include="codes\sources\saving.cpp" />
     <ClCompile Include="codes\sources\highscore.cpp" />
     <ClCompile Include="codes\sources\candidateinfor.cpp" />
+    <ClCompile Include="codes\sources\weapon.cpp" />
+    <ClCompile Include="codes\sources\cannon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -70,6 +72,8 @@
     <ClInclude Include="codes\headers\saving.h" />
     <ClInclude Include="codes\headers\highscore.h" />
     <ClInclude Include="codes\headers\candidateinfor.h" />
+    <ClInclude Include="codes\headers\weapon.h" />
+    <ClInclude Include="codes\headers\cannon.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

@@ -37,6 +37,8 @@ Ending::Ending(Game& game) {
 
 	_btnList.push_back(yesBtn);
 	_btnList.push_back(noBtn);
+
+	_name = "ending";
 }
 
 Ending::~Ending() {
