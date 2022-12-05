@@ -24,6 +24,7 @@ public:
 	void addPlayerBullet(Game& game);
 	void drawPlayerHealthBar(Game& game);
 	void fadeInInit(Game& game), fadeOutInit(Game& game);
+
 	std::string _state;
 private:
 	sf::Text _text;
@@ -40,6 +41,8 @@ private:
 	std::vector<std::shared_ptr<TypingText>> _typingTextList;
 
 	int _currentLevel, _endLevel;
+
+	
 };
 
 #endif // !GAMEPLAY_H

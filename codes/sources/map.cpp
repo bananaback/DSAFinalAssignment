@@ -145,6 +145,7 @@ void Map::updateAll(Game& game) {
 			std::shared_ptr<Player> player = playerList[j];
 			if (collectableitem->checkCollision(*player)) {
 				collectableitem->activate(*player);
+				collectableitem->addEffect(effectList, game);
 				collectableitem->destroy();
 			}
 		}
@@ -275,6 +276,7 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
+	playerList[0]->drawPlayerCoin(game);
 
 	// for path finding debug
 	/*sf::RectangleShape rectangle;

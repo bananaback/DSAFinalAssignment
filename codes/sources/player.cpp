@@ -22,6 +22,7 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
 	_currentAnimation = 0;
 	_coin = 0;
+	_realCoin = _coin;
 	_hurting = 0;
 	_hurtTimer = 0;
 	_appear = true;
@@ -32,7 +33,30 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_weaponDisplayList.push_back(std::make_shared<Matter>(game, 0, 0, 2));
 	
 	_currentWeapon = 0;
-	
+
+	_coinAnimation = std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::COIN_HUD], 2, 0, 16, 16, 4, 0.1, "coinhud");
+	_coinScale = 2;
+	_coinMinScale = 2;
+	_scoreScale = 2;
+	_scoreMinScale = 2;
+	_increaseCoinReload = 0;
+
+	_char.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::IMG_FONT]);
+	_char.setOrigin(10, 10);
+}
+
+void Player::drawText(Game& game, float x, float y, std::string s, float scale) {
+	for (int i = 0; i < s.length(); i++) {
+		_char.setTextureRect(game.ra_ptr->_imgFontIntRects[game.ra_ptr->_charMapping[s[i]]]);
+		_char.setPosition(x + i * 35, y);
+		_char.setScale(sf::Vector2f(scale, scale));
+		game._window.draw(_char);
+	}
+}
+
+void Player::drawPlayerCoin(Game& game) {
+	_coinAnimation->draw(game, 1300, 50, 0, _coinScale, _coinScale, 8, 8);
+	drawText(game, 1350, 50, std::to_string(_realCoin), _scoreScale);
 }
 
 void Player::setWeapon(int c) {
@@ -68,6 +92,8 @@ void Player::setHealth(float h) {
 
 void Player::increaseCoin(int amount) {
 	_coin += amount;
+	_coinScale = 3;
+	_scoreScale = 3;
 }
 
 void Player::increaseHealth(double regenValue) {
@@ -152,60 +178,33 @@ void Player::update(Game& game) {
 	_angle = std::atan2(-(mouse_pos.y - (_y + _width / 2)), -(mouse_pos.x - (_x + _height / 2))) * 180 / (std::atan(1) * 4);
 	int a = std::floor((_angle + 180 + 22.5) / 45);
 	_currentAnimation = _assetName[a];
-
-	/*if (a == 0 || a == 8) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_SIDE]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 + 10, _y + _height / 2 + 5));
-		_gun.setScale(sf::Vector2f(2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 17, 10));
-	}
-	else if (a == 1) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DIAGDOWN]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 + 8, _y + _height / 2 + 5));
-		_gun.setScale(sf::Vector2f(2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 16, 13));
-	}
-	else if (a == 2) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DOWN]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 - 12, _y + _height / 2 + 10));
-		_gun.setScale(sf::Vector2f(2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 12, 14));
-	}
-	else if (a == 3) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DIAGDOWN]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 - 6, _y + _height / 2 + 5));
-		_gun.setScale(sf::Vector2f(-2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 16, 13));
-	}
-	else if (a == 4) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_SIDE]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 - 8, _y + _height / 2 + 5));
-		_gun.setScale(sf::Vector2f(-2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 17, 10));
-	}
-	else if (a == 5) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DIAGUP]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 - 15, _y + _height / 2 - 10));
-		_gun.setScale(sf::Vector2f(-2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 15, 13));
-	}
-	else if (a == 6) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_UP]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 - 12, _y + _height / 2 - 14));
-		_gun.setScale(sf::Vector2f(2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 12, 14));
-	}
-	else if (a == 7) {
-		_gun.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DIAGUP]);
-		_gun.setPosition(sf::Vector2f(_x + _width / 2 + 15, _y + _height / 2 - 10));
-		_gun.setScale(sf::Vector2f(2.0, 2.0));
-		_gun.setTextureRect(sf::IntRect(0, 0, 15, 13));
-	}*/
-
 	_weaponDisplayList[_currentWeapon]->update(game, _angle, _x + _width / 2, _y + _height / 2);
 
 
 	if (std::abs(_angle) < 67.5) _scaleX = -3.f; else _scaleX = 3.f;
+
+	_coinAnimation->update(game._dt);
+	if (_coinScale > _coinMinScale) {
+		_coinScale -= game._dt * 2;
+	}
+	else {
+		_coinScale = _coinMinScale;
+	}
+	if (_scoreScale > _scoreMinScale) {
+		_scoreScale -= game._dt * 5;
+	}
+	else {
+		_scoreScale = _scoreMinScale;
+	}
+
+	_increaseCoinReload += game._dt;
+	if (_increaseCoinReload >= 0.02) {
+		_increaseCoinReload = 0;
+		if (_realCoin < _coin) {
+			_realCoin++;
+			_scoreScale = 2.5;
+		}
+	}
 }
 
 void Player::draw(Game& game) {
@@ -223,9 +222,5 @@ void Player::draw(Game& game) {
 		game._window.draw(_animations[_currentAnimation]->_sprite);
 		if (_angle < 0)  _weaponDisplayList[_currentWeapon]->draw(game);
 	}
-	/*sf::RectangleShape healthBar;
-	healthBar.setSize(sf::Vector2f(70.0/100*_healthPoint, 5));
-	healthBar.setOutlineColor(sf::Color::Green);
-	healthBar.setFillColor(sf::Color::Green);
-	healthBar.setPosition(_x - 10, _y - 15);*/
+	//drawPlayerCoin(game);
 }

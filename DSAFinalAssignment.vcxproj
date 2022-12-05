@@ -151,6 +151,7 @@
     <ClCompile Include="codes\sources\character.cpp" />
     <ClCompile Include="codes\sources\coin.cpp" />
     <ClCompile Include="codes\sources\collectableitem.cpp" />
+    <ClCompile Include="codes\sources\dust.cpp" />
     <ClCompile Include="codes\sources\effect.cpp" />
     <ClCompile Include="codes\sources\button.cpp" />
     <ClCompile Include="codes\sources\calculator.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="codes\headers\character.h" />
     <ClInclude Include="codes\headers\coin.h" />
     <ClInclude Include="codes\headers\collectableitem.h" />
+    <ClInclude Include="codes\headers\dust.h" />
     <ClInclude Include="codes\headers\effect.h" />
     <ClInclude Include="codes\headers\button.h" />
     <ClInclude Include="codes\headers\calculator.h" />
