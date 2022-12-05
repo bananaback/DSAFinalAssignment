@@ -8,6 +8,8 @@
 #include "../headers/cannonbullet.h"
 #include "../headers/flamethrowerbullet.h"
 #include "../headers/mgbullet.h"
+#include "../headers/onionbullet.h"
+#include "../headers/tomatobullet.h"
 
 GamePlay::GamePlay(Game& game) {
 
@@ -122,7 +124,9 @@ void GamePlay::addPlayerBullet(Game& game) {
 		} else if (player->getCurrentWeapon() == Player::MGGUN) {
 			_map.playerBulletList.push_back(std::make_shared<MgBullet>(game, player->getX() + player->getWidth() / 2 - 11.f / 2, player->getY() + player->getHeight() / 2 - 8.f / 2, 11, 8, angle));
 		} else if (player->getCurrentWeapon() == Player::MATTER) {
-
+			//float flameSpawnRadius = 40;
+			//_map.playerBulletList.push_back(std::make_shared<OnionBullet>(game, player->getX() + player->getWidth() / 2 - 13.f, player->getY() + player->getHeight() / 2 - 13.f, 26, 26, angle));
+			_map.playerBulletList.push_back(std::make_shared<TomatoBullet>(game, player->getX() + player->getWidth() / 2 - 11.f, player->getY() + player->getHeight() / 2 - 12.f, 22, 24, angle));
 		}
 	}
 }

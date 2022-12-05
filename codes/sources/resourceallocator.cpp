@@ -77,6 +77,10 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_side.png");
 	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_diagdown.png");
 	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_down.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/onion.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/tomato.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/onion_effect.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/tomato_effect.png");
 
 
 

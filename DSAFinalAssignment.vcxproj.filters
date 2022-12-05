@@ -45,6 +45,10 @@
     <ClCompile Include="codes\sources\flameeffect.cpp" />
     <ClCompile Include="codes\sources\mggun.cpp" />
     <ClCompile Include="codes\sources\matter.cpp" />
+    <ClCompile Include="codes\sources\onionbullet.cpp" />
+    <ClCompile Include="codes\sources\onioneffect.cpp" />
+    <ClCompile Include="codes\sources\tomatobullet.cpp" />
+    <ClCompile Include="codes\sources\tomatoeffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -90,6 +94,10 @@
     <ClInclude Include="codes\headers\flameeffect.h" />
     <ClInclude Include="codes\headers\mggun.h" />
     <ClInclude Include="codes\headers\matter.h" />
+    <ClInclude Include="codes\headers\onionbullet.h" />
+    <ClInclude Include="codes\headers\onioneffect.h" />
+    <ClInclude Include="codes\headers\tomatobullet.h" />
+    <ClInclude Include="codes\headers\tomatoeffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
