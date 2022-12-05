@@ -9,10 +9,7 @@
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
 
-
-std::random_device rd; // obtain a random number from hardware
-std::mt19937 gen(rd()); // seed the generator
-std::uniform_int_distribution<> distr(0, 63); // define the range
+std::uniform_int_distribution<> distr(-60, 60); // define the range
 
 Map::Map() {
 	std::cout << "I'm map\n";
@@ -108,7 +105,7 @@ void Map::build(Game& game, int currentLevel) {
 
 void Map::clear(Game& game) {
 	removeObjects(enemyList);
-	removeObjects(bulletList);
+	removeObjects(playerBulletList);
 	removeObjects(effectList);
 	removeObjects(collectableItemList);
 	removeObjects(wallList);
@@ -118,23 +115,28 @@ void Map::clear(Game& game) {
 void Map::updateAll(Game& game) {
 	// collision check O(mn+np+pq...)
 		// bullet and enemy
-	for (size_t i = 0; i < bulletList.size(); i++) {
-		std::shared_ptr<Bullet> bullet = bulletList[i];
+	for (size_t i = 0; i < playerBulletList.size(); i++) {
+		std::shared_ptr<PlayerBullet> playerBullet = playerBulletList[i];
 		for (size_t j = 0; j < enemyList.size(); j++) {
 			std::shared_ptr<Enemy> enemy = enemyList[j];
-			if (bullet->checkCollision(*enemy)) {
-				enemy->takeDamage(10);
+			if (playerBullet->checkCollision(*enemy)) {
+				enemy->takeDamage(playerBullet->getDamage());
 				if (enemy->getHealth() <= 0)
 				{
-					for (int k = 0; k < 9; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX() + enemy->getWidth() / 2 + distr(gen) - 16, enemy->getY() + enemy->getHeight() / 2 + distr(gen) - 16, 32, 32, game));
+					for (int k = 0; k < 5; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX() + enemy->getWidth() / 2 + distr(game.gen) - 16, enemy->getY() + enemy->getHeight() / 2 + distr(game.gen) - 16, 32, 32, game));
 				}
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
-				bullet->destroy();
-				effectList.push_back(std::make_shared<ExplosionEffect1>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
+				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
+				//effectList.push_back(std::make_shared<ExplosionEffect1>(playerBullet->getX(), playerBullet->getY(), playerBullet->getWidth(), playerBullet->getHeight(), game));
+				if (playerBullet->getDurability() <= 0) {
+					playerBullet->addEffect(effectList, game);
+				}
 				break;
 			}
 		}
 	}
+
+	
 
 	// player and item
 	for (size_t i = 0; i < collectableItemList.size(); i++) {
@@ -158,18 +160,26 @@ void Map::updateAll(Game& game) {
 	}
 
 	// bullet and wall
-	for (size_t i = 0; i < bulletList.size(); i++) {
-		std::shared_ptr<Bullet> bullet = bulletList[i];
+	for (size_t i = 0; i < playerBulletList.size(); i++) {
+		std::shared_ptr<PlayerBullet> playerBullet = playerBulletList[i];
 		for (size_t j = 0; j < wallList.size(); j++) {
 			std::shared_ptr<Wall> wall = wallList[j];
-			if (bullet->checkCollision(*wall)) {
-				bullet->destroy();
-				effectList.push_back(std::make_shared<ExplosionEffect1>(bullet->getX(), bullet->getY(), bullet->getWidth(), bullet->getHeight(), game));
+			if (playerBullet->checkCollision(*wall)) {
+				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
+				effectList.push_back(std::make_shared<ExplosionEffect1>(playerBullet->getX() + playerBullet->getWidth()/2,
+					playerBullet->getY() + playerBullet->getHeight()/2, 0, 0, game));
 				break;
 			}
 		}
 	}
 
+	// bullet disasppear effect
+	for (size_t i = 0; i < playerBulletList.size(); i++) {
+		std::shared_ptr<PlayerBullet> playerBullet = playerBulletList[i];
+		if (playerBullet->getDurability() <= 0) {
+			playerBullet->addEffect(effectList, game);
+		}
+	}
 
 	// player and wall collision resolve
 	for (size_t i = 0; i < playerList.size(); i++) {
@@ -199,7 +209,7 @@ void Map::updateAll(Game& game) {
 		updateList(game, enemyList, playerList[0]->getX() + playerList[0]->getWidth() / 2,
 			playerList[0]->getY() + playerList[0]->getHeight() / 2);
 	}
-	updateList(game, bulletList);
+	updateList(game, playerBulletList);
 	updateList(game, effectList);
 	updateList(game, collectableItemList);
 	updateList(game, wallList);
@@ -208,7 +218,7 @@ void Map::updateAll(Game& game) {
 
 	// clear destroyed object
 	removeDestroyedObjects(playerList);
-	removeDestroyedObjects(bulletList);
+	removeDestroyedObjects(playerBulletList);
 	removeDestroyedObjects(enemyList);
 	removeDestroyedObjects(effectList);
 	removeDestroyedObjects(collectableItemList);
@@ -261,7 +271,7 @@ void Map::drawAll(Game& game) {
 	drawBackground(game);
 	for (size_t i = 0; i < playerList.size(); i++) playerList[i]->draw(game);
 	for (size_t i = 0; i < enemyList.size(); i++) enemyList[i]->draw(game);
-	for (size_t i = 0; i < bulletList.size(); i++) bulletList[i]->draw(game);
+	for (size_t i = 0; i < playerBulletList.size(); i++) playerBulletList[i]->draw(game);
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);

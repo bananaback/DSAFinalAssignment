@@ -5,6 +5,9 @@
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
 #include "../headers/medkit.h"
+#include "../headers/cannonbullet.h"
+#include "../headers/flamethrowerbullet.h"
+#include "../headers/mgbullet.h"
 
 GamePlay::GamePlay(Game& game) {
 
@@ -101,13 +104,26 @@ GamePlay::~GamePlay() {
 
 }
 
+std::uniform_int_distribution<> flameSpawnDistrAngle(-25, 25); // define the range
+
 void GamePlay::addPlayerBullet(Game& game) {
 	if (_map.playerList.size() > 0) {
 		std::shared_ptr<Player> player = _map.playerList[0];
 		// get the current mouse position in the window
 		sf::Vector2i pixelPos = sf::Mouse::getPosition(game._window);
 		float angle = calculateAngle(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, pixelPos.x, pixelPos.y);
-		_map.bulletList.push_back(std::make_shared<Bullet>(player->getX() + player->getWidth() / 2, player->getY() + player->getHeight() / 2, 10, 10, 400, 5, angle, game));
+		if (player->getCurrentWeapon() == Player::CANNON) {
+			_map.playerBulletList.push_back(std::make_shared<CannonBullet>(game, player->getX() + player->getWidth() / 2 - 17/2, player->getY() + player->getHeight()/2 - 17/2, 17, 17, angle));
+		} else if (player->getCurrentWeapon() == Player::FLAMETHROWER) {
+			for (int i = 0; i < 5; i++) {
+				float flameSpawnRadius = 40;
+				_map.playerBulletList.push_back(std::make_shared<FlameThrowerBullet>(game, player->getX() + player->getWidth() / 2 - 13.f / 2 + std::cos(angle)*flameSpawnRadius, player->getY() + player->getHeight() / 2 - 10 / 2 + std::sin(angle) * flameSpawnRadius, 13, 10, angle + flameSpawnDistrAngle(game.gen) / 180.f * (std::atan(1) * 4)));
+			}
+		} else if (player->getCurrentWeapon() == Player::MGGUN) {
+			_map.playerBulletList.push_back(std::make_shared<MgBullet>(game, player->getX() + player->getWidth() / 2 - 11.f / 2, player->getY() + player->getHeight() / 2 - 8.f / 2, 11, 8, angle));
+		} else if (player->getCurrentWeapon() == Player::MATTER) {
+
+		}
 	}
 }
 
@@ -135,6 +151,18 @@ void GamePlay::handleEvents(Game& game) {
 				} else {
 					game.changeState("ending", 1, 0);
 				}
+			}
+			if (pEvent.key.code == sf::Keyboard::Num1) {
+				_map.playerList[0]->setWeapon(Player::CANNON);
+			}
+			if (pEvent.key.code == sf::Keyboard::Num2) {
+				_map.playerList[0]->setWeapon(Player::FLAMETHROWER);
+			}
+			if (pEvent.key.code == sf::Keyboard::Num3) {
+				_map.playerList[0]->setWeapon(Player::MGGUN);
+			}
+			if (pEvent.key.code == sf::Keyboard::Num4) {
+				_map.playerList[0]->setWeapon(Player::MATTER);
 			}
 		}
 		if (pEvent.type == sf::Event::MouseButtonPressed) {

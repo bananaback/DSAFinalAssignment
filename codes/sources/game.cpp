@@ -15,8 +15,11 @@ Game::Game() {
 	_running = true;
 	// create a new game window
 	_window.create(sf::VideoMode(48 * 2 * 16, 48 * 2 * 9), "Infinity topdown shooter game!");
+	//_window.setFramerateLimit(60);
+	//_window.setVerticalSyncEnabled(true);
 	// initialize dt
 	_dt = 0;
+	gen.seed(rd()); // seed the generator
 }
 // Destructor
 Game::~Game() {

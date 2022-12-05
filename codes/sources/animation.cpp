@@ -43,6 +43,7 @@ void Animation::draw(Game& game, float x, float y, float rot, float scaleX, floa
 	_sprite.setPosition(x, y);
 	_sprite.setOrigin(originX, originY);
 	_sprite.setScale(scaleX, scaleY);
+	_sprite.setRotation(rot);
 	game._window.draw(_sprite);
 }
 
