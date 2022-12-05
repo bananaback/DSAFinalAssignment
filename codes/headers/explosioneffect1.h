@@ -10,6 +10,8 @@ public:
 	~ExplosionEffect1();
 	void update(Game& game);
 	void draw(Game& game);
+	static const int EXPLOSION_EFFECT_WIDTH = 12;
+	static const int EXPLOSION_EFFECT_HEIGHT = 12;
 };
 
 #endif // ! EXPLOSIONEFFECT1_H

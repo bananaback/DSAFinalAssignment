@@ -38,6 +38,19 @@
     <ClCompile Include="codes\sources\weapon.cpp" />
     <ClCompile Include="codes\sources\cannon.cpp" />
     <ClCompile Include="codes\sources\flamethrower.cpp" />
+    <ClCompile Include="codes\sources\playerbullet.cpp" />
+    <ClCompile Include="codes\sources\cannonbullet.cpp" />
+    <ClCompile Include="codes\sources\flamethrowerbullet.cpp" />
+    <ClCompile Include="codes\sources\mgbullet.cpp" />
+    <ClCompile Include="codes\sources\flameeffect.cpp" />
+    <ClCompile Include="codes\sources\mggun.cpp" />
+    <ClCompile Include="codes\sources\matter.cpp" />
+    <ClCompile Include="codes\sources\onionbullet.cpp" />
+    <ClCompile Include="codes\sources\onioneffect.cpp" />
+    <ClCompile Include="codes\sources\tomatobullet.cpp" />
+    <ClCompile Include="codes\sources\tomatoeffect.cpp" />
+    <ClCompile Include="codes\sources\catbullet.cpp" />
+    <ClCompile Include="codes\sources\catscratch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -76,6 +89,19 @@
     <ClInclude Include="codes\headers\weapon.h" />
     <ClInclude Include="codes\headers\cannon.h" />
     <ClInclude Include="codes\headers\flamethrower.h" />
+    <ClInclude Include="codes\headers\playerbullet.h" />
+    <ClInclude Include="codes\headers\cannonbullet.h" />
+    <ClInclude Include="codes\headers\flamethrowerbullet.h" />
+    <ClInclude Include="codes\headers\mgbullet.h" />
+    <ClInclude Include="codes\headers\flameeffect.h" />
+    <ClInclude Include="codes\headers\mggun.h" />
+    <ClInclude Include="codes\headers\matter.h" />
+    <ClInclude Include="codes\headers\onionbullet.h" />
+    <ClInclude Include="codes\headers\onioneffect.h" />
+    <ClInclude Include="codes\headers\tomatobullet.h" />
+    <ClInclude Include="codes\headers\tomatoeffect.h" />
+    <ClInclude Include="codes\headers\catbullet.h" />
+    <ClInclude Include="codes\headers\catscratch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

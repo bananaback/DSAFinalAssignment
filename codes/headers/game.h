@@ -3,6 +3,7 @@
 #define GAME_H
 
 #include <memory>
+#include <random>
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
@@ -38,6 +39,8 @@ public:
 	sf::Clock _clock;
 	float _dt;
 
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 gen;
 private:
 	// Game logic update
 	void update();

@@ -12,6 +12,7 @@ public:
 	void draw(Game& game);
 protected:
 	std::shared_ptr<Animation> _holdingAnimation;
+	float _scale;
 };
 
 #endif // !EFFECT_H

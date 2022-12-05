@@ -64,6 +64,25 @@ ResourceAllocator::ResourceAllocator() {
 	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_side.png");
 	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_diagdown.png");
 	std::cout << addImage("assets/img/topdown_shooter/guns/flamthrower/flamethrower_down.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/flamethrower_bullet.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/bulletc.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/burning.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/mg/mg_up.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/mg/mg_diagup.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/mg/mg_side.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/mg/mg_diagdown.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/mg/mg_down.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_up.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_diagup.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_side.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_diagdown.png");
+	std::cout << addImage("assets/img/topdown_shooter/guns/matter/matter_down.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/onion.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/tomato.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/onion_effect.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/tomato_effect.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/cat.png");
+	std::cout << addImage("assets/img/topdown_shooter/other/catscratch.png");
 
 
 	std::cout << addFont("assets/fonts/monogram-extended.ttf");
