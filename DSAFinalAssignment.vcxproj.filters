@@ -51,6 +51,7 @@
     <ClCompile Include="codes\sources\tomatoeffect.cpp" />
     <ClCompile Include="codes\sources\catbullet.cpp" />
     <ClCompile Include="codes\sources\catscratch.cpp" />
+    <ClCompile Include="codes\sources\dust.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="codes\headers\tomatoeffect.h" />
     <ClInclude Include="codes\headers\catbullet.h" />
     <ClInclude Include="codes\headers\catscratch.h" />
+    <ClInclude Include="codes\headers\dust.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

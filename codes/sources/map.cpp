@@ -145,6 +145,7 @@ void Map::updateAll(Game& game) {
 			std::shared_ptr<Player> player = playerList[j];
 			if (collectableitem->checkCollision(*player)) {
 				collectableitem->activate(*player);
+				collectableitem->addEffect(effectList, game);
 				collectableitem->destroy();
 			}
 		}

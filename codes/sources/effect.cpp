@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../headers/effect.h"
 #include "../headers/gameobject.h"
+#include "../headers/game.h"
 
 Effect::Effect(float x, float y, float width, float height, Game& game) : GameObject(x, y, width, height) {
 	_scale = 1;
