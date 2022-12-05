@@ -28,6 +28,7 @@ public:
 	float getSpeed();
 	void setWeapon(int c);
 	int getCurrentWeapon();
+	void drawText(Game& game, float x, float y, std::string s, float scale), drawPlayerCoin(Game& game);;
 	static const int CANNON = 0;
 	static const int FLAMETHROWER = 1;
 	static const int MGGUN = 2;
@@ -38,9 +39,15 @@ private:
 	sf::Vector2i moveVec;
 	std::vector<std::shared_ptr<Animation>> _animations;
 	std::vector<std::shared_ptr<Weapon>> _weaponDisplayList;
-	int _currentAnimation, _coin, _currentWeapon;
+	int _currentAnimation, _coin, _realCoin, _currentWeapon;
 	sf::Sprite _gun;
 	bool _appear;
+
+	// player coin hud
+	std::shared_ptr<Animation> _coinAnimation;
+	float _coinScale, _coinMinScale, _scoreScale, _scoreMinScale, _increaseCoinReload;
+	// draw image font
+	sf::Sprite _char;
 };
 
 #endif

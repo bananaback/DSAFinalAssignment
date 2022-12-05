@@ -34,6 +34,7 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
 
+
 	_currentLevel = 1; // load from .txt soon
 	_endLevel = 10;
 
@@ -233,6 +234,7 @@ void GamePlay::update(Game& game) {
 		if (_map.playerList.size() >= 1) {
 			_playerHpBar.setScale(sf::Vector2f(_map.playerList[0]->getHealth() / 100 * 2, 1));
 		}
+		
 		_map.updateAll(game);
 	} else if (_state == "fadeout") {
 		_timer += game._dt;
