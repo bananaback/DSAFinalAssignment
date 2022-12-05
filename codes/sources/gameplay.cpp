@@ -10,6 +10,7 @@
 #include "../headers/mgbullet.h"
 #include "../headers/onionbullet.h"
 #include "../headers/tomatobullet.h"
+#include "../headers/catbullet.h"
 
 GamePlay::GamePlay(Game& game) {
 
@@ -107,6 +108,7 @@ GamePlay::~GamePlay() {
 }
 
 std::uniform_int_distribution<> flameSpawnDistrAngle(-25, 25); // define the range
+std::uniform_int_distribution<> bulletTypeDistr(0, 2); // 3 types of matter bullet
 
 void GamePlay::addPlayerBullet(Game& game) {
 	if (_map.playerList.size() > 0) {
@@ -124,9 +126,17 @@ void GamePlay::addPlayerBullet(Game& game) {
 		} else if (player->getCurrentWeapon() == Player::MGGUN) {
 			_map.playerBulletList.push_back(std::make_shared<MgBullet>(game, player->getX() + player->getWidth() / 2 - 11.f / 2, player->getY() + player->getHeight() / 2 - 8.f / 2, 11, 8, angle));
 		} else if (player->getCurrentWeapon() == Player::MATTER) {
-			//float flameSpawnRadius = 40;
-			//_map.playerBulletList.push_back(std::make_shared<OnionBullet>(game, player->getX() + player->getWidth() / 2 - 13.f, player->getY() + player->getHeight() / 2 - 13.f, 26, 26, angle));
-			_map.playerBulletList.push_back(std::make_shared<TomatoBullet>(game, player->getX() + player->getWidth() / 2 - 11.f, player->getY() + player->getHeight() / 2 - 12.f, 22, 24, angle));
+			int curr = bulletTypeDistr(game.gen);
+			float spawnRadius = 30;
+			float adjustX = std::cos(angle) * spawnRadius;
+			float adjustY = std::sin(angle) * spawnRadius;
+			if (curr == 0) {
+				_map.playerBulletList.push_back(std::make_shared<OnionBullet>(game, player->getX() + player->getWidth() / 2 - 13.f + adjustX, player->getY() + player->getHeight() / 2 - 13.f + adjustY, 26, 26, angle));
+			} else if (curr == 1) {
+				_map.playerBulletList.push_back(std::make_shared<TomatoBullet>(game, player->getX() + player->getWidth() / 2 - 11.f + adjustX, player->getY() + player->getHeight() / 2 - 12.f + adjustY, 22, 24, angle));
+			} else if (curr == 2) {
+				_map.playerBulletList.push_back(std::make_shared<CatBullet>(game, player->getX() + player->getWidth() / 2 - 19.f + adjustX, player->getY() + player->getHeight() / 2 - 14.f + adjustY, 38, 28, angle));
+			}
 		}
 	}
 }

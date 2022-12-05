@@ -49,6 +49,8 @@
     <ClCompile Include="codes\sources\onioneffect.cpp" />
     <ClCompile Include="codes\sources\tomatobullet.cpp" />
     <ClCompile Include="codes\sources\tomatoeffect.cpp" />
+    <ClCompile Include="codes\sources\catbullet.cpp" />
+    <ClCompile Include="codes\sources\catscratch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -98,6 +100,8 @@
     <ClInclude Include="codes\headers\onioneffect.h" />
     <ClInclude Include="codes\headers\tomatobullet.h" />
     <ClInclude Include="codes\headers\tomatoeffect.h" />
+    <ClInclude Include="codes\headers\catbullet.h" />
+    <ClInclude Include="codes\headers\catscratch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
