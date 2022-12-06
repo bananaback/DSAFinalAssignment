@@ -8,6 +8,7 @@
 #include "../headers/astar.h"
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
+#include "../headers/dust.h"
 
 std::uniform_int_distribution<> distr(-60, 60); // define the range
 
@@ -99,6 +100,10 @@ void Map::addEnemy(Game& game, int currentLevel) {
 	//}
 }
 
+void Map::addSpawner(Game& game, int currentLevel) {
+
+}
+
 void Map::build(Game& game, int currentLevel) {
 	addWall(game, currentLevel);
 	addPlayer(game, currentLevel);
@@ -131,6 +136,27 @@ void Map::updateAll(Game& game) {
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
 				//effectList.push_back(std::make_shared<ExplosionEffect1>(playerBullet->getX(), playerBullet->getY(), playerBullet->getWidth(), playerBullet->getHeight(), game));
+				if (playerBullet->getDurability() <= 0) {
+					playerBullet->addEffect(effectList, game);
+				}
+				break;
+			}
+		}
+	}
+
+	// bullet and spawner
+	for (size_t i = 0; i < playerBulletList.size(); i++) {
+		std::shared_ptr<PlayerBullet> playerBullet = playerBulletList[i];
+		for (size_t j = 0; j < spawnerList.size(); j++) {
+			std::shared_ptr<Spawner> spawner = spawnerList[j];
+			if (playerBullet->checkCollision(*spawner)) {
+				spawner->takeDamage(playerBullet->getDamage());
+				if (spawner->getHealthPoint() <= 0)
+				{
+					for (int k = 0; k < 5; k++) collectableItemList.push_back(std::make_shared<Coin>(spawner->getX() + spawner->getWidth() / 2 + distr(game.gen)*0.5 - 16, spawner->getY() + spawner->getHeight() / 2 + distr(game.gen) * 0.5 - 16, 32, 32, game));
+					effectList.push_back(std::make_shared<Dust>(spawner->getX()+spawner->getWidth()/2, spawner->getY()+spawner->getHeight()/2, 16, 16, game));
+				}
+				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
 				if (playerBullet->getDurability() <= 0) {
 					playerBullet->addEffect(effectList, game);
 				}
@@ -192,6 +218,15 @@ void Map::updateAll(Game& game) {
 		for (size_t j = 0; j < wallList.size(); j++) {
 			std::shared_ptr<Wall> wall = wallList[j];
 			player->resolveCollisionWithWall(*wall, 2);
+		}
+	}
+
+	// player and spawner collision resolve
+	for (size_t i = 0; i < playerList.size(); i++) {
+		std::shared_ptr<Player> player = playerList[i];
+		for (size_t j = 0; j < spawnerList.size(); j++) {
+			std::shared_ptr<Spawner> spawner = spawnerList[j];
+			player->resolveCollisionWithSpawner(*spawner, 2);
 		}
 	}
 

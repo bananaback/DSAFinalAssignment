@@ -24,6 +24,7 @@ public:
 	void addWall(Game& game, int currentLevel);
 	void addPlayer(Game& game, int currentLevel);
 	void addEnemy(Game& game, int currentLevel);
+	void addSpawner(Game& game, int currentLevel);
 	void drawBackground(Game& game);
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<std::shared_ptr<Player>> playerList;

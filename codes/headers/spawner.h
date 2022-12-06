@@ -11,8 +11,13 @@ public:
 	~Spawner();
 	void update(Game& game);
 	void draw(Game& game);
+	float getHealthPoint();
+	void setHealthPoint(float f);
+	void drawHealthBar(Game& game);
+	void takeDamage(float d);
 private:
 	sf::Sprite _sprite;
+	float _healthPoint;
 };
 
 #endif
