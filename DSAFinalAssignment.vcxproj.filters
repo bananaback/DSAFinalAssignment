@@ -52,6 +52,7 @@
     <ClCompile Include="codes\sources\catbullet.cpp" />
     <ClCompile Include="codes\sources\catscratch.cpp" />
     <ClCompile Include="codes\sources\dust.cpp" />
+    <ClCompile Include="codes\sources\spawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="codes\headers\animation.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="codes\headers\catbullet.h" />
     <ClInclude Include="codes\headers\catscratch.h" />
     <ClInclude Include="codes\headers\dust.h" />
+    <ClInclude Include="codes\headers\spawner.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />

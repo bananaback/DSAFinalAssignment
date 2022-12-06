@@ -183,6 +183,7 @@
     <ClCompile Include="codes\sources\resourceallocator.cpp" />
     <ClCompile Include="codes\sources\saving.cpp" />
     <ClCompile Include="codes\sources\setting.cpp" />
+    <ClCompile Include="codes\sources\spawner.cpp" />
     <ClCompile Include="codes\sources\tomatobullet.cpp" />
     <ClCompile Include="codes\sources\tomatoeffect.cpp" />
     <ClCompile Include="codes\sources\typingtext.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="codes\headers\resourceallocator.h" />
     <ClInclude Include="codes\headers\saving.h" />
     <ClInclude Include="codes\headers\setting.h" />
+    <ClInclude Include="codes\headers\spawner.h" />
     <ClInclude Include="codes\headers\tomatobullet.h" />
     <ClInclude Include="codes\headers\tomatoeffect.h" />
     <ClInclude Include="codes\headers\typingtext.h" />
