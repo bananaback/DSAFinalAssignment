@@ -19,6 +19,7 @@ Map::Map() {
 	blockEnemyMap = blockData;
 
 	singleTile.setOrigin(sf::Vector2f(8.f, 8.f));
+	spawnTimer = 0;
 }
 
 Map::~Map() {
@@ -77,8 +78,6 @@ void Map::addWall(Game& game, int currentLevel) {
 			}
 		}
 	}
-
-	spawnerList.push_back(std::make_shared<Spawner>(game, 48*6, 48*6, std::vector<std::pair<int, std::string>>()));
 }
 
 void Map::addPlayer(Game& game, int currentLevel) {
@@ -101,13 +100,18 @@ void Map::addEnemy(Game& game, int currentLevel) {
 }
 
 void Map::addSpawner(Game& game, int currentLevel) {
-
+	if (currentLevel == 1) {
+		spawnerList.push_back(std::make_shared<Spawner>(game, 48 * 5, 48 * 5, std::vector<std::pair<int, std::string>>{
+		std::make_pair(1, "slime"), std::make_pair(2.1, "slime"), std::make_pair(4, "slime"), std::make_pair(6, "slime")}));
+	}
 }
 
 void Map::build(Game& game, int currentLevel) {
+	spawnTimer = 0;
 	addWall(game, currentLevel);
 	addPlayer(game, currentLevel);
-	addEnemy(game, currentLevel);
+	//addEnemy(game, currentLevel);
+	addSpawner(game, currentLevel);
 }
 
 void Map::clear(Game& game) {
@@ -240,6 +244,20 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	spawnTimer += game._dt;
+	// check spawner
+	for (size_t i = 0; i < spawnerList.size(); i++) {
+		std::pair<bool, std::string> spawn = spawnerList[i]->checkSpawn(spawnTimer);
+		if (spawn.first) {
+			if (spawn.second == "slime") {
+				spawnerList[i]->setScale(2);
+				enemyList.push_back(std::make_shared<Enemy>(spawnerList[i]->getX(), spawnerList[i]->getY(), 30, 30, 80, 5, 100, game));
+			}
+		}
+		if (spawnerList[i]->getQueueLength() == 0) {
+			spawnerList[i]->generateSpawnQueue(game, spawnTimer);
+		}
+	}
 
 
 	// update

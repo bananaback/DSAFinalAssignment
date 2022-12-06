@@ -15,9 +15,14 @@ public:
 	void setHealthPoint(float f);
 	void drawHealthBar(Game& game);
 	void takeDamage(float d);
+	std::pair<bool, std::string> checkSpawn(float timer);
+	size_t getQueueLength();
+	void generateSpawnQueue(Game& game, float timer);
+	void setScale(float s);
 private:
 	sf::Sprite _sprite;
-	float _healthPoint;
+	float _healthPoint, _spawnScale, _spawnMinScale;
+	std::vector<std::pair<int, std::string>> _spawnScript;
 };
 
 #endif
