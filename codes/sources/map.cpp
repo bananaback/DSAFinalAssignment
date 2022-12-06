@@ -76,6 +76,8 @@ void Map::addWall(Game& game, int currentLevel) {
 			}
 		}
 	}
+
+	spawnerList.push_back(std::make_shared<Spawner>(game, 48*6, 48*6, std::vector<std::pair<int, std::string>>()));
 }
 
 void Map::addPlayer(Game& game, int currentLevel) {
@@ -110,6 +112,7 @@ void Map::clear(Game& game) {
 	removeObjects(collectableItemList);
 	removeObjects(wallList);
 	removeObjects(playerList);
+	removeObjects(spawnerList);
 }
 
 void Map::updateAll(Game& game) {
@@ -214,6 +217,7 @@ void Map::updateAll(Game& game) {
 	updateList(game, effectList);
 	updateList(game, collectableItemList);
 	updateList(game, wallList);
+	updateList(game, spawnerList);
 
 
 
@@ -224,6 +228,7 @@ void Map::updateAll(Game& game) {
 	removeDestroyedObjects(effectList);
 	removeDestroyedObjects(collectableItemList);
 	removeDestroyedObjects(wallList);
+	removeDestroyedObjects(spawnerList);
 
 	if (playerList.size() >= 1) {
 		// enemy pathfinding
@@ -276,6 +281,7 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
+	for (size_t i = 0; i < spawnerList.size(); i++) spawnerList[i]->draw(game);
 	playerList[0]->drawPlayerCoin(game);
 
 	// for path finding debug

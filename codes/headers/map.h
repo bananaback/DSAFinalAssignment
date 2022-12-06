@@ -11,6 +11,7 @@
 #include "effect.h"
 #include "collectableitem.h"
 #include "wall.h"
+#include "spawner.h"
 
 class Map {
 public:
@@ -30,7 +31,7 @@ public:
 	std::vector<std::shared_ptr<Effect>> effectList;
 	std::vector<std::shared_ptr<CollectableItem>> collectableItemList;
 	std::vector<std::shared_ptr<Wall>> wallList;
-	
+	std::vector<std::shared_ptr<Spawner>> spawnerList;
 	std::pair<int, int> playerPosInCell;
 	std::vector<std::vector<int>> blockData, blockEnemyMap, backgroundData;
 	sf::Sprite singleTile;
