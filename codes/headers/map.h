@@ -11,6 +11,7 @@
 #include "effect.h"
 #include "collectableitem.h"
 #include "wall.h"
+#include "spawner.h"
 
 class Map {
 public:
@@ -23,6 +24,7 @@ public:
 	void addWall(Game& game, int currentLevel);
 	void addPlayer(Game& game, int currentLevel);
 	void addEnemy(Game& game, int currentLevel);
+	void addSpawner(Game& game, int currentLevel);
 	void drawBackground(Game& game);
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<std::shared_ptr<Player>> playerList;
@@ -30,9 +32,11 @@ public:
 	std::vector<std::shared_ptr<Effect>> effectList;
 	std::vector<std::shared_ptr<CollectableItem>> collectableItemList;
 	std::vector<std::shared_ptr<Wall>> wallList;
+	std::vector<std::shared_ptr<Spawner>> spawnerList;
 	std::pair<int, int> playerPosInCell;
 	std::vector<std::vector<int>> blockData, blockEnemyMap, backgroundData;
 	sf::Sprite singleTile;
+	float spawnTimer;
 };
 
 #endif // ! MAP_H

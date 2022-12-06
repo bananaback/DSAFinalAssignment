@@ -8,6 +8,7 @@
 #include "../headers/astar.h"
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
+#include "../headers/dust.h"
 
 std::uniform_int_distribution<> distr(-60, 60); // define the range
 
@@ -18,6 +19,7 @@ Map::Map() {
 	blockEnemyMap = blockData;
 
 	singleTile.setOrigin(sf::Vector2f(8.f, 8.f));
+	spawnTimer = 0;
 }
 
 Map::~Map() {
@@ -97,10 +99,19 @@ void Map::addEnemy(Game& game, int currentLevel) {
 	//}
 }
 
+void Map::addSpawner(Game& game, int currentLevel) {
+	if (currentLevel == 1) {
+		spawnerList.push_back(std::make_shared<Spawner>(game, 48 * 5, 48 * 5, std::vector<std::pair<int, std::string>>{
+		std::make_pair(1, "slime"), std::make_pair(2.1, "slime"), std::make_pair(4, "slime"), std::make_pair(6, "slime")}));
+	}
+}
+
 void Map::build(Game& game, int currentLevel) {
+	spawnTimer = 0;
 	addWall(game, currentLevel);
 	addPlayer(game, currentLevel);
-	addEnemy(game, currentLevel);
+	//addEnemy(game, currentLevel);
+	addSpawner(game, currentLevel);
 }
 
 void Map::clear(Game& game) {
@@ -110,6 +121,7 @@ void Map::clear(Game& game) {
 	removeObjects(collectableItemList);
 	removeObjects(wallList);
 	removeObjects(playerList);
+	removeObjects(spawnerList);
 }
 
 void Map::updateAll(Game& game) {
@@ -128,6 +140,27 @@ void Map::updateAll(Game& game) {
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
 				//effectList.push_back(std::make_shared<ExplosionEffect1>(playerBullet->getX(), playerBullet->getY(), playerBullet->getWidth(), playerBullet->getHeight(), game));
+				if (playerBullet->getDurability() <= 0) {
+					playerBullet->addEffect(effectList, game);
+				}
+				break;
+			}
+		}
+	}
+
+	// bullet and spawner
+	for (size_t i = 0; i < playerBulletList.size(); i++) {
+		std::shared_ptr<PlayerBullet> playerBullet = playerBulletList[i];
+		for (size_t j = 0; j < spawnerList.size(); j++) {
+			std::shared_ptr<Spawner> spawner = spawnerList[j];
+			if (playerBullet->checkCollision(*spawner)) {
+				spawner->takeDamage(playerBullet->getDamage());
+				if (spawner->getHealthPoint() <= 0)
+				{
+					for (int k = 0; k < 5; k++) collectableItemList.push_back(std::make_shared<Coin>(spawner->getX() + spawner->getWidth() / 2 + distr(game.gen)*0.5 - 16, spawner->getY() + spawner->getHeight() / 2 + distr(game.gen) * 0.5 - 16, 32, 32, game));
+					effectList.push_back(std::make_shared<Dust>(spawner->getX()+spawner->getWidth()/2, spawner->getY()+spawner->getHeight()/2, 16, 16, game));
+				}
+				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
 				if (playerBullet->getDurability() <= 0) {
 					playerBullet->addEffect(effectList, game);
 				}
@@ -192,6 +225,15 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	// player and spawner collision resolve
+	for (size_t i = 0; i < playerList.size(); i++) {
+		std::shared_ptr<Player> player = playerList[i];
+		for (size_t j = 0; j < spawnerList.size(); j++) {
+			std::shared_ptr<Spawner> spawner = spawnerList[j];
+			player->resolveCollisionWithSpawner(*spawner, 2);
+		}
+	}
+
 	// enemy and wall collision resolve
 	for (size_t i = 0; i < enemyList.size(); i++) {
 		std::shared_ptr<Enemy> enemy = enemyList[i];
@@ -202,6 +244,20 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	spawnTimer += game._dt;
+	// check spawner
+	for (size_t i = 0; i < spawnerList.size(); i++) {
+		std::pair<bool, std::string> spawn = spawnerList[i]->checkSpawn(spawnTimer);
+		if (spawn.first) {
+			if (spawn.second == "slime") {
+				spawnerList[i]->setScale(2);
+				enemyList.push_back(std::make_shared<Enemy>(spawnerList[i]->getX(), spawnerList[i]->getY(), 30, 30, 80, 5, 100, game));
+			}
+		}
+		if (spawnerList[i]->getQueueLength() == 0) {
+			spawnerList[i]->generateSpawnQueue(game, spawnTimer);
+		}
+	}
 
 
 	// update
@@ -214,6 +270,7 @@ void Map::updateAll(Game& game) {
 	updateList(game, effectList);
 	updateList(game, collectableItemList);
 	updateList(game, wallList);
+	updateList(game, spawnerList);
 
 
 
@@ -224,6 +281,7 @@ void Map::updateAll(Game& game) {
 	removeDestroyedObjects(effectList);
 	removeDestroyedObjects(collectableItemList);
 	removeDestroyedObjects(wallList);
+	removeDestroyedObjects(spawnerList);
 
 	if (playerList.size() >= 1) {
 		// enemy pathfinding
@@ -276,6 +334,7 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < effectList.size(); i++) effectList[i]->draw(game);
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
+	for (size_t i = 0; i < spawnerList.size(); i++) spawnerList[i]->draw(game);
 	playerList[0]->drawPlayerCoin(game);
 
 	// for path finding debug
