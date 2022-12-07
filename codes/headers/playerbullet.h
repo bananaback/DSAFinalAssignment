@@ -18,6 +18,12 @@ public:
 	int getDurabilityReduceAmount();
 	int getDurability();
 	float getDamage();
+	void movingWithAngle(Game& game);
+	void checkRemove(Game& game, float t);
+	void updateAnimForSpinBullet(Game& game, float& displayAngle, float& spinDir);
+	void spinBulletInitialize(float& scaleY, float& spinDir);
+	static int getFrameWidth() { return 0; };
+	static int getFrameHeight() { return 0; };
 protected:
 	float _angle, _speed, _damageDeal, _timer, _durability, _durabilityReduceAmount;
 	std::shared_ptr<Animation> _animation;

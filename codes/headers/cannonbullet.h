@@ -11,6 +11,8 @@ public:
 	void update(Game& game) override;
 	void draw(Game& game) override;
 	void addEffect(std::vector<std::shared_ptr<Effect>>& effect, Game& game);
+	static int getFrameWidth() { return 17; };
+	static int getFrameHeight() { return 17; };
 private:
 
 };

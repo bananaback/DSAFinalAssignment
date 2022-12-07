@@ -19,7 +19,7 @@ public:
 	std::vector<std::pair<int, int>> _path;
 	void setX(float x), setY(float y);
 private:
-	float _speed, _attackDamage, _healthPoint, _angle, _assetWidth, _assetHeight, _scaleX, _scaleY;
+	float _speed, _attackDamage, _healthPoint, _angle, _assetWidth, _assetHeight, _scaleX, _scaleY, _healthbarOpacity;
 	std::vector<std::shared_ptr<Animation>> _animations;
 	int _currentAnimation = 0;
 };

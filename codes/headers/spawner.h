@@ -21,7 +21,7 @@ public:
 	void setScale(float s);
 private:
 	sf::Sprite _sprite;
-	float _healthPoint, _spawnScale, _spawnMinScale;
+	float _healthPoint, _spawnScale, _spawnMinScale, _healthBarOpacity;
 	std::vector<std::pair<int, std::string>> _spawnScript;
 };
 

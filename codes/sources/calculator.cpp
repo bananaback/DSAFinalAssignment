@@ -16,3 +16,11 @@ bool checkCollisionBetweenTwoRect(float l, float t, float w, float h, float l2, 
 	if (t > t2 + h2 || t2 > t + h) return false;
 	return true;
 }
+
+float deg2rad(float deg) {
+	return deg * (PI / 180);
+}
+
+float rad2deg(float rad) {
+	return rad * (180 / PI);
+}
