@@ -10,7 +10,7 @@
 #include "../headers/utility.h"
 #include "../headers/dust.h"
 
-std::uniform_int_distribution<> distr(-60, 60); // define the range
+std::uniform_int_distribution<> distr(-40, 40); // define the range
 
 Map::Map() {
 	std::cout << "I'm map\n";
@@ -20,6 +20,8 @@ Map::Map() {
 
 	singleTile.setOrigin(sf::Vector2f(8.f, 8.f));
 	spawnTimer = 0;
+	levelFinish = false;
+	levelFinishTimer = 0;
 }
 
 Map::~Map() {
@@ -80,14 +82,18 @@ void Map::addWall(Game& game, int currentLevel) {
 	}
 }
 
+std::uniform_int_distribution<> posDistX(0, 31); // define the range
+std::uniform_int_distribution<> posDistY(0, 17);
+
 void Map::addPlayer(Game& game, int currentLevel) {
-	float pX, pY;
-	//if (currentLevel == 1) {
-		pX = 300;
-		pY = 500;
-	//}
+	int currY = posDistY(game.gen);
+	int currX = posDistX(game.gen);
+	while (blockData[currY][currX] != 0) {
+		currY = posDistY(game.gen);
+		currX = posDistX(game.gen);
+	}
 	// add player
-	playerList.push_back(std::make_shared<Player>(pX, pY, 40, 40, 100, 100, game));
+	playerList.push_back(std::make_shared<Player>(currX * 48, currY * 48, 40, 40, 100, 100, game));
 }
 
 void Map::addEnemy(Game& game, int currentLevel) {
@@ -99,14 +105,34 @@ void Map::addEnemy(Game& game, int currentLevel) {
 	//}
 }
 
+
 void Map::addSpawner(Game& game, int currentLevel) {
-	if (currentLevel == 1) {
+	/*if (currentLevel == 1) {
 		spawnerList.push_back(std::make_shared<Spawner>(game, 48 * 5, 48 * 5, std::vector<std::pair<int, std::string>>{
 		std::make_pair(1, "slime"), std::make_pair(2.1, "slime"), std::make_pair(4, "slime"), std::make_pair(6, "slime")}));
+	}*/
+	std::vector<std::pair<int, int>> tried;
+	for (int i = 0; i < 3; i++) {
+		int currX = posDistX(game.gen);
+		int currY = posDistY(game.gen);
+		bool found = false;
+		for (size_t j = 0; j < tried.size(); j++) {
+			if (tried[j].first == currY && tried[j].second == currX) {
+				found = true;
+			}
+		}
+		while (blockData[currY][currX] != 0 && found == false) {
+			currX = posDistX(game.gen);
+			currY = posDistY(game.gen);
+		}
+		tried.push_back(std::make_pair(currY, currX));
+		spawnerList.push_back(std::make_shared<Spawner>(game, 48 * currX, 48 * currY, std::vector<std::pair<int, std::string>>()));
 	}
 }
 
 void Map::build(Game& game, int currentLevel) {
+	levelFinish = false;
+	levelFinishTimer = 0;
 	spawnTimer = 0;
 	addWall(game, currentLevel);
 	addPlayer(game, currentLevel);
@@ -133,8 +159,9 @@ void Map::updateAll(Game& game) {
 			std::shared_ptr<Enemy> enemy = enemyList[j];
 			if (playerBullet->checkCollision(*enemy)) {
 				enemy->takeDamage(playerBullet->getDamage());
-				if (enemy->getHealth() <= 0)
+				if (enemy->getHealth() <= 0 && enemy->isDestroyed()==false)
 				{
+					enemy->destroy();
 					for (int k = 0; k < 5; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX() + enemy->getWidth() / 2 + distr(game.gen) - 16, enemy->getY() + enemy->getHeight() / 2 + distr(game.gen) - 16, 32, 32, game));
 				}
 				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
@@ -250,7 +277,7 @@ void Map::updateAll(Game& game) {
 		std::pair<bool, std::string> spawn = spawnerList[i]->checkSpawn(spawnTimer);
 		if (spawn.first) {
 			if (spawn.second == "slime") {
-				spawnerList[i]->setScale(2);
+				spawnerList[i]->setScale(1.5);
 				enemyList.push_back(std::make_shared<Enemy>(spawnerList[i]->getX(), spawnerList[i]->getY(), 30, 30, 80, 5, 100, game));
 			}
 		}
@@ -311,6 +338,14 @@ void Map::updateAll(Game& game) {
 		// store player position
 		playerPosInCell.first = (int)std::floor(pCenterY / 48);
 		playerPosInCell.second = (int)std::floor(pCenterX / 48);
+	}
+
+	//check level finish
+	if (spawnerList.size() == 0 && enemyList.size() == 0) {
+		levelFinishTimer += game._dt;
+		if (levelFinishTimer >= 5) {
+			levelFinish = true;
+		}
 	}
 }
 

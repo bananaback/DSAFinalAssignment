@@ -236,6 +236,9 @@ void GamePlay::update(Game& game) {
 		}
 		
 		_map.updateAll(game);
+		if (_map.levelFinish) {
+			fadeOutInit(game);
+		}
 	} else if (_state == "fadeout") {
 		_timer += game._dt;
 		if (_addLevelComplete == false && _timer >= 1) {

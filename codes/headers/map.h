@@ -36,7 +36,8 @@ public:
 	std::pair<int, int> playerPosInCell;
 	std::vector<std::vector<int>> blockData, blockEnemyMap, backgroundData;
 	sf::Sprite singleTile;
-	float spawnTimer;
+	float spawnTimer, levelFinishTimer = 0;
+	bool levelFinish;
 };
 
 #endif // ! MAP_H
