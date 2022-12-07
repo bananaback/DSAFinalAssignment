@@ -10,8 +10,10 @@ class CollectableItem : public GameObject {
 public:
 	CollectableItem(float x, float y, float width, float height, Game& game);
 	~CollectableItem();
-	void update(Game& game);
-	void draw(Game& game);
+	virtual void update(Game& game, float playerCenterX, float playerCenterY) = 0;
+	virtual void draw(Game& game) = 0;
+	void updateAnim(Game& game);
+	void drawAnim(Game& game);
 	void addEffect(std::vector<std::shared_ptr<Effect>>& effectList, Game& game);
 	virtual void activate(Player& player) = 0;
 protected:

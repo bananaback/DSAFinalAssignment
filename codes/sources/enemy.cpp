@@ -25,6 +25,8 @@ Enemy::Enemy(float x, float y, float width, float height, float speed, float att
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SLIME_SIDE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "side"));//2
 	//_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "explode"));//3
 	_currentAnimation = 0;
+
+	_healthbarOpacity = 255;
 }
 
 Enemy::~Enemy() {
@@ -84,6 +86,7 @@ void Enemy::update(Game& game, float pX, float pY) {
 		}
 	}
 	_animations[_currentAnimation]->update(game._dt);
+	if (_healthbarOpacity > 0) _healthbarOpacity -= game._dt * 200; else _healthbarOpacity = 0;
 }
 
 void Enemy::draw(Game& game) {
@@ -103,8 +106,8 @@ void Enemy::draw(Game& game) {
 	sf::RectangleShape healthBar;
 	healthBar.setSize(sf::Vector2f(70.0 * (_healthPoint / 100.0), 5));
 	healthBar.setOutlineColor(sf::Color::Green);
-	healthBar.setFillColor(sf::Color::Green);
-	healthBar.setPosition(_x - 10, _y - 15);
+	healthBar.setFillColor(sf::Color(0, 255, 0, _healthbarOpacity));
+	healthBar.setPosition(_x - 20, _y - 15);
 	game._window.draw(healthBar);
 	//draw path
 	/*for (size_t i = 0; i < _path.size(); i++) {
@@ -127,4 +130,5 @@ void Enemy::setHealth(float h) {
 
 void Enemy::takeDamage(float d) {
 	_healthPoint -= d;
+	_healthbarOpacity = 255;
 }

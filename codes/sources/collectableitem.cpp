@@ -9,10 +9,11 @@ CollectableItem::CollectableItem(float x, float y, float width, float height, Ga
 CollectableItem::~CollectableItem() {
 
 }
-void CollectableItem::update(Game& game) {
+
+void CollectableItem::updateAnim(Game& game) {
 	_animation->update(game._dt);
 }
-void CollectableItem::draw(Game& game) {
+void CollectableItem::drawAnim(Game& game) {
 	_animation->draw(game,_x + _width/2,_y+_height/2,0,_scaleX, _scaleY,8,8);
 }
 

@@ -9,11 +9,13 @@ Spawner::Spawner(Game& game, float x, float y, std::vector<std::pair<int, std::s
 	_sprite.setColor(sf::Color(255, 255, 255, 255));
 	_sprite.setOrigin(24, 24);
 
-	_healthPoint = 100;
+	_healthPoint = 1000;
 	_spawnScript = spawnScript;
 
 	_spawnScale = 1;
 	_spawnMinScale = 1;
+
+	_healthBarOpacity = 255;
 }
 
 Spawner::~Spawner() {
@@ -68,6 +70,7 @@ void Spawner::setHealthPoint(float f) {
 
 void Spawner::takeDamage(float d) {
 	_healthPoint -= d;
+	_healthBarOpacity = 255;
 }
 
 void Spawner::update(Game& game) {
@@ -77,12 +80,17 @@ void Spawner::update(Game& game) {
 	} else {
 		_spawnScale = _spawnMinScale;
 	}
+	if (_healthBarOpacity > 0) {
+		_healthBarOpacity -= game._dt * 255;
+	} else {
+		_healthBarOpacity = 0;
+	}
 }
 
 void Spawner::drawHealthBar(Game& game) {
 	sf::RectangleShape rect;
-	rect.setSize(sf::Vector2f(_healthPoint, 8));
-	rect.setFillColor(sf::Color::Red);
+	rect.setSize(sf::Vector2f(_healthPoint/10, 8));
+	rect.setFillColor(sf::Color(255, 0, 0, _healthBarOpacity));
 	rect.setPosition(_x - 26, _y - 20);
 	game._window.draw(rect);
 }

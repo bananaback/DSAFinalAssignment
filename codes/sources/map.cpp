@@ -295,7 +295,8 @@ void Map::updateAll(Game& game) {
 	}
 	updateList(game, playerBulletList);
 	updateList(game, effectList);
-	updateList(game, collectableItemList);
+	updateList(game, collectableItemList, playerList[0]->getX() + playerList[0]->getWidth() / 2,
+		playerList[0]->getY() + playerList[0]->getHeight() / 2);
 	updateList(game, wallList);
 	updateList(game, spawnerList);
 

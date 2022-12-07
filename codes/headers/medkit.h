@@ -10,7 +10,7 @@ public:
 	Medkit(float x, float y, float width, float height, Game& game);
 	~Medkit();
 	void update(Game& game);
-	void draw(Game& game);
+	void draw(Game& game) override;
 	void activate(Player& player) override;
 private:
 	double _regenValue;

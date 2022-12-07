@@ -11,11 +11,11 @@ Medkit::~Medkit() {
 }
 
 void Medkit::update(Game& game) {
-	CollectableItem::update(game);
+	CollectableItem::updateAnim(game);
 }
 
 void Medkit::draw(Game& game) {
-	CollectableItem::draw(game);
+	CollectableItem::drawAnim(game);
 }
 
 void Medkit::activate(Player& player) {
