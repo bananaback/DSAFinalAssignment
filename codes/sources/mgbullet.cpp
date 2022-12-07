@@ -18,7 +18,7 @@ void MgBullet::update(Game& game) {
 	_x = _x + std::cos(_angle) * _speed * game._dt;
 	_y = _y + std::sin(_angle) * _speed * game._dt;
 	_timer += game._dt;
-	if (_timer >= 1) {
+	if (_timer >= 2) {
 		_isDestroyed = true;
 		_timer = 0;
 	}
