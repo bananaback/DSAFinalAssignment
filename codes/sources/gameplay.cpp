@@ -23,7 +23,6 @@ void GamePlay::loadSavedData(Game& game) {
 	if (myReadFile.is_open()) {
 		myReadFile >> currTxt;
 	} else {
-		std::cout << "Can't open currentlevel.txt";
 	}
 	_currentLevel = std::stoi(currTxt);
 	myReadFile.close();
@@ -34,7 +33,6 @@ void GamePlay::saveGameData(Game& game) {
 	if (myWriteFile.is_open()) {
 		myWriteFile << std::to_string(_currentLevel);
 	} else {
-		std::cout << "Can't open currentlevel.txt to write";
 	}
 	myWriteFile.close();
 
@@ -43,7 +41,6 @@ void GamePlay::saveGameData(Game& game) {
 		myScore << _map.playerList[0]->getScore();
 	} else
 	{
-		std::cout << "Can't open score.txt to write";
 	}
 	myScore.close();
 }
@@ -295,7 +292,6 @@ void GamePlay::update(Game& game) {
 				myWriteFile << std::to_string(_currentLevel);
 			}
 			else {
-				std::cout << "Can't open currentlevel.txt to write";
 			}
 			myWriteFile.close();
 			game.changeState("gameover", 1, 0);

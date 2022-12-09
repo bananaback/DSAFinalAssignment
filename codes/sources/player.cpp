@@ -6,7 +6,6 @@
 Player::Player(float x, float y, float width, float height, float speed, float healthPoint, Game& game) : Character(x, y, width, height) {
 	_speed = speed;
 	_healthPoint = healthPoint;
-	std::cout << "I'm player\n";
 
 	float frameDuration = 0.1f;
 	_assetWidth = 20;
@@ -29,7 +28,6 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 		myScore >> currScore;
 		_coin = std::stoi(currScore);
 	} else {
-		std::cout << "Can't not read score.txt";
 	}
 	myScore.close();
 	_realCoin = _coin;

@@ -8,7 +8,6 @@ Bullet::Bullet(float x, float y, float width, float height, float speed, float d
 	_angle = angle;
 	_timer = 0;
 	_lifeTime = 1;
-	std::cout << "Im bullet\n";
 
 	_assetWidth = 17;
 	_assetHeight = 17;
@@ -16,7 +15,6 @@ Bullet::Bullet(float x, float y, float width, float height, float speed, float d
 }
 
 Bullet::~Bullet() {
-	std::cout << "Bullet removed\n";
 }
 
 void Bullet::update(Game& game) {

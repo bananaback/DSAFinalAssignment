@@ -4,7 +4,6 @@
 void readMap(std::string filePath, std::vector<std::vector<int>>& matrix) {
 	std::string myText;
 	std::ifstream myReadFile(filePath);
-	if (!myReadFile.is_open()) std::cout << "Failed\n";
 	while (std::getline(myReadFile, myText)) {
 		// Output the text from the file
 		std::vector<int> temp;

@@ -31,7 +31,6 @@ Game::~Game() {
 void Game::run() {
 	while (_running) {
 		_dt = _clock.restart().asSeconds();
-		//std::cout << _dt << "\n";
 		//do the game 
 		update();
 		handleEvents();
