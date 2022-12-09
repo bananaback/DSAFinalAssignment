@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "../headers/gameplay.h"
 #include "../headers/calculator.h"
 #include "../headers/astar.h"
@@ -13,18 +14,52 @@
 #include "../headers/catbullet.h"
 
 GamePlay::GamePlay(Game& game) {
+	_name = "gameplay";
+}
 
+void GamePlay::loadSavedData(Game& game) {
+	std::ifstream myReadFile("./data/currentlevel.txt");
+	std::string currTxt = "";
+	if (myReadFile.is_open()) {
+		myReadFile >> currTxt;
+	} else {
+		std::cout << "Can't open currentlevel.txt";
+	}
+	_currentLevel = std::stoi(currTxt);
+	myReadFile.close();
+}
+
+void GamePlay::saveGameData(Game& game) {
+	std::ofstream myWriteFile("./data/currentlevel.txt");
+	if (myWriteFile.is_open()) {
+		myWriteFile << std::to_string(_currentLevel);
+	} else {
+		std::cout << "Can't open currentlevel.txt to write";
+	}
+	myWriteFile.close();
+
+	std::ofstream myScore("./data/score.txt");
+	if (myScore.is_open()) {
+		myScore << _map.playerList[0]->getScore();
+	} else
+	{
+		std::cout << "Can't open score.txt to write";
+	}
+	myScore.close();
+}
+
+void GamePlay::build(Game& game) {
 	_text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 	_text.setPosition(280, 350);
 	_text.setString("Game play");
 	_text.setCharacterSize(24);
 	_text.setFillColor(sf::Color::White);
 	_text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	_name = "gameplay";
+	
 
 	_background.setSize(sf::Vector2f(16.0 * 96, 9.0 * 96));
 	_background.setFillColor(sf::Color(9, 184, 0));
-	
+
 	// init player health bar
 	_playerHpBar.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR_FILL]);
 	_playerHPBarBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR]);
@@ -34,15 +69,17 @@ GamePlay::GamePlay(Game& game) {
 	_playerHpBar.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHpBar.setPosition(40, 35);
 
-
-	_currentLevel = 1; // load from .txt soon
+	loadSavedData(game);
+	//_currentLevel = 1; // load from .txt soon
 	_endLevel = 10;
 
 	//_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
-	
+
 	_map.build(game, _currentLevel);
 	fadeInInit(game);
 }
+
+
 
 template <typename T>
 void removeObjects(std::vector<std::shared_ptr<T>>& t_list) {
@@ -52,6 +89,16 @@ void removeObjects(std::vector<std::shared_ptr<T>>& t_list) {
 		*it = nullptr;
 		it = t_list.erase(it);
 	}
+}
+
+void GamePlay::clear(Game& game) {
+	removeObjects(_map.enemyList);
+	removeObjects(_map.playerList);
+	removeObjects(_map.playerBulletList);
+	removeObjects(_map.effectList);
+	removeObjects(_map.collectableItemList);
+	removeObjects(_map.wallList);
+	removeObjects(_map.spawnerList);
 }
 
 void GamePlay::fadeInInit(Game& game) {
@@ -157,10 +204,12 @@ void GamePlay::handleEvents(Game& game) {
 				fadeOutInit(game);
 			}
 			if (pEvent.key.code == sf::Keyboard::C) {
+				saveGameData(game);
 				_map.clear(game);
 				if (_currentLevel != _endLevel)
 				{
 					_currentLevel++;
+					
 					_map.build(game, _currentLevel);
 					fadeInInit(game);
 				} else {
@@ -238,6 +287,18 @@ void GamePlay::update(Game& game) {
 		_map.updateAll(game);
 		if (_map.levelFinish) {
 			fadeOutInit(game);
+		}
+
+		if (_map.playerList[0]->getHealth() <= 0) {
+			std::ofstream myWriteFile("./data/currentlevel.txt");
+			if (myWriteFile.is_open()) {
+				myWriteFile << std::to_string(_currentLevel);
+			}
+			else {
+				std::cout << "Can't open currentlevel.txt to write";
+			}
+			myWriteFile.close();
+			game.changeState("gameover", 1, 0);
 		}
 	} else if (_state == "fadeout") {
 		_timer += game._dt;

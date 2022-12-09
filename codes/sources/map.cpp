@@ -278,7 +278,7 @@ void Map::updateAll(Game& game) {
 		if (spawn.first) {
 			if (spawn.second == "slime") {
 				spawnerList[i]->setScale(1.5);
-				enemyList.push_back(std::make_shared<Enemy>(spawnerList[i]->getX(), spawnerList[i]->getY(), 30, 30, 80, 5, 100, game));
+				enemyList.push_back(std::make_shared<Enemy>(spawnerList[i]->getX() + 9, spawnerList[i]->getY() + 9, 30, 30, 80, 5, 100, game));
 			}
 		}
 		if (spawnerList[i]->getQueueLength() == 0) {
@@ -286,6 +286,7 @@ void Map::updateAll(Game& game) {
 		}
 	}
 
+	
 
 	// update
 	updateList(game, playerList);
@@ -295,8 +296,10 @@ void Map::updateAll(Game& game) {
 	}
 	updateList(game, playerBulletList);
 	updateList(game, effectList);
-	updateList(game, collectableItemList, playerList[0]->getX() + playerList[0]->getWidth() / 2,
-		playerList[0]->getY() + playerList[0]->getHeight() / 2);
+	if (playerList.size() >= 1) {
+		updateList(game, collectableItemList, playerList[0]->getX() + playerList[0]->getWidth() / 2,
+			playerList[0]->getY() + playerList[0]->getHeight() / 2);
+	}
 	updateList(game, wallList);
 	updateList(game, spawnerList);
 
@@ -310,6 +313,10 @@ void Map::updateAll(Game& game) {
 	removeDestroyedObjects(collectableItemList);
 	removeDestroyedObjects(wallList);
 	removeDestroyedObjects(spawnerList);
+
+
+	for (size_t i = 0; i < playerList.size(); i++) playerList[i]->limitObjectToScreen();
+	for (size_t i = 0; i < enemyList.size(); i++) enemyList[i]->limitObjectToScreen();
 
 	if (playerList.size() >= 1) {
 		// enemy pathfinding
@@ -371,7 +378,7 @@ void Map::drawAll(Game& game) {
 	for (size_t i = 0; i < collectableItemList.size(); i++) collectableItemList[i]->draw(game);
 	for (size_t i = 0; i < wallList.size(); i++) wallList[i]->draw(game);
 	for (size_t i = 0; i < spawnerList.size(); i++) spawnerList[i]->draw(game);
-	playerList[0]->drawPlayerCoin(game);
+	if (playerList.size() >= 1) playerList[0]->drawPlayerCoin(game);
 
 	// for path finding debug
 	/*sf::RectangleShape rectangle;

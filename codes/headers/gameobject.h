@@ -10,6 +10,7 @@ public:
 	void destroy();
 	float getX(), getY(), getWidth(), getHeight();
 	bool checkCollision(GameObject& other);
+	void limitObjectToScreen();
 protected:
 	float _x, _y, _width, _height;
 	bool _isDestroyed;

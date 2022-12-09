@@ -24,6 +24,7 @@ private:
 	sf::Sprite _savingBackground;
 	sf::Text _savingText, _tutorText, _scoreText;
 	TextBox _userName;
+	int _score;
 };
 
 #endif // ! SAVING_H

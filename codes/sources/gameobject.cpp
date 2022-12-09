@@ -52,3 +52,10 @@ bool GameObject::checkCollision(GameObject& other) {
 	if (t1 > b2 || t2 > b1) return false;
 	return true;
 }
+
+void GameObject::limitObjectToScreen() {
+	if (_x <= 0) _x = 1;
+	if (_y <= 0) _y = 1;
+	if (_x >= 48 * 2 * 16) _x = 48 * 2 * 16 - 1;
+	if (_y >= 48 * 2 * 9) _y = 48 * 2 * 9 - 1; 
+}

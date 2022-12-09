@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "../headers/player.h"
 #include "../headers/gameobject.h"
 
@@ -21,7 +22,16 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_SGUN], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "sgun"));
 	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
 	_currentAnimation = 0;
-	_coin = 0;
+	
+	std::ifstream myScore("./data/score.txt");
+	std::string currScore = "0";
+	if (myScore.is_open()) {
+		myScore >> currScore;
+		_coin = std::stoi(currScore);
+	} else {
+		std::cout << "Can't not read score.txt";
+	}
+	myScore.close();
 	_realCoin = _coin;
 	_hurting = 0;
 	_hurtTimer = 0;
@@ -43,6 +53,10 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 
 	_char.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::IMG_FONT]);
 	_char.setOrigin(10, 10);
+}
+
+int Player::getScore() {
+	return _coin;
 }
 
 void Player::drawText(Game& game, float x, float y, std::string s, float scale) {
@@ -205,6 +219,8 @@ void Player::update(Game& game) {
 			_scoreScale = 2.5;
 		}
 	}
+
+	//if (_healthPoint <= 0) game.changeState("gameover", 1, 0);
 }
 
 void Player::draw(Game& game) {

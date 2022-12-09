@@ -15,11 +15,13 @@ Game::Game() {
 	_running = true;
 	// create a new game window
 	_window.create(sf::VideoMode(48 * 2 * 16, 48 * 2 * 9), "Infinity topdown shooter game!");
+	_window.setMouseCursorVisible(false);
 	//_window.setFramerateLimit(60);
 	//_window.setVerticalSyncEnabled(true);
 	// initialize dt
 	_dt = 0;
 	gen.seed(rd()); // seed the generator
+
 }
 // Destructor
 Game::~Game() {
@@ -64,6 +66,8 @@ void Game::init() {
 	addState(saving);
 	addState(highscore);
 	_currentState = mainMenu;
+	_cursorImg.setTexture(*ra_ptr->_imageResources[ra_ptr->IMAGE::CURSOR_1]);
+	_cursorImg.setScale(2.f, 2.f);
 }
 // Update game logic
 void Game::update() {
@@ -77,10 +81,22 @@ void Game::setRunning(bool r) {
 void Game::handleEvents() {
 	_currentState->handleEvents(*this);
 }
+
+void Game::setCursorProperties() {
+	_cursorImg.setOrigin(1.f * _cursorImg.getTexture()->getSize().x / 2, 1.f * _cursorImg.getTexture()->getSize().y / 2);
+	_cursorImg.setTextureRect(sf::IntRect(0, 0, _cursorImg.getTexture()->getSize().x, _cursorImg.getTexture()->getSize().y));
+}
+
 // Game render
 void Game::render() {
 	_window.clear();
 	_currentState->render(*this);
+
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
+	_cursorImg.setPosition(pixelPos.x, pixelPos.y);
+	setCursorProperties();
+	_window.draw(_cursorImg);
+
 	_window.display();
 }
 // Function to check if game is end
