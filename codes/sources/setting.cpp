@@ -44,7 +44,29 @@ void Setting::handleEvents(Game& game) {
 		}
 	}
 	if (pEvent.type == sf::Event::MouseButtonReleased) {
-		if (pEvent.mouseButton.button == sf::Mouse::Left) if (_backMainMenu->checkHover(game))game.changeState("mainmenu", 0, 0);
+		if (pEvent.mouseButton.button == sf::Mouse::Left) {
+			if (_backMainMenu->checkHover(game))game.changeState("mainmenu", 0, 0);
+			for (size_t i = 0; i < _btns.size(); i++) {
+				if (_btns[i]->checkHover(game)) {
+					if (_btns[i]->getName() == "cursor_1") {
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_1]);
+						game.setCursorProperties();
+					} else if (_btns[i]->getName() == "cursor_2") {
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_2]);
+						game.setCursorProperties();
+					} else if (_btns[i]->getName() == "cursor_3") {
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_3]);
+						game.setCursorProperties();
+					} else if (_btns[i]->getName() == "cursor_4") {
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_4]);
+						game.setCursorProperties();
+					} else if (_btns[i]->getName() == "cursor_5") {
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_5]);
+						game.setCursorProperties();
+					}
+				}
+			}
+		}
 	}
 }
 

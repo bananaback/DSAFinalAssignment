@@ -32,13 +32,22 @@ Saving::Saving(Game& game) {
 	_tutorText.setPosition(350, 500);
 	_tutorText.setString("CLICK ON THE TEXTBOX\n(A..Z, 0..9)\nNAME LENGTH <= 20\nPRESS ENTER TO SUBMIT");
 
+	std::ifstream myScore("./data/score.txt");
+	std::string currScore = "0";
+	if (myScore.is_open()) {
+		myScore >> currScore;
+		_score = std::stoi(currScore);
+	}
+	else {
+		std::cout << "Can't not read score.txt";
+	}
+	myScore.close();
 
-	int score = 500;
 	_scoreText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
 	_scoreText.setCharacterSize(100);
 	_scoreText.setFillColor(sf::Color::Green);
 	_scoreText.setPosition(450, 350);
-	_scoreText.setString("YOUR SCORE: " + std::to_string(score));
+	_scoreText.setString("YOUR SCORE: " + std::to_string(_score));
 
 	_name = "saving";
 }
@@ -202,7 +211,7 @@ void Saving::handleEvents(Game& game) {
 				MyReadFile.close();
 				for (auto x : _userName._currentContext) x = std::toupper(x);
 				if (_userName._currentContext.size() == 0) _userName._currentContext = "NONAME";
-				playerList.push_back(std::make_pair(_userName._currentContext, 500));
+				playerList.push_back(std::make_pair(_userName._currentContext, _score));
 				std::sort(playerList.begin(), playerList.end(), comp);
 				int length = playerList.size();
 				if (length > 10) length = 10;
@@ -211,6 +220,26 @@ void Saving::handleEvents(Game& game) {
 					myOutFile << playerList[i].first << ";" << playerList[i].second << "\n";
 				}
 				myOutFile.close();
+
+				std::ofstream myWriteFile("./data/currentlevel.txt");
+				if (myWriteFile.is_open()) {
+					myWriteFile << 1;
+				}
+				else {
+					std::cout << "Can't open currentlevel.txt to write";
+				}
+				myWriteFile.close();
+
+				std::ofstream myScore("./data/score.txt");
+				if (myScore.is_open()) {
+					myScore << 0;
+				}
+				else
+				{
+					std::cout << "Can't open score.txt to write";
+				}
+				myScore.close();
+
 				game.changeState("highscore", 0, 1);
 			}
 			

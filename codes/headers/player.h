@@ -28,6 +28,7 @@ public:
 	float getSpeed();
 	void setWeapon(int c);
 	int getCurrentWeapon();
+	int getScore();
 	void drawText(Game& game, float x, float y, std::string s, float scale), drawPlayerCoin(Game& game);;
 	static const int CANNON = 0;
 	static const int FLAMETHROWER = 1;

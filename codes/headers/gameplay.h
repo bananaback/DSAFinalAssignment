@@ -24,7 +24,10 @@ public:
 	void addPlayerBullet(Game& game);
 	void drawPlayerHealthBar(Game& game);
 	void fadeInInit(Game& game), fadeOutInit(Game& game);
-
+	void build(Game& game) override;
+	void clear(Game& game) override;
+	void loadSavedData(Game& game);
+	void saveGameData(Game& game);
 	std::string _state;
 private:
 	sf::Text _text;

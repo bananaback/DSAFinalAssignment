@@ -47,7 +47,7 @@ void MainMenu::handleEvents(Game& game) {
 		if (pEvent.mouseButton.button == sf::Mouse::Left) {
 			for (size_t i = 0; i < _btns.size(); i++) {
 				if (_btns[i]->checkHover(game)) {
-					if (_btns[i]->getName() == "play") game.changeState("gameplay", 0, 0);
+					if (_btns[i]->getName() == "play") game.changeState("gameplay", 0, 1);
 					if (_btns[i]->getName() == "quit") game.setRunning(false);
 					if (_btns[i]->getName() == "credit") game.changeState("credit", 0, 0);
 					if (_btns[i]->getName() == "setting") game.changeState("setting", 0, 0);
