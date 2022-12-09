@@ -9,6 +9,7 @@
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
 #include "../headers/dust.h"
+#include "../headers/medkit.h"
 
 std::uniform_int_distribution<> distr(-40, 40); // define the range
 
@@ -186,6 +187,7 @@ void Map::updateAll(Game& game) {
 				{
 					for (int k = 0; k < 5; k++) collectableItemList.push_back(std::make_shared<Coin>(spawner->getX() + spawner->getWidth() / 2 + distr(game.gen)*0.5 - 16, spawner->getY() + spawner->getHeight() / 2 + distr(game.gen) * 0.5 - 16, 32, 32, game));
 					effectList.push_back(std::make_shared<Dust>(spawner->getX()+spawner->getWidth()/2, spawner->getY()+spawner->getHeight()/2, 16, 16, game));
+					collectableItemList.push_back(std::make_shared<Medkit>(spawner->getX() + spawner->getWidth() / 2 + distr(game.gen) * 0.5 - 16, spawner->getY() + spawner->getHeight() / 2 + distr(game.gen) * 0.5 - 16, 32, 32, game));
 				}
 				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
 				if (playerBullet->getDurability() <= 0) {
