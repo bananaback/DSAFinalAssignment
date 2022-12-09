@@ -1,8 +1,8 @@
 #pragma once
-#ifndef CATBULLET_H
-#define CATBULLET_H
+#ifndef CAT_BULLET_H
+#define CAT_BULLET_H
 
-#include "playerbullet.h"
+#include "player_bullet.h"
 
 class CatBullet : public PlayerBullet {
 public:
@@ -17,4 +17,4 @@ private:
 	float _displayAngle, _scaleY, _spinDir;
 };
 
-#endif // !CATBULLET_H
+#endif // !CAT_BULLET_H

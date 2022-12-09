@@ -1,4 +1,4 @@
-#include "../headers/mgbullet.h"
+#include "../headers/mg_bullet.h"
 #include "../headers/explosioneffect2.h"
 #include "../headers/calculator.h"
 

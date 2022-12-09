@@ -1,4 +1,4 @@
-#include "../headers/cannonbullet.h"
+#include "../headers/cannon_bullet.h"
 
 CannonBullet::CannonBullet(Game& game, float x, float y, float width, float height, float angle) : PlayerBullet(game, x, y, width, height, angle) {
 	_speed = 300;

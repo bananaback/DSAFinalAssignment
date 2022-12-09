@@ -6,12 +6,12 @@
 #include "../headers/astarboi.h"
 #include "../headers/utility.h"
 #include "../headers/medkit.h"
-#include "../headers/cannonbullet.h"
-#include "../headers/flamethrowerbullet.h"
-#include "../headers/mgbullet.h"
-#include "../headers/onionbullet.h"
-#include "../headers/tomatobullet.h"
-#include "../headers/catbullet.h"
+#include "../headers/cannon_bullet.h"
+#include "../headers/flamethrower_bullet.h"
+#include "../headers/mg_bullet.h"
+#include "../headers/onion_bullet.h"
+#include "../headers/tomato_bullet.h"
+#include "../headers/cat_bullet.h"
 
 GamePlay::GamePlay(Game& game) {
 	_name = "gameplay";

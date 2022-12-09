@@ -1,4 +1,4 @@
-#include "../headers/playerbullet.h"
+#include "../headers/player_bullet.h"
 
 PlayerBullet::PlayerBullet(Game& game, float x, float y, float width, float height, float angle) : GameObject(x, y, width, height) {
 	_timer = 0;

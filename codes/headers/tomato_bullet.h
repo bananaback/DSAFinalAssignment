@@ -1,8 +1,8 @@
 #pragma once
-#ifndef TOMATOBULLET_H
-#define TOMATOBULLET_H
+#ifndef TOMATO_BULLET_H
+#define TOMATO_BULLET_H
 
-#include "playerbullet.h"
+#include "player_bullet.h"
 
 class TomatoBullet : public PlayerBullet {
 public:
@@ -17,4 +17,4 @@ private:
 	float _displayAngle, _scaleY, _spinDir;
 };
 
-#endif // !TOMATOBULLET_H
+#endif // !TOMATO_BULLET_H

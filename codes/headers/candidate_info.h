@@ -1,13 +1,13 @@
 #pragma once
-#ifndef  CANDIDATEINFOR_H
-#define CANDIDATEINFOR_H
+#ifndef CANDIDATE_INFO_H
+#define CANDIDATE_INFO_H
 
 #include "game.h"
 
-class CandidateInfor {
+class CandidateInfo {
 public:
-	CandidateInfor(Game& game, float x, float y, std::string name, int score);
-	~CandidateInfor();
+	CandidateInfo(Game& game, float x, float y, std::string name, int score);
+	~CandidateInfo();
 	void update(Game& game);
 	void draw(Game& game);
 	std::string getName();
@@ -21,4 +21,4 @@ private:
 	sf::Text _text;
 };
 
-#endif // ! CANDIDATEINFOR_H
+#endif // ! CANDIDATE_INFO_H

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef  PLAYERBULLET_H
-#define PLAYERBULLET_H
+#ifndef PLAYER_BULLET_H
+#define PLAYER_BULLET_H
 
 #include "gameobject.h"
 #include "game.h"
@@ -29,4 +29,4 @@ protected:
 	std::shared_ptr<Animation> _animation;
 };
 
-#endif // ! PLAYERBULLET_H
+#endif // ! PLAYER_BULLET_H

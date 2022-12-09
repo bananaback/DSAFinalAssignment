@@ -1,10 +1,10 @@
 #pragma once
-#ifndef  HIGHSCORE_H
+#ifndef HIGHSCORE_H
 #define HIGHSCORE_H
 
 #include "gamestate.h"
 #include "SFML/Graphics.hpp"
-#include "candidateinfor.h"
+#include "candidate_info.h"
 
 class Highscore : public GameState {
 public:
@@ -18,7 +18,7 @@ public:
 private:
 	sf::Sprite _highscoreBg, _char;
 	sf::Text _highscoreTitle;
-	std::vector<std::shared_ptr<CandidateInfor>> _candidateList;
+	std::vector<std::shared_ptr<CandidateInfo>> _candidateList;
 };
 
 #endif // ! HIGHSCORE_H

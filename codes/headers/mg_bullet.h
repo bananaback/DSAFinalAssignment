@@ -1,8 +1,8 @@
 #pragma once
-#ifndef MGBULLET_H
-#define MGBULLET_H
+#ifndef MG_BULLET_H
+#define MG_BULLET_H
 
-#include "playerbullet.h"
+#include "player_bullet.h"
 
 class MgBullet : public PlayerBullet {
 public:
@@ -17,4 +17,4 @@ private:
 	float _displayAngle;
 };
 
-#endif // !MGBULLET_H
+#endif // !MG_BULLET_H

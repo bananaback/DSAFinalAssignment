@@ -1,8 +1,8 @@
 #pragma once
-#ifndef ONIONBULLET_H
-#define ONIONBULLET_H
+#ifndef ONION_BULLET_H
+#define ONION_BULLET_H
 
-#include "playerbullet.h"
+#include "player_bullet.h"
 
 class OnionBullet : public PlayerBullet {
 public:
@@ -17,4 +17,4 @@ private:
 	float _displayAngle, _scaleY, _spinDir;
 };
 
-#endif // !ONIONBULLET_H
+#endif // !ONION_BULLET_H

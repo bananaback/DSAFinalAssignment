@@ -1,5 +1,5 @@
 #pragma once
-#ifndef  SAVING_H
+#ifndef SAVING_H
 #define SAVING_H
 
 #include "gamestate.h"

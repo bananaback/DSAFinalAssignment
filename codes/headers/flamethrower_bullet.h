@@ -1,8 +1,8 @@
 #pragma once
-#ifndef FLAMETHROWERBULLET_H
-#define FLAMETHROWERBULLET_H
+#ifndef FLAMETHROWER_BULLET_H
+#define FLAMETHROWER_BULLET_H
 
-#include "playerbullet.h"
+#include "player_bullet.h"
 
 class FlameThrowerBullet : public PlayerBullet {
 public:
@@ -17,4 +17,4 @@ private:
 	float _displayAngle;
 };
 
-#endif // FLAMETHROWERBULLET_H
+#endif // FLAMETHROWER_BULLET_H

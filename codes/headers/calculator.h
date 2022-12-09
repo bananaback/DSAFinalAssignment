@@ -1,5 +1,5 @@
 #pragma once
-#ifndef  CALCULATOR_H
+#ifndef CALCULATOR_H
 #define CALCULATOR_H
 
 #include <cmath>

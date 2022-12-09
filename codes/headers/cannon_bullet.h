@@ -1,8 +1,8 @@
 #pragma once
-#ifndef CANNONBULLET_H
-#define CANNONBULLET_H
+#ifndef CANNON_BULLET_H
+#define CANNON_BULLET_H
 
-#include "playerbullet.h"
+#include "player_bullet.h"
 
 class CannonBullet : public PlayerBullet {
 public:
@@ -17,4 +17,4 @@ private:
 
 };
 
-#endif // !CANNONBULLET_H
+#endif // !CANNON_BULLET_H

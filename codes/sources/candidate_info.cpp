@@ -1,6 +1,6 @@
-#include "../headers/candidateinfor.h"
+#include "../headers/candidate_info.h"
 
-CandidateInfor::CandidateInfor(Game& game, float x, float y, std::string name, int score) {
+CandidateInfo::CandidateInfo(Game& game, float x, float y, std::string name, int score) {
 	_x = x;
 	_y = y;
 	_width = 620;
@@ -15,31 +15,31 @@ CandidateInfor::CandidateInfor(Game& game, float x, float y, std::string name, i
 	_text.setString(_name + " " + std::to_string(_score));
 }
 
-CandidateInfor::~CandidateInfor() {
+CandidateInfo::~CandidateInfo() {
 
 }
 
-void CandidateInfor::update(Game& game) {
+void CandidateInfo::update(Game& game) {
 
 }
 
-float CandidateInfor::getX() {
+float CandidateInfo::getX() {
 	return _x;
 }
 
-float CandidateInfor::getY() {
+float CandidateInfo::getY() {
 	return _y;
 }
 
-std::string CandidateInfor::getName() {
+std::string CandidateInfo::getName() {
 	return _name;
 }
 
-int CandidateInfor::getScore() {
+int CandidateInfo::getScore() {
 	return _score;
 }
 
-void CandidateInfor::draw(Game& game) {
+void CandidateInfo::draw(Game& game) {
 	//sf::RectangleShape rect;
 	//rect.setSize(sf::Vector2f(_width, _height));
 	//rect.setFillColor(sf::Color::White);

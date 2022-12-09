@@ -1,5 +1,5 @@
 #pragma once
-#ifndef  MAP_H
+#ifndef MAP_H
 #define MAP_H
 
 #include <vector>
@@ -7,7 +7,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "bullet.h"
-#include "playerbullet.h"
+#include "player_bullet.h"
 #include "effect.h"
 #include "collectableitem.h"
 #include "wall.h"

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../headers/flamethrowerbullet.h"
+#include "../headers/flamethrower_bullet.h"
 #include "../headers/explosioneffect2.h"
 #include "../headers/explosioneffect1.h"
 #include "../headers/flameeffect.h"
