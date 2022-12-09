@@ -71,7 +71,7 @@ void GamePlay::build(Game& game) {
 
 	loadSavedData(game);
 	//_currentLevel = 1; // load from .txt soon
-	_endLevel = 10;
+	_endLevel = 16;
 
 	//_map.collectableItemList.push_back(std::make_shared<Medkit>(200, 500, 32, 32, game));
 
