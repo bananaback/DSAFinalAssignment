@@ -37,7 +37,7 @@ void GameOver::handleEvents(Game& game) {
 		if (pEvent.mouseButton.button == sf::Mouse::Left) {
 			for (size_t i = 0; i < _btns.size(); i++) {
 				if (_btns[i]->checkHover(game)) {
-					if (_btns[i]->getName() == "tryagain") game.changeState("gameplay", 0, 0);
+					if (_btns[i]->getName() == "tryagain") game.changeState("gameplay", 0, 1);
 					if (_btns[i]->getName() == "giveup") game.setRunning(false);
 					if (_btns[i]->getName() == "backtomain") game.changeState("mainmenu", 0, 0);
 				}
