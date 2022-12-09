@@ -34,17 +34,14 @@ void Highscore::build(Game& game) {
 	int i = 0;
 	while (std::getline(MyReadFile, myText)) {
 		i++;
-		std::cout << myText << "\n";
 		size_t found = myText.find(";");
 		std::string name, score;
 		name = myText.substr(0, found);
 		score = myText.substr(found + 1, myText.size() - 1);
-		std::cout << name << " " << score << "\n";
 		_candidateList.push_back(std::make_shared<CandidateInfor>(game, 200, 150 + 70 * (i - 1),
 			name, std::stoi(score)));
 	}
 	MyReadFile.close();
-	std::cout << i << "\n";
 	for (; i < 10; i++) {
 		_candidateList.push_back(std::make_shared<CandidateInfor>(game, 200, 150 + 70 * i,
 			"BLANK", 0));

@@ -39,7 +39,6 @@ Saving::Saving(Game& game) {
 		_score = std::stoi(currScore);
 	}
 	else {
-		std::cout << "Can't not read score.txt";
 	}
 	myScore.close();
 
@@ -197,13 +196,11 @@ void Saving::handleEvents(Game& game) {
 				std::string myText;
 				std::vector<std::pair<std::string, int>> playerList;
 				while (std::getline(MyReadFile, myText)) {
-					std::cout << myText << "\n";
 					size_t found = myText.find(";");
 					std::string name = "";
 					std::string score = "";
 					name = myText.substr(0, found);
 					score = myText.substr(found + 1, myText.size() - 1);
-					std::cout << name << " " << score << "\n";
 					if (name.size() == 0) name = "NONAME";
 					for (auto x : name) x = std::toupper(x);
 					playerList.push_back(std::make_pair(name, std::stoi(score)));
@@ -226,7 +223,6 @@ void Saving::handleEvents(Game& game) {
 					myWriteFile << 1;
 				}
 				else {
-					std::cout << "Can't open currentlevel.txt to write";
 				}
 				myWriteFile.close();
 
@@ -236,7 +232,6 @@ void Saving::handleEvents(Game& game) {
 				}
 				else
 				{
-					std::cout << "Can't open score.txt to write";
 				}
 				myScore.close();
 

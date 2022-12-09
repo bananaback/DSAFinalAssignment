@@ -38,7 +38,6 @@ std::vector<std::pair<int, int>> retracePath(const std::pair<int, int>& startNod
 
 std::vector<std::pair<int, int>> pathFinding(const std::vector<std::vector<int>>& map, const std::pair<int, int>& startNode, const std::pair<int, int>& targetNode) {
 	if (map[startNode.first][startNode.second] != 0 || map[targetNode.first][targetNode.second] != 0) {
-		std::cout << "Source of destination is blocked!\n";
 		return std::vector<std::pair<int, int>>();
 	}
 
@@ -62,7 +61,6 @@ std::vector<std::pair<int, int>> pathFinding(const std::vector<std::vector<int>>
 		remove(openSet, currentNode);
 		closedSet.push_back(currentNode);
 		if (currentNode == targetNode) {
-			std::cout << "Path found!\n";
 			return retracePath(startNode, targetNode, parent);
 		}
 

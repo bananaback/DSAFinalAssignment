@@ -14,7 +14,6 @@
 std::uniform_int_distribution<> distr(-40, 40); // define the range
 
 Map::Map() {
-	std::cout << "I'm map\n";
 	playerPosInCell.first = 5;
 	playerPosInCell.second = 5;
 	blockEnemyMap = blockData;
@@ -165,7 +164,6 @@ void Map::updateAll(Game& game) {
 					enemy->destroy();
 					for (int k = 0; k < 5; k++) collectableItemList.push_back(std::make_shared<Coin>(enemy->getX() + enemy->getWidth() / 2 + distr(game.gen) - 16, enemy->getY() + enemy->getHeight() / 2 + distr(game.gen) - 16, 32, 32, game));
 				}
-				std::cout << "Enemy health point: " << enemy->getHealth() << "\n";
 				playerBullet->reduceDurability(playerBullet->getDurabilityReduceAmount());
 				//effectList.push_back(std::make_shared<ExplosionEffect1>(playerBullet->getX(), playerBullet->getY(), playerBullet->getWidth(), playerBullet->getHeight(), game));
 				if (playerBullet->getDurability() <= 0) {
@@ -332,12 +330,10 @@ void Map::updateAll(Game& game) {
 			for (size_t i = 0; i < enemyList.size(); i++) {
 				float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
 				float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
-				std::cout << (int)std::floor(enemyCenterY / 48) << "\n";
 				blockEnemyMap[(int)std::floor(enemyCenterY / 48)][(int)std::floor(enemyCenterX / 48)] = 1;
 			}
 
 			for (size_t i = 0; i < enemyList.size(); i++) {
-				//std::cout << "I'm here\n";
 				float enemyCenterX = enemyList[i]->getX() + enemyList[i]->getWidth() / 2;
 				float enemyCenterY = enemyList[i]->getY() + enemyList[i]->getHeight() / 2;
 				enemyList[i]->_path = astar(blockEnemyMap, (int)std::floor(enemyCenterY / 48),
