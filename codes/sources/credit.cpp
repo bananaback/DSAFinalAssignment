@@ -1,34 +1,35 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/credit.h"
 #include "../headers/game.h"
 
 Credit::Credit(Game& game) {
 	_name = "credit";
-	_background.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CREDIT_BG]);
-	_creditText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::FONT_CREDIT]);
+	_background.setTexture(*game.ra_ptr->_imageResources[IMAGE::CREDIT_BG]);
+	_creditText.setFont(*game.ra_ptr->_fontResources[FONT::FONT_CREDIT]);
 	_creditText.setString("CREDIT");
 	_creditText.setFillColor(sf::Color::Black);
 	_creditText.setScale(sf::Vector2f(5.f, 5.f));
 	_creditText.setPosition(sf::Vector2f(540.f, 100.f));
 
-	_person1.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_person1.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_person1.setString("Member: Vo Trong Tin");
 	_person1.setScale(sf::Vector2f(2.f, 2.f));
 	_person1.setPosition(sf::Vector2f(400.f, 500.f));
 	_person1.setFillColor(sf::Color::Black);
 
-	_person2.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_person2.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_person2.setString("Member: Cao Thi Thu Thuy");
 	_person2.setScale(sf::Vector2f(2.f, 2.f));
 	_person2.setPosition(sf::Vector2f(400.f, 600.f));
 	_person2.setFillColor(sf::Color::Black);
 
-	_person3.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_person3.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_person3.setString("Member: Trinh Thi Thanh Huyen");
 	_person3.setScale(sf::Vector2f(2.f, 2.f));
 	_person3.setPosition(sf::Vector2f(400.f, 700.f));
 	_person3.setFillColor(sf::Color::Black);
 
-	_person4.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_person4.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_person4.setString("Instructor: Nguyen Thuy An");
 	_person4.setScale(sf::Vector2f(2.f, 2.f));
 	_person4.setPosition(sf::Vector2f(400.f, 400.f));

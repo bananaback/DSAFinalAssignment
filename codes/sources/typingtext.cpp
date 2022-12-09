@@ -1,4 +1,6 @@
 #include <iostream>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/typingtext.h"
 
 TypingText::TypingText(float x, float y, float size, float speed, std::string context, Game& game) {
@@ -8,7 +10,7 @@ TypingText::TypingText(float x, float y, float size, float speed, std::string co
 	_speed = speed;
 	_context = context;
 	_currentContext = "";
-	_currentText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_currentText.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_currentText.setString(_currentContext);
 	_currentText.setCharacterSize(_size);
 	_currentText.setFillColor(sf::Color::Black);

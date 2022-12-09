@@ -1,10 +1,11 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/flyingtext.h"
 
 FlyingText::FlyingText(float x, float y, float size, float limitX, std::string color, std::string context, Game& game) {
 	_x = x;
 	_y = y;
 	_limitX = limitX;
-	_context.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_context.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_context.setCharacterSize(size);
 	_context.setString(context);
 	_context.setPosition(sf::Vector2f(_x, _y));

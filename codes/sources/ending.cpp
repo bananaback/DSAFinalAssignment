@@ -1,11 +1,12 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/ending.h"
 #include "../headers/game.h"
 
 Ending::Ending(Game& game) {
-	_endingBackground.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::ENDING_BG]);
+	_endingBackground.setTexture(*game.ra_ptr->_imageResources[IMAGE::ENDING_BG]);
 	_endingBackground.setScale(sf::Vector2f(12.f, 10.f));
 
-	_endingText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_endingText.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_endingText.setString("         Congratulations!\nYou have completed the game!\nThank you for playing our game ^^\n\nDo you want to save your score?");
 	_endingText.setFillColor(sf::Color::Blue);
 	_endingText.setCharacterSize(80);
@@ -16,7 +17,7 @@ Ending::Ending(Game& game) {
 	yesBtn._y = 600;
 	yesBtn._width = 64;
 	yesBtn._height = 64;
-	yesBtn._btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::YES_BTN]);
+	yesBtn._btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::YES_BTN]);
 	yesBtn._isHover = false;
 	yesBtn._scaleX = 4;
 	yesBtn._scaleY = 4;
@@ -28,7 +29,7 @@ Ending::Ending(Game& game) {
 	noBtn._y = 600;
 	noBtn._width = 64;
 	noBtn._height = 64;
-	noBtn._btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::NO_BTN]);
+	noBtn._btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::NO_BTN]);
 	noBtn._isHover = false;
 	noBtn._scaleX = 4;
 	noBtn._scaleY = 4;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../headers/resource_allocator.h"
 #include "../headers/cannon.h"
 
 Cannon::Cannon(Game& game, float x, float y, float scale) : Weapon(game) {
@@ -7,11 +8,11 @@ Cannon::Cannon(Game& game, float x, float y, float scale) : Weapon(game) {
 	_scale = scale;
 	_sprite.setScale(sf::Vector2f(_scale, _scale));
 	//---------------------------------ADJUST HERE-------------------------------------------
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_UP]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DIAGUP]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_SIDE]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DIAGDOWN]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNON_DOWN]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::CANNON_UP]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::CANNON_DIAGUP]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::CANNON_SIDE]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::CANNON_DIAGDOWN]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::CANNON_DOWN]);
 	_radius = 20;
 	//---------------------------------------------------------------------------------------
 	for (int i = 0; i <= 8; i++) {

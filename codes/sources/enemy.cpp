@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "../headers/resource_allocator.h"
 #include "../headers/enemy.h"
 #include "../headers/gameobject.h"
 #include "../headers/game.h"
@@ -20,10 +21,10 @@ Enemy::Enemy(float x, float y, float width, float height, float speed, float att
 	float frameDuration = 0.1;
 	_assetWidth = 16;
 	_assetHeight = 16;
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SLIME_BACK], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "back"));//0
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SLIME_FRONT], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "front"));//1
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SLIME_SIDE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "side"));//2
-	//_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "explode"));//3
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::SLIME_BACK], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "back"));//0
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::SLIME_FRONT], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "front"));//1
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::SLIME_SIDE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "side"));//2
+	//_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "explode"));//3
 	_currentAnimation = 0;
 
 	_healthbarOpacity = 255;

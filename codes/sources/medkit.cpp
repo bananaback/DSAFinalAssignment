@@ -1,7 +1,9 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/medkit.h"
 #include "../headers/calculator.h"
+
 Medkit::Medkit(float x, float y, float width, float height, Game& game) : CollectableItem(x, y, width, height, game) {
-	_animation = std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MEDKIT], 0, 0, 16, 16, 4, 0.1, "medkit");
+	_animation = std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::MEDKIT], 0, 0, 16, 16, 4, 0.1, "medkit");
 	_scaleX = 2;
 	_scaleY = 2;
 	_regenValue = 20;

@@ -1,3 +1,4 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/mggun.h"
 
 MgGun::MgGun(Game& game, float x, float y, float scale) : Weapon(game) {
@@ -6,11 +7,11 @@ MgGun::MgGun(Game& game, float x, float y, float scale) : Weapon(game) {
 	_scale = scale;
 	_sprite.setScale(sf::Vector2f(_scale, _scale));
 	//---------------------------------ADJUST HERE-------------------------------------------
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MG_UP]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MG_DIAGUP]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MG_SIDE]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MG_DIAGDOWN]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MG_DOWN]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MG_UP]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MG_DIAGUP]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MG_SIDE]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MG_DIAGDOWN]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MG_DOWN]);
 	_radius = 30;
 	//---------------------------------------------------------------------------------------
 	for (int i = 0; i <= 8; i++) {

@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
 
+#include "../headers/resource_allocator.h"
 #include "../headers/saving.h"
 #include "../headers/game.h"
 
 Saving::Saving(Game& game) {
-	_savingBackground.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SAVING_BG]);
+	_savingBackground.setTexture(*game.ra_ptr->_imageResources[IMAGE::SAVING_BG]);
 	_savingBackground.setScale(sf::Vector2f(12.f, 10.f));
 
 	_userName;
@@ -18,15 +19,15 @@ Saving::Saving(Game& game) {
 	_userName._text.setPosition(450, 270);
 	_userName._text.setCharacterSize(80);
 	_userName._text.setFillColor(sf::Color::Black);
-	_userName._text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
+	_userName._text.setFont(*game.ra_ptr->_fontResources[FONT::MONO]);
 
-	_savingText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
+	_savingText.setFont(*game.ra_ptr->_fontResources[FONT::MONO]);
 	_savingText.setCharacterSize(100);
 	_savingText.setFillColor(sf::Color::Black);
 	_savingText.setPosition(350, 100);
 	_savingText.setString("ENTER YOUR COOL NAME:");
 
-	_tutorText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
+	_tutorText.setFont(*game.ra_ptr->_fontResources[FONT::MONO]);
 	_tutorText.setCharacterSize(100);
 	_tutorText.setFillColor(sf::Color::Black);
 	_tutorText.setPosition(350, 500);
@@ -43,7 +44,7 @@ Saving::Saving(Game& game) {
 	}
 	myScore.close();
 
-	_scoreText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
+	_scoreText.setFont(*game.ra_ptr->_fontResources[FONT::MONO]);
 	_scoreText.setCharacterSize(100);
 	_scoreText.setFillColor(sf::Color::Green);
 	_scoreText.setPosition(450, 350);

@@ -31,8 +31,8 @@ void PlayerBullet::updateAnimForSpinBullet(Game& game, float& displayAngle, floa
 }
 
 void PlayerBullet::movingWithAngle(Game& game) {
-	_x = _x + std::cos(_angle) * _speed * game._dt;
-	_y = _y + std::sin(_angle) * _speed * game._dt;
+	_x += std::cos(_angle) * _speed * game._dt;
+	_y += std::sin(_angle) * _speed * game._dt;
 }
 
 void PlayerBullet::checkRemove(Game& game, float t) {
@@ -47,7 +47,9 @@ void PlayerBullet::checkRemove(Game& game, float t) {
 }
 
 void PlayerBullet::reduceDurability(int d) {
-	if (_durability > 0)_durability -= d;
+	if (_durability > 0) {
+    _durability -= d;
+  }
 }
 
 int PlayerBullet::getDurabilityReduceAmount() {

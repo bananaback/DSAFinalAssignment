@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/gameplay.h"
 #include "../headers/calculator.h"
 #include "../headers/astar.h"
@@ -49,7 +51,7 @@ void GamePlay::saveGameData(Game& game) {
 }
 
 void GamePlay::build(Game& game) {
-	_text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
+	_text.setFont(*game.ra_ptr->_fontResources[FONT::MONO]);
 	_text.setPosition(280, 350);
 	_text.setString("Game play");
 	_text.setCharacterSize(24);
@@ -61,8 +63,8 @@ void GamePlay::build(Game& game) {
 	_background.setFillColor(sf::Color(9, 184, 0));
 
 	// init player health bar
-	_playerHpBar.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR_FILL]);
-	_playerHPBarBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::HEALTHBAR]);
+	_playerHpBar.setTexture(*game.ra_ptr->_imageResources[IMAGE::HEALTHBAR_FILL]);
+	_playerHPBarBg.setTexture(*game.ra_ptr->_imageResources[IMAGE::HEALTHBAR]);
 	_playerHPBarBg.setScale(sf::Vector2f(2.f, 2.f));
 	_playerHPBarBg.setPosition(20, 20);
 

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <random>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/map.h"
 #include "../headers/calculator.h"
 #include "../headers/explosioneffect1.h"
@@ -362,7 +364,7 @@ void Map::updateAll(Game& game) {
 void Map::drawBackground(Game& game) {
 	for (size_t i = 0; i < backgroundData.size(); i++) {
 		for (size_t j = 0; j < backgroundData[i].size(); j++) {
-			singleTile.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TILES]);
+			singleTile.setTexture(*game.ra_ptr->_imageResources[IMAGE::TILES]);
 			singleTile.setTextureRect(game.ra_ptr->_tilesImgRects[backgroundData[i][j]-1]);
 			singleTile.setPosition(sf::Vector2f(j*48+24, i*48+24));
 			singleTile.setScale(sf::Vector2f(3.f, 3.f));

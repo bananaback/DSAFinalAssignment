@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../headers/resourceallocator.h"
+#include "../headers/resource_allocator.h"
 
 // Constructor
 ResourceAllocator::ResourceAllocator() {

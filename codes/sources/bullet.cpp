@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../headers/resource_allocator.h"
 #include "../headers/bullet.h"
 #include "../headers/gameobject.h"
 
@@ -12,7 +13,7 @@ Bullet::Bullet(float x, float y, float width, float height, float speed, float d
 
 	_assetWidth = 17;
 	_assetHeight = 17;
-	_img.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CANNONBALL]);
+	_img.setTexture(*game.ra_ptr->_imageResources[IMAGE::CANNONBALL]);
 }
 
 Bullet::~Bullet() {

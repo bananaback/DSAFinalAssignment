@@ -18,7 +18,7 @@ Animation::Animation(std::shared_ptr<sf::Texture> t, int x, int y, int w, int h,
 		_frames.push_back(sf::IntRect(x + i * w, y, w, h));
 	}
 	_sprite.setTexture(*t);
-	_sprite.setOrigin(1.f * w / 2, 1.f * h / 2);
+	_sprite.setOrigin(w / 2.f, h / 2.f);
 	_sprite.setTextureRect(_frames[0]);
 	_w = w;
 	_h = h;
@@ -50,5 +50,3 @@ void Animation::draw(Game& game, float x, float y, float rot, float scaleX, floa
 bool Animation::isEnd() {
 	return _frame >= _frames.size();
 }
-
-

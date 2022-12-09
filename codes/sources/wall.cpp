@@ -1,7 +1,9 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/wall.h"
 #include "../headers/gameobject.h"
+
 Wall::Wall(float x, float y, float width, float height, Game& game, int id) : GameObject(x, y, width, height) {
-	_sprite.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TILES]);
+	_sprite.setTexture(*game.ra_ptr->_imageResources[IMAGE::TILES]);
 	_sprite.setTextureRect(game.ra_ptr->_tilesImgRects[id]);
 	_sprite.setOrigin(sf::Vector2f(8.f, 8.f));
 	_sprite.setPosition(sf::Vector2f(_x + _width / 2, _y + _height / 2));

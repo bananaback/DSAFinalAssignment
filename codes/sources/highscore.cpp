@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
-#include "../headers/highscore.h"
 
+#include "../headers/resource_allocator.h"
+#include "../headers/highscore.h"
 #include "../headers/game.h"
 
 Highscore::Highscore(Game& game) {
-	_highscoreBg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SCORE_BG]);
+	_highscoreBg.setTexture(*game.ra_ptr->_imageResources[IMAGE::SCORE_BG]);
 	_highscoreBg.setScale(sf::Vector2f(12.f, 10.f));
 
-	_highscoreTitle.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_highscoreTitle.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_highscoreTitle.setCharacterSize(100);
 	_highscoreTitle.setFillColor(sf::Color::Black);
 	_highscoreTitle.setPosition(sf::Vector2f(350, 10));
@@ -16,7 +17,7 @@ Highscore::Highscore(Game& game) {
 
 	build(game);
 
-	_char.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::IMG_FONT]);
+	_char.setTexture(*game.ra_ptr->_imageResources[IMAGE::IMG_FONT]);
 	_char.setOrigin(10, 10);
 
 	_name = "highscore";

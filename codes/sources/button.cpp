@@ -1,4 +1,5 @@
-#include<iostream>
+#include <iostream>
+#include "../headers/resource_allocator.h"
 #include "../headers/button.h"
 
 Button::Button(float x, float y, float width, float height, std::string name) {
@@ -25,43 +26,43 @@ std::string Button::getName() {
 
 void Button::draw(Game& game) {
 	if (_name == "play") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_PLAY]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::MAINMENU_PLAY]);
 	}
 	else if (_name == "quit") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_QUIT]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::MAINMENU_QUIT]);
 	}
 	else if (_name == "setting") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_SETTING]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::MAINMENU_SETTING]);
 	}
 	else if (_name == "credit") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MAINMENU_STAR]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::MAINMENU_STAR]);
 	}
 	else if (_name == "backmainmenu") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BACK_MAIN_MENU]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::BACK_MAIN_MENU]);
 	}
 	else if (_name == "cursor_1") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_1]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_1]);
 	}
 	else if (_name == "cursor_2") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_2]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_2]);
 	}
 	else if (_name == "cursor_3") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_3]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_3]);
 	}
 	else if (_name == "cursor_4") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_4]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_4]);
 	}
 	else if (_name == "cursor_5") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_5]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_5]);
 	}
 	else if (_name == "tryagain") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::TRY_AGAIN]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::TRY_AGAIN]);
 	}
 	else if (_name == "backtomain") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BACK_TO_MAIN]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::BACK_TO_MAIN]);
 	}
 	else if (_name == "giveup") {
-		_btnImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::GIVE_UP]);
+		_btnImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::GIVE_UP]);
 	}
 	_btnImg.setPosition(_x + _width / 2, _y + _height / 2);
 	if (_name == "play") {

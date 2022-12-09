@@ -1,4 +1,6 @@
 #include <iostream>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/game.h"
 #include "../headers/mainmenu.h"
 #include "../headers/gameplay.h" 
@@ -41,10 +43,10 @@ void Game::run() {
 }
 // Function to init our game
 void Game::init() {
-	// Pointer to resouce allocator 
-	std::shared_ptr<ResourceAllocator> resouceAllocator(new ResourceAllocator);
-	// Attach resouce allocator to our game
-	ra_ptr = resouceAllocator;
+	// Pointer to resource allocator
+	std::shared_ptr<ResourceAllocator> resourceAllocator(new ResourceAllocator);
+	// Attach resource allocator to our game
+	ra_ptr = resourceAllocator;
 
 	// Pointer to main menu game state
 	std::shared_ptr<MainMenu> mainMenu(new MainMenu(*this));
@@ -66,7 +68,7 @@ void Game::init() {
 	addState(saving);
 	addState(highscore);
 	_currentState = mainMenu;
-	_cursorImg.setTexture(*ra_ptr->_imageResources[ra_ptr->IMAGE::CURSOR_1]);
+	_cursorImg.setTexture(*ra_ptr->_imageResources[IMAGE::CURSOR_1]);
 	_cursorImg.setScale(2.f, 2.f);
 }
 // Update game logic
@@ -83,7 +85,7 @@ void Game::handleEvents() {
 }
 
 void Game::setCursorProperties() {
-	_cursorImg.setOrigin(1.f * _cursorImg.getTexture()->getSize().x / 2, 1.f * _cursorImg.getTexture()->getSize().y / 2);
+	_cursorImg.setOrigin(_cursorImg.getTexture()->getSize().x / 2.f, _cursorImg.getTexture()->getSize().y / 2.f);
 	_cursorImg.setTextureRect(sf::IntRect(0, 0, _cursorImg.getTexture()->getSize().x, _cursorImg.getTexture()->getSize().y));
 }
 

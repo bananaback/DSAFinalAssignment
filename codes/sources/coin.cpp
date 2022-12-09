@@ -1,9 +1,10 @@
-#include "../headers/coin.h"
+#include "../headers/resource_allocator.h"
 #include "../headers/collectableitem.h"
+#include "../headers/coin.h"
 #include "../headers/calculator.h"
 
 Coin::Coin(float x, float y, float width, float height, Game& game) : CollectableItem(x, y, width, height, game) {
-	_animation = std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::COIN_BIG], 0, 0, 16, 16, 8, 0.1, "coin");
+	_animation = std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::COIN_BIG], 0, 0, 16, 16, 8, 0.1, "coin");
 	_scaleX = 2;
 	_scaleY = 2;
 	_value = 10;

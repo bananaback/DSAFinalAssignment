@@ -1,3 +1,4 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/candidate_info.h"
 
 CandidateInfo::CandidateInfo(Game& game, float x, float y, std::string name, int score) {
@@ -8,7 +9,7 @@ CandidateInfo::CandidateInfo(Game& game, float x, float y, std::string name, int
 	_name = name;
 	_score = score;
 	
-	_text.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::MONO]);
+	_text.setFont(*game.ra_ptr->_fontResources[FONT::MONO]);
 	_text.setCharacterSize(80);
 	_text.setFillColor(sf::Color::Black);
 	_text.setPosition(_x, _y-30);

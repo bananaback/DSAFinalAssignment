@@ -1,3 +1,4 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/matter.h"
 
 Matter::Matter(Game& game, float x, float y, float scale) : Weapon(game) {
@@ -6,11 +7,11 @@ Matter::Matter(Game& game, float x, float y, float scale) : Weapon(game) {
 	_scale = scale;
 	_sprite.setScale(sf::Vector2f(_scale, _scale));
 	//---------------------------------ADJUST HERE-------------------------------------------
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MATTER_UP]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MATTER_DIAGUP]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MATTER_SIDE]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MATTER_DIAGDOWN]);
-	_textureSet.push_back(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::MATTER_DOWN]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MATTER_UP]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MATTER_DIAGUP]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MATTER_SIDE]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MATTER_DIAGDOWN]);
+	_textureSet.push_back(game.ra_ptr->_imageResources[IMAGE::MATTER_DOWN]);
 	_radius = 30;
 	//---------------------------------------------------------------------------------------
 	for (int i = 0; i <= 8; i++) {

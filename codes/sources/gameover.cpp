@@ -1,11 +1,13 @@
 #include <iostream>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/gameover.h"
 #include "../headers/gamestate.h"
 #include "../headers/button.h"
 //#include "../headers/game.h"
 GameOver::GameOver(Game& game) {
 	_name = "gameover";
-	_gameOverText.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::FONT_CREDIT]);
+	_gameOverText.setFont(*game.ra_ptr->_fontResources[FONT::FONT_CREDIT]);
 	_gameOverText.setString("GAME OVER");
 	_gameOverText.setFillColor(sf::Color::Black);
 	_gameOverText.setScale(sf::Vector2f(5.f, 5.f));
@@ -53,7 +55,7 @@ void GameOver::update(Game& game) {
 }
 
 void GameOver::render(Game& game) {
-	_gameOverbg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::GAMEOVER_BG]);
+	_gameOverbg.setTexture(*game.ra_ptr->_imageResources[IMAGE::GAMEOVER_BG]);
 	_gameOverbg.setScale(sf::Vector2f(12.f, 12.f));
 	game._window.draw(_gameOverbg);
 	game._window.draw(_gameOverText);

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/player.h"
 #include "../headers/gameobject.h"
 
@@ -14,13 +16,13 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	_scaleX = 3;
 	_scaleY = 3;
 	_angle = 0;
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_E], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "e"));//0
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_NE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "ne"));//1
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_SE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "se"));//2
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "n"));//3
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_S], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "s"));//4
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_SGUN], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "sgun"));
-	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_E], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "e"));//0
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_NE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "ne"));//1
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_SE], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "se"));//2
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_N], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "n"));//3
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_S], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "s"));//4
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_SGUN], 0, 0, _assetWidth, _assetHeight, 4, frameDuration, "sgun"));
+	_animations.push_back(std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::PLAYER_IDLE], 0, 0, _assetWidth, _assetHeight, 1, frameDuration, "idle"));
 	_currentAnimation = 0;
 	
 	std::ifstream myScore("./data/score.txt");
@@ -44,14 +46,14 @@ Player::Player(float x, float y, float width, float height, float speed, float h
 	
 	_currentWeapon = 0;
 
-	_coinAnimation = std::make_shared<Animation>(game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::COIN_HUD], 2, 0, 16, 16, 4, 0.1, "coinhud");
+	_coinAnimation = std::make_shared<Animation>(game.ra_ptr->_imageResources[IMAGE::COIN_HUD], 2, 0, 16, 16, 4, 0.1, "coinhud");
 	_coinScale = 2;
 	_coinMinScale = 2;
 	_scoreScale = 2;
 	_scoreMinScale = 2;
 	_increaseCoinReload = 0;
 
-	_char.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::IMG_FONT]);
+	_char.setTexture(*game.ra_ptr->_imageResources[IMAGE::IMG_FONT]);
 	_char.setOrigin(10, 10);
 }
 

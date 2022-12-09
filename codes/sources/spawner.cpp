@@ -1,10 +1,11 @@
+#include "../headers/resource_allocator.h"
 #include "../headers/spawner.h"
 #include "../headers/effect.h"
 #include "../headers/dust.h"
 
 Spawner::Spawner(Game& game, float x, float y, std::vector<std::pair<int, std::string>> spawnScript) : GameObject(x, y, 48, 48) {
 	_sprite.setTextureRect(sf::IntRect(0, 0, 48, 48));
-	_sprite.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::BASE]);
+	_sprite.setTexture(*game.ra_ptr->_imageResources[IMAGE::BASE]);
 	_sprite.setPosition(x+24, y+24);
 	_sprite.setColor(sf::Color(255, 255, 255, 255));
 	_sprite.setOrigin(24, 24);

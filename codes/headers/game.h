@@ -8,7 +8,7 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "gamestate.h"
-#include "resourceallocator.h"
+#include "resource_allocator.h"
 
 
 // Game class

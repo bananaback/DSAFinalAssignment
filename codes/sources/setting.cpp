@@ -1,13 +1,16 @@
 #include <iostream>
+
+#include "../headers/resource_allocator.h"
 #include "../headers/setting.h"
 #include "../headers/gamestate.h"
 #include "../headers/button.h"
+
 //Constructor
 Setting::Setting(Game& game) {
 	_name = "setting";
-	_background.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::SETTING_BG]);
+	_background.setTexture(*game.ra_ptr->_imageResources[IMAGE::SETTING_BG]);
 	//text cursor
-	_mouseCursor.setFont(*game.ra_ptr->_fontResources[game.ra_ptr->FONT::THALEAHFAT]);
+	_mouseCursor.setFont(*game.ra_ptr->_fontResources[FONT::THALEAHFAT]);
 	_mouseCursor.setString("Mouse Cursor");
 	_mouseCursor.setScale(sf::Vector2f(2.f, 2.f));
 	_mouseCursor.setPosition(sf::Vector2f(200.f, 620.f));
@@ -49,19 +52,19 @@ void Setting::handleEvents(Game& game) {
 			for (size_t i = 0; i < _btns.size(); i++) {
 				if (_btns[i]->checkHover(game)) {
 					if (_btns[i]->getName() == "cursor_1") {
-						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_1]);
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_1]);
 						game.setCursorProperties();
 					} else if (_btns[i]->getName() == "cursor_2") {
-						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_2]);
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_2]);
 						game.setCursorProperties();
 					} else if (_btns[i]->getName() == "cursor_3") {
-						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_3]);
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_3]);
 						game.setCursorProperties();
 					} else if (_btns[i]->getName() == "cursor_4") {
-						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_4]);
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_4]);
 						game.setCursorProperties();
 					} else if (_btns[i]->getName() == "cursor_5") {
-						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[game.ra_ptr->IMAGE::CURSOR_5]);
+						game._cursorImg.setTexture(*game.ra_ptr->_imageResources[IMAGE::CURSOR_5]);
 						game.setCursorProperties();
 					}
 				}
